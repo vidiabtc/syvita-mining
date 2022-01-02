@@ -28,3 +28,15 @@ export const getCoinBalance = async (city, stxAddress) => {
 	console.log(`${city.coin.toUpperCase()} balance: `, balance);
 	return balance;
 };
+
+export const getPrevMinedBlocks = async (city) => {
+	let blockHeight = await getBlockHeight();
+	let url = `https://${city.miningHistoryUrl}/blocks?start=${blockHeight - 400}&stop=${
+		blockHeight + 100
+	}`;
+	let res = await fetch(url);
+	console.log(url);
+	let data = await res.json();
+	console.log('Prev mined blocks: ', data);
+	return data;
+};

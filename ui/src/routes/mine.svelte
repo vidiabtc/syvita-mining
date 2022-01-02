@@ -6,9 +6,12 @@
 	import { getStxBalance, getBlockHeight, getCoinBalance } from '$lib/apiCalls.js';
 	import { getStxAddress } from '$lib/auth';
 
+	// server side
 	$: stxAddress = getStxAddress($user);
 	$: cityWalletBalance = getStxBalance($city.cityWalletAddress);
 	$: blockHeight = getBlockHeight($city);
+
+	// client side
 	$: coinBalance = stxAddress ? getCoinBalance($city, stxAddress) : 0;
 	$: stxBalance = stxAddress ? getStxBalance(stxAddress) : 0;
 </script>
