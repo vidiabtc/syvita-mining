@@ -1,107 +1,279 @@
 <script>
-	import { getPrevMinedBlocks } from '$lib/apiCalls.js';
+	// import { getPrevMinedBlocks } from '$lib/apiCalls.js';
 	import { city } from '$lib/stores.js';
 
 	let toggle = false;
 
-	$: prevMinedBlocks = getPrevMinedBlocks($city);
-
-	const totalStxCommitted = (miners) => {
-		let totalStx = 0;
-		for (let miner in miners) {
-			totalStx += parseInt(miners[miner]);
-		}
-		console.log(totalStx);
-		return totalStx / 1000000;
-	};
-
-	const reward = (blocks, block) => {
-		let reward = blocks[block].reward;
-
-		if (reward == undefined) {
-			reward = blocks[Object.keys(blocks)[0]].reward;
-		}
-		return reward;
-	};
-
-	const winnerStatus = (block) => {
-		let reward = block.reward;
-		let winner = block.winner;
-
-		if (reward == undefined) {
-			return 'Pending';
-		} else {
-			if (winner == undefined) {
-				return 'Unreleased';
-			} else {
-				return winner;
-			}
-		}
-	};
+	// $: prevMinedBlocks = getPrevMinedBlocks($city);
 </script>
 
 <div class="mining-blocks-wrapper">
-	{#await prevMinedBlocks}
-		<p>Loading ...</p>
-	{:then blocks}
-		{#each Object.keys(blocks).reverse() as block}
-			<!-- content here -->
-			<div class="mining-block">
-				<div>
-					<p>{block}</p>
-					<p>Block</p>
-				</div>
-				<div>
-					<p>{totalStxCommitted(blocks[block].miners).toLocaleString()}</p>
-					<p>Commited</p>
-				</div>
-				<div>
-					<p>{Object.keys(blocks[block].miners).length}</p>
-					<p>Miners</p>
-				</div>
-				<div>
-					<p>
-						{reward(blocks, block) / 1000}K
-					</p>
-					<p>Reward</p>
-				</div>
-				<div>
-					<p class="block-status">{winnerStatus(blocks[block])}</p>
-					<p class="winner-title">Winner</p>
-				</div>
-				<div>
-					<img on:click={() => (toggle = !toggle)} src="/icons/arrow-down.svg" alt="" />
-				</div>
+	<!-- content here -->
+	<div on:click={() => (toggle = !toggle)} class="mining-block">
+		<div>
+			<p>123</p>
+			<p>Block</p>
+		</div>
+		<div>
+			<p>150 STX</p>
+			<p>Commited</p>
+		</div>
+		<div>
+			<p>5</p>
+			<p>Miners</p>
+		</div>
+		<div>
+			<p>100 K</p>
+			<p>Reward</p>
+		</div>
+		<div>
+			<p class="block-status-winner">invidia.btc</p>
+			<p class="winner-title">Winner</p>
+		</div>
+		<div>
+			<img src="/icons/arrow-down.svg" alt="" />
+		</div>
+	</div>
+	{#if toggle}
+		<div class="block-dropdown-wrapper">
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
 			</div>
-			{i}
-			<div class="block-dropdown-wrapper">
-				<div class="block-dropdown">
-					<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
-					<p>115.00 STX</p>
-					<p>22.00%</p>
-				</div>
-				<div class="block-dropdown-divider" />
-				<div class="block-dropdown">
-					<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
-					<p>115.00 STX</p>
-					<p>22.00%</p>
-				</div>
-				<div class="block-dropdown-divider" />
-				<div class="block-dropdown">
-					<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
-					<p>115.00 STX</p>
-					<p>22.00%</p>
-				</div>
-				<div class="block-dropdown-divider" />
-				<div class="block-dropdown">
-					<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
-					<p>115.00 STX</p>
-					<p>22.00%</p>
-				</div>
-				<div class="block-dropdown-divider" />
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
 			</div>
-		{/each}
-	{/await}
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+		</div>
+	{/if}
+	<div class="mining-block">
+		<div>
+			<p>123</p>
+			<p>Block</p>
+		</div>
+		<div>
+			<p>150 STX</p>
+			<p>Commited</p>
+		</div>
+		<div>
+			<p>5</p>
+			<p>Miners</p>
+		</div>
+		<div>
+			<p>100 K</p>
+			<p>Reward</p>
+		</div>
+		<div>
+			<p class="block-status-pending">pending</p>
+			<p class="winner-title">Winner</p>
+		</div>
+		<div>
+			<img on:click={() => (toggle = !toggle)} src="/icons/arrow-down.svg" alt="" />
+		</div>
+	</div>
+	{#if toggle}
+		<div class="block-dropdown-wrapper">
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+		</div>
+	{/if}
+	<div class="mining-block">
+		<div>
+			<p>123</p>
+			<p>Block</p>
+		</div>
+		<div>
+			<p>150 STX</p>
+			<p>Commited</p>
+		</div>
+		<div>
+			<p>5</p>
+			<p>Miners</p>
+		</div>
+		<div>
+			<p>100 K</p>
+			<p>Reward</p>
+		</div>
+		<div>
+			<p class="block-status-pending">pending</p>
+			<p class="winner-title">Winner</p>
+		</div>
+		<div>
+			<img on:click={() => (toggle = !toggle)} src="/icons/arrow-down.svg" alt="" />
+		</div>
+	</div>
+	{#if toggle}
+		<div class="block-dropdown-wrapper">
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+		</div>
+	{/if}
+	<div class="mining-block">
+		<div>
+			<p>123</p>
+			<p>Block</p>
+		</div>
+		<div>
+			<p>150 STX</p>
+			<p>Commited</p>
+		</div>
+		<div>
+			<p>5</p>
+			<p>Miners</p>
+		</div>
+		<div>
+			<p>100 K</p>
+			<p>Reward</p>
+		</div>
+		<div>
+			<p class="block-status-pending">pending</p>
+			<p class="winner-title">Winner</p>
+		</div>
+		<div>
+			<img on:click={() => (toggle = !toggle)} src="/icons/arrow-down.svg" alt="" />
+		</div>
+	</div>
+	{#if toggle}
+		<div class="block-dropdown-wrapper">
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+		</div>
+	{/if}
+	<div class="mining-block">
+		<div>
+			<p>123</p>
+			<p>Block</p>
+		</div>
+		<div>
+			<p>150 STX</p>
+			<p>Commited</p>
+		</div>
+		<div>
+			<p>5</p>
+			<p>Miners</p>
+		</div>
+		<div>
+			<p>100 K</p>
+			<p>Reward</p>
+		</div>
+		<div>
+			<p class="block-status-pending">pending</p>
+			<p class="winner-title">Winner</p>
+		</div>
+		<div>
+			<img on:click={() => (toggle = !toggle)} src="/icons/arrow-down.svg" alt="" />
+		</div>
+	</div>
+	{#if toggle}
+		<div class="block-dropdown-wrapper">
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+			<div class="block-dropdown">
+				<p>SP1FJ0MY8M18KZF43E85WJN48SDXYS1EC4BCQW02S</p>
+				<p>115.00 STX</p>
+				<p>22.00%</p>
+			</div>
+			<div class="block-dropdown-divider" />
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -130,6 +302,20 @@
 		margin-top: 20px;
 	}
 
+	.mining-block-winner {
+		background: linear-gradient(180deg, rgba(77, 186, 95, 0.1) 0%, rgba(77, 186, 95, 0) 104.88%);
+		border: 2px solid #4dba5f;
+		width: 1180px;
+		height: 82.3px;
+		border-radius: 5px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-left: 103px;
+		padding-right: 27px;
+		margin-top: 20px;
+	}
+
 	.mining-block div {
 		text-align: center;
 	}
@@ -138,8 +324,17 @@
 		padding-bottom: 10px;
 	}
 
-	.block-status {
+	.block-status-pending {
 		background: #f26c42;
+		width: 115px;
+		height: 30px;
+		box-shadow: 0px 10px 20px rgba(242, 108, 66, 0.1);
+		border-radius: 4px;
+		line-height: 1.75;
+	}
+
+	.block-status-winner {
+		background: #48c063;
 		width: 115px;
 		height: 30px;
 		box-shadow: 0px 10px 20px rgba(242, 108, 66, 0.1);

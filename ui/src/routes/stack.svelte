@@ -1,6 +1,5 @@
 <script>
-  import MinedBlocks from "$components/minedBlocks.svelte";
+	import StackingCycles from '$components/stackingCycles.svelte';
 </script>
 
-
-<MinedBlocks/>
+<StackingCycles />

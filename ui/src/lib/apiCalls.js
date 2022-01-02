@@ -29,7 +29,7 @@ export const getCoinBalance = async (city, stxAddress) => {
 	return balance;
 };
 
-export const getPrevMinedBlocks = async (city) => {
+export const getMiningInfo = async (city, block) => {
 	let blockHeight = await getBlockHeight();
 	let url = `https://${city.miningHistoryUrl}/blocks?start=${blockHeight - 400}&stop=${
 		blockHeight + 100

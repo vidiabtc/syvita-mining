@@ -91,3 +91,10 @@ export const mineMany = async (numOfBlocks, stxPerBlock) => {
 		[makeStandardSTXPostCondition(stxAddress, FungibleConditionCode.Equal, uintCV(total).value)]
 	);
 };
+
+// 'get-mining-stats-at-block'
+// 'get-block-winner-id'
+// 'get-user'
+// 'get-coinbase-amount'
+
+export const getMiningStatsAtBlock = async () => {};
