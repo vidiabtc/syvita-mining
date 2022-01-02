@@ -1,5 +1,5 @@
 <script>
-	import { mineMany } from '$lib/contract-calls.js';
+	import { mineMany } from '$lib/contractCalls.js';
 
 	let numOfBlocks = 0;
 	let stxPerBlock = 0;

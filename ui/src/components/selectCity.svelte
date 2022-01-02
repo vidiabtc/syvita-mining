@@ -1,5 +1,5 @@
 <script>
-	import { cities } from '$lib/constants.js';
+	import { CITIES } from '$lib/constants.js';
 	import { city } from '$lib/stores.js';
 
 	let toggle = false;
@@ -14,17 +14,17 @@
 		<img class={toggle ? 'chevron' : 'chevron-up'} src="/icons/arrow-down.svg" alt="arrow down" />
 	</div>
 	{#if toggle}
-		{#each Object.keys(cities) as selectedCity}
+		{#each Object.keys(CITIES) as selectedCity}
 			{#if selectedCity != $city.coin}
 				<div class="dropdown">
 					<p
 						on:click={() => {
-							city.set(cities[selectedCity]);
-							console.log('city set to ', cities[selectedCity]);
+							city.set(CITIES[selectedCity]);
+							console.log('city set to ', CITIES[selectedCity]);
 						}}
 					>
-						<img class="coin" src={cities[selectedCity].img} alt={`${selectedCity}`} />
-						{cities[selectedCity].name}
+						<img class="coin" src={CITIES[selectedCity].img} alt={`${selectedCity}`} />
+						{CITIES[selectedCity].name}
 					</p>
 				</div>
 			{/if}

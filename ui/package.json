@@ -23,7 +23,6 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/inter": "^4.5.1",
-		"@stacks/blockchain-api-client": "^1.0.4",
 		"micro-stacks": "^0.1.7"
 	}
 }

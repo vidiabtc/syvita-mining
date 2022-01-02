@@ -1,4 +1,4 @@
-import { is_mainnet } from '$lib/constants.js';
+import { IS_MAINNET } from '$lib/constants.js';
 import {
 	makeContractCallToken,
 	openTransactionPopup,
@@ -16,7 +16,7 @@ import { get } from 'svelte/store';
 
 import { StacksTestnet, StacksMainnet } from 'micro-stacks/network';
 
-const NETWORK = is_mainnet ? new StacksMainnet() : new StacksTestnet();
+const NETWORK = IS_MAINNET ? new StacksMainnet() : new StacksTestnet();
 
 export const authOptions = {
 	appDetails: {
@@ -37,7 +37,7 @@ export const getReadOnlyTxOptions = (city, functionName, functionArgs) => {
 };
 
 export const callContract = async (functionName, functionArgs, postConditions) => {
-	let stxAddress = is_mainnet
+	let stxAddress = IS_MAINNET
 		? JSON.parse(get(user)).addresses.mainnet
 		: JSON.parse(get(user)).addresses.testnet;
 	let privateKey = JSON.parse(get(user)).appPrivateKey;
@@ -75,7 +75,7 @@ export const parseClarityList = (list) => {
 };
 
 export const mineMany = async (numOfBlocks, stxPerBlock) => {
-	let stxAddress = is_mainnet
+	let stxAddress = IS_MAINNET
 		? JSON.parse(get(user)).addresses.mainnet
 		: JSON.parse(get(user)).addresses.testnet;
 	let mineManyAmounts = [];
