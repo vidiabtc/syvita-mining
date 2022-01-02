@@ -7,9 +7,9 @@
 		<p class="logo">Syvita Mining</p>
 	</a>
 	<nav>
-		<a href=""><p>Pool</p></a>
+		<a href="/pool"><p>Pool</p></a>
 		<a href="/mine"><p>Mine</p></a>
-		<a href=""><p>Stack</p></a>
+		<a href="/stack"><p>Stack</p></a>
 		<a class="discord" href="">
 			<img src="/discord.svg" alt="Discord Logo" />
 			<p>Discord</p>
@@ -53,4 +53,13 @@
 	.discord p {
 		margin-left: -10px;
 	}
+
+	a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+a {
+	color: white;
+}
 </style>
