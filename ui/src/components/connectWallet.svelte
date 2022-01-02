@@ -20,6 +20,10 @@
 		border-radius: 50px;
 	}
 
+	button:hover {
+		cursor: pointer;
+	}
+
 	.connect-wallet {
 		min-width: 154px;
 		min-height: 50px;
