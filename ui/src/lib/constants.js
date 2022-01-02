@@ -1,8 +1,12 @@
 export const cities = {
-  'mia': {
-    city_name: 'Miami',
-  },
-  'nyc': {
-    city_name: 'New York',
-  },
-}
+	mia: {
+		name: 'Miami',
+		coin: 'mia',
+		img: 'citycoins/mia.svg'
+	},
+	nyc: {
+		name: 'New York',
+		coin: 'nyc',
+		img: 'citycoins/nyc.svg'
+	}
+};

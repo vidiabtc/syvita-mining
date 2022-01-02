@@ -1,5 +1,5 @@
 <script>
-		import ConnectWallet from '$components/connectWallet.svelte';
+	import ConnectWallet from '$components/connectWallet.svelte';
 </script>
 
 <div class="nav-wrapper">
@@ -7,17 +7,16 @@
 		<p class="logo">Syvita Mining</p>
 	</a>
 	<nav>
-		<a href=""><p> Pool</p></a>
-		<a href=""><p>Mine</p></a>
+		<a href=""><p>Pool</p></a>
+		<a href="/mine"><p>Mine</p></a>
 		<a href=""><p>Stack</p></a>
 		<a class="discord" href="">
-				<img src = "/discord.svg" alt="Discord Logo"/>
-				<p>Discord</p>
+			<img src="/discord.svg" alt="Discord Logo" />
+			<p>Discord</p>
 		</a>
 		<ConnectWallet />
 	</nav>
 </div>
-
 
 <style>
 	.nav-wrapper {
@@ -44,7 +43,6 @@
 		align-items: center;
 		gap: 30px;
 		padding-right: 20px;
-		
 	}
 
 	.discord {
@@ -55,6 +53,4 @@
 	.discord p {
 		margin-left: -10px;
 	}
-
-
 </style>

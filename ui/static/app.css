@@ -28,6 +28,16 @@ select {
 
 button {
 	color: white;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+}
+
+input {
+	color: white;
+	border: 1px solid #444d66;
+	border-radius: 4px;
+	background: transparent;
 }
 
 a {
