@@ -1,0 +1,16 @@
+name = "api"
+type = "webpack"
+
+account_id = "1b716765706e783e5a7c99ad054a97ea"
+workers_dev = true
+route = "miningpool.city/api/*"
+zone_id = "bd9317240018ea784963a8d1784f841a"
+compatibility_date = "2021-12-04"
+webpack_config = "webpack.config.js"
+
+kv_namespaces = [ 
+  { binding = "POOL", id='2c7e53470e1f491795f6541f15ce65f8', preview_id = "ac0f8c37d589436d82db65d82eadf5e2" },
+]
+
+[triggers]
+crons = ["*/1 * * * *"]

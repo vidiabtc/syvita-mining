@@ -90,11 +90,11 @@
 	.stats div {
 		border: 2px solid transparent;
 		border-radius: 10px;
-		border-image: linear-gradient(45deg, #222f98, #3b2e51) 1;
+		/* border-image: linear-gradient(45deg, #222f98, #3b2e51) 1; */
+		border: solid 1px blue;
 		padding: 20px;
 		width: 270px;
 		height: 141px;
-		border-radius: 10px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

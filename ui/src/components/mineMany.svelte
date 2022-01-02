@@ -44,12 +44,23 @@
 </div>
 
 <style>
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+
 	.mineMany-wrapper {
 		width: 770px;
 		height: max-content;
 		border: 2px solid transparent;
 		border-radius: 10px;
-		border-image: linear-gradient(45deg, #222f98, #3b2e51) 1;
+		border: 1px solid blue;
 		padding: 20px;
 	}
 
@@ -71,6 +82,7 @@
 		color: white;
 		width: 569px;
 		height: 50px;
+		padding-left: 10px;
 	}
 
 	p {
