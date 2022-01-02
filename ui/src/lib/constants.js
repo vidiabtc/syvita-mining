@@ -1,6 +1,6 @@
 export const is_mainnet = true;
 
-export const API_ENDPOINT = 'https://mainnet.syvita.org/extended/v1'
+export const BASE_URL = 'https://mainnet.syvita.org/extended/v1';
 
 export const cities = {
 	mia: {
