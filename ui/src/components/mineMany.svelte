@@ -1,4 +1,6 @@
 <script>
+	import { mineMany } from '$lib/contract-calls.js';
+
 	let numOfBlocks = 0;
 	let stxPerBlock = 0;
 </script>
@@ -35,7 +37,9 @@
 			}}
 			class="reset-button">Reset</button
 		>
-		<button class="mine-button">Mine for {numOfBlocks} blocks</button>
+		<button on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)} class="mine-button"
+			>Mine for {numOfBlocks} blocks</button
+		>
 	</div>
 </div>
 

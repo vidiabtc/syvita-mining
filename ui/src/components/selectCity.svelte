@@ -36,6 +36,7 @@
 	.selector-wrapper {
 		position: relative;
 		font-size: 1.5rem;
+		z-index: 1;
 	}
 	.city-selector {
 		display: flex;
