@@ -6,7 +6,7 @@
 		<th>Mining Status</th>
 	</tr>
 	<tr>
-		<td><img src="/mayors/mayor-suarez.webp" />Francis X. Suarez</td>
+		<td><img src="/mayors/mayor-suarez.jpg" />Francis X. Suarez</td>
 		<td>Eric Adams</td>
 		<td>Steve Adler</td>
 	</tr>

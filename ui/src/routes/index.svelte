@@ -7,6 +7,7 @@
 <div class="homepage-wrapper">
 	<Header />
 	<img class="city-coins-logo" src="/city-coins-header.svg" alt="" />
+
 	<PoolStats />
 	<CityStats />
 </div>
@@ -22,4 +23,5 @@
 		margin: auto;
 		margin-top: -10px;
 	}
+
 </style>
