@@ -1,10 +1,10 @@
 <div class="pool-stats">
 	<div>
-		<p>8,990</p>
+		<p class="stx-contributed"><img src="/icons/stx.svg"/>8,990</p>
 		<p>Total Raised STX for Pool <img class="info-img" src="/info.svg" alt="" /></p>
 	</div>
 	<div>
-		<p><img class="city-coin-img" src="/city-coins.svg" />65,580,520,212.33</p>
+		<p class="city-coins-won"><img class="city-coin-img" src="/city-coins.svg" />65,580,520,212.33</p>
 		<p>Total City Coins Won <img class="info-img" src="/info.svg" alt="" /></p>
 	</div>
 </div>
@@ -35,8 +35,27 @@
 		display: flex;
 	}
 
+	.stx-contributed {
+		display: flex;
+		align-items: center;
+		font-size: 2.75rem;
+	}
+
+	.stx-contributed img {
+		padding-right: 5px;
+		width: 30px;
+	}
+
+
+
 	.pool-stats div:nth-child(2) {
 		background: linear-gradient(149.52deg, #384cff 8.64%, #ff38d3 86.61%);
+	}
+
+	.city-coins-won {
+		display: flex;
+		align-items: center;
+		font-size: 2.75rem;
 	}
 
 	.info-img {
@@ -45,6 +64,7 @@
 
 	.city-coin-img {
 		padding-right: 5px;
+
 	}
 
 	.divider {

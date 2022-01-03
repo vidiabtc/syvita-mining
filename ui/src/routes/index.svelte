@@ -10,6 +10,14 @@
 
 	<PoolStats />
 	<CityStats />
+
+	<widgetbot
+  server="827950736087449601"
+  channel="905622527211106334"
+  width="300"
+  height="500"
+></widgetbot>
+<script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
 </div>
 
 <style>
