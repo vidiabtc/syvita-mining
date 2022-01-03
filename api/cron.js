@@ -32,10 +32,11 @@ const updateSyvitaMiningData = async currentBlock => {
     Object.keys(CITIES).map(async city => {
       city = CITIES[city]
       console.log(`Updating data for ${city.name}`)
-      let currentCycle = Math.floor(
-        (parseInt(currentBlock) - parseInt(city.activationBlock)) /
-          CYCLE_LENGTH,
-      )
+      let currentCycle =
+        Math.floor(
+          (parseInt(currentBlock) - parseInt(city.activationBlock)) /
+            CYCLE_LENGTH,
+        ) + 1
       console.log(`Current cycle for ${city.name}: `, currentCycle)
 
       let allCycleData = await CITYCOINS.get(

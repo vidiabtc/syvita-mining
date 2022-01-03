@@ -21,7 +21,7 @@
 			<div class="mayor"><img src="https://pbs.twimg.com/profile_images/1310062565750341633/bwInZ7l2_400x400.jpg"/><p>Eric Adams</p></div>
 		</td>
 		<td>New York City</td>
-		<td>30,000,000</td>
+		<td>$30,000,000</td>
 		<td ><span class="status-active">Active</span></td>
 	</tr>
 	<tr>
