@@ -27,12 +27,12 @@ export const authOptions = {
 
 export const getReadOnlyTxOptions = (city, functionName, functionArgs) => {
 	return {
-		contractAddress: CITIES[city].contractAddress,
-		contractName: CITIES[city].contractName,
+		contractAddress: city.contractAddress,
+		contractName: city.contractName,
 		functionName: functionName,
 		functionArgs: functionArgs,
 		network: NETWORK,
-		senderAddress: CITIES[city].contractAddress
+		senderAddress: city.contractAddress
 	};
 };
 

@@ -3,6 +3,7 @@
 	import SelectCity from '$components/selectCity.svelte';
 	import MinedBlocks from '$components/minedBlocks.svelte';
 	import { user, city } from '$lib/stores.js';
+	import CityStats from '$components/index/cityStats.svelte';
 	import { getStxBalance, getBlockHeight, getCoinBalance } from '$lib/apiCalls.js';
 	import { getStxAddress } from '$lib/auth';
 
@@ -66,6 +67,7 @@
 	</a>
 
 	<MinedBlocks />
+	<CityStats />
 </div>
 
 <style>

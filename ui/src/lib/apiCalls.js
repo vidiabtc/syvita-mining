@@ -1,4 +1,8 @@
-import { BASE_URL } from './constants';
+import { BASE_URL, CYCLE_LENGTH } from './constants.js';
+import { getReadOnlyTxOptions } from './contractCalls.js';
+import { callReadOnlyFunction } from 'micro-stacks/transactions';
+
+import { uintCV } from 'micro-stacks/clarity';
 
 export const getStxBalance = async (stxAddress) => {
 	let url = `${BASE_URL}/address/${stxAddress}/balances`;
@@ -29,14 +33,17 @@ export const getCoinBalance = async (city, stxAddress) => {
 	return balance;
 };
 
-export const getMiningInfo = async (city, block) => {
-	let blockHeight = await getBlockHeight();
-	let url = `https://${city.miningHistoryUrl}/blocks?start=${blockHeight - 400}&stop=${
-		blockHeight + 100
-	}`;
-	let res = await fetch(url);
-	console.log(url);
-	let data = await res.json();
-	console.log('Prev mined blocks: ', data);
-	return data;
+export const getStackingStatsAtCycle = async (city, cycle) => {
+	const options = getReadOnlyTxOptions(city, 'get-stacking-stats-at-cycle', [uintCV(cycle)]);
+	let res = await callReadOnlyFunction(options);
+
+	console.log('RESPONSE: ', res);
+};
+
+export const getCurrentCycle = async (city) => {
+	let currentBlock = await getBlockHeight();
+	let currentCycle = Math.floor(
+		(parseInt(currentBlock) - parseInt(city.activationBlock)) / CYCLE_LENGTH
+	);
+	return currentCycle;
 };

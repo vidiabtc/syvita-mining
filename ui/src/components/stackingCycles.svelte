@@ -1,192 +1,55 @@
 <script>
+	import { getStackingStatsAtCycle } from '$lib/apiCalls';
+	import { city } from '$lib/stores.js';
+
+	export let currentCycle;
+
+	const getCycleInfo = async () => {
+		const cycles = [];
+		for (let i = 1; i <= currentCycle; i++) {
+			await getStackingStatsAtCycle($city, i);
+			cycles.push(i);
+		}
+		return cycles;
+	};
+
+	let promise = getCycleInfo();
 </script>
 
 <div class="stacking-blocks-wrapper">
-	<div class="stacking-block-winner">
-		<div>
-			<p>9</p>
-			<p>Cycle</p>
-		</div>
-		<div>
-			<p>2,620,000,000</p>
-			<p>MIA Stacked</p>
-		</div>
-		<div>
-			<p>5</p>
-			<p>STX/MIA</p>
-		</div>
-		<div>
-			<p>43397</p>
-			<p>Start Block</p>
-		</div>
-		<div>
-			<p>4,918</p>
-			<p>STX to Stackers</p>
-		</div>
-		<div>
-			<p>0.00%</p>
-			<p>Percent Complete</p>
-		</div>
-	</div>
-
-	<div class="stacking-block">
-		<div>
-			<p>9</p>
-			<p>Cycle</p>
-		</div>
-		<div>
-			<p>2,620,000,000</p>
-			<p>MIA Stacked</p>
-		</div>
-		<div>
-			<p>5</p>
-			<p>STX/MIA</p>
-		</div>
-		<div>
-			<p>43397</p>
-			<p>Start Block</p>
-		</div>
-		<div>
-			<p class="block-status-winner">4,918</p>
-			<p class="winner-title">STX to Stackers</p>
-		</div>
-		<div>
-			<p>0.00%</p>
-			<p>Percent Complete</p>
-		</div>
-	</div>
-
-	<div class="stacking-block">
-		<div>
-			<p>9</p>
-			<p>Cycle</p>
-		</div>
-		<div>
-			<p>2,620,000,000</p>
-			<p>MIA Stacked</p>
-		</div>
-		<div>
-			<p>5</p>
-			<p>STX/MIA</p>
-		</div>
-		<div>
-			<p>43397</p>
-			<p>Start Block</p>
-		</div>
-		<div>
-			<p class="block-status-winner">4,918</p>
-			<p class="winner-title">STX to Stackers</p>
-		</div>
-		<div>
-			<p>0.00%</p>
-			<p>Percent Complete</p>
-		</div>
-	</div>
-
-	<div class="stacking-block">
-		<div>
-			<p>9</p>
-			<p>Cycle</p>
-		</div>
-		<div>
-			<p>2,620,000,000</p>
-			<p>MIA Stacked</p>
-		</div>
-		<div>
-			<p>5</p>
-			<p>STX/MIA</p>
-		</div>
-		<div>
-			<p>43397</p>
-			<p>Start Block</p>
-		</div>
-		<div>
-			<p class="block-status-winner">4,918</p>
-			<p class="winner-title">STX to Stackers</p>
-		</div>
-		<div>
-			<p>0.00%</p>
-			<p>Percent Complete</p>
-		</div>
-	</div>
-	<div class="stacking-block">
-		<div>
-			<p>9</p>
-			<p>Cycle</p>
-		</div>
-		<div>
-			<p>2,620,000,000</p>
-			<p>MIA Stacked</p>
-		</div>
-		<div>
-			<p>5</p>
-			<p>STX/MIA</p>
-		</div>
-		<div>
-			<p>43397</p>
-			<p>Start Block</p>
-		</div>
-		<div>
-			<p class="block-status-winner">4,918</p>
-			<p class="winner-title">STX to Stackers</p>
-		</div>
-		<div>
-			<p>0.00%</p>
-			<p>Percent Complete</p>
-		</div>
-	</div>
-	<div class="stacking-block">
-		<div>
-			<p>9</p>
-			<p>Cycle</p>
-		</div>
-		<div>
-			<p>2,620,000,000</p>
-			<p>MIA Stacked</p>
-		</div>
-		<div>
-			<p>5</p>
-			<p>STX/MIA</p>
-		</div>
-		<div>
-			<p>43397</p>
-			<p>Start Block</p>
-		</div>
-		<div>
-			<p class="block-status-winner">4,918</p>
-			<p class="winner-title">STX to Stackers</p>
-		</div>
-		<div>
-			<p>0.00%</p>
-			<p>Percent Complete</p>
-		</div>
-	</div>
-	<div class="stacking-block">
-		<div>
-			<p>9</p>
-			<p>Cycle</p>
-		</div>
-		<div>
-			<p>2,620,000,000</p>
-			<p>MIA Stacked</p>
-		</div>
-		<div>
-			<p>5</p>
-			<p>STX/MIA</p>
-		</div>
-		<div>
-			<p>43397</p>
-			<p>Start Block</p>
-		</div>
-		<div>
-			<p class="block-status-winner">4,918</p>
-			<p class="winner-title">STX to Stackers</p>
-		</div>
-		<div>
-			<p>0.00%</p>
-			<p>Percent Complete</p>
-		</div>
-	</div>
+	{#await promise}
+		<h1>loading ...</h1>
+	{:then cycles}
+		<!-- promise was fulfilled -->
+		{#each cycles as cycle}
+			<div class="stacking-block-winner">
+				<div>
+					<p>{cycle}</p>
+					<p>Cycle</p>
+				</div>
+				<div>
+					<p>2,620,000,000</p>
+					<p>MIA Stacked</p>
+				</div>
+				<div>
+					<p>5</p>
+					<p>STX/MIA</p>
+				</div>
+				<div>
+					<p>43397</p>
+					<p>Start Block</p>
+				</div>
+				<div>
+					<p>4,918</p>
+					<p>STX to Stackers</p>
+				</div>
+				<div>
+					<p>0.00%</p>
+					<p>Percent Complete</p>
+				</div>
+			</div>
+		{/each}
+	{/await}
 </div>
 
 <style>
