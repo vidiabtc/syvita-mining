@@ -1,3 +1,10 @@
+
+
+
+
+<div class="city-stats-wrapper">
+
+
 <div class="table-wrapper">
 <table>
 	<tr>
@@ -33,6 +40,25 @@
 
 </table>
 </div>
+
+<div class="city-stats">
+<div class="mayor-stats">
+	<div><p>2</p><p>Total Mayors</p></div>
+	<div><p>120,000,000,000,000</p><p>Current City Coins</p></div>
+	<div>
+		<p>12850</p>
+		<p>Market Cap</p>
+	</div>
+</div>
+<div class="city-marketcaps"><p>City Coins Marketcap</p></div>
+
+
+</div>
+
+
+
+</div>
+
 <style>
 
 .table-wrapper {
@@ -42,6 +68,8 @@
   border-radius: 10px;
   overflow: hidden;
 	margin-bottom: 30px;
+
+
 
 }
 	table, th, td {
@@ -107,5 +135,59 @@
 		height: 35px;
 	
 	}
+
+	.city-stats {
+		display: flex;
+		justify-content: center;
+		gap: 30px;
+		padding-top: 50px;
+	}
+
+	.mayor-stats {
+		height: 485px;
+		width: 380px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.mayor-stats div {
+	border: 1px solid #444D66;
+	width: 370px;
+	height: 141px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	}
+
+	.mayor-stats div:nth-child(2) {
+		background: linear-gradient(149.52deg, #384CFF 8.64%, #FF38D3 86.61%);
+background-blend-mode: lighten;
+	}
+
+	.mayor-stats div p:first-child{
+		font-size: 2rem;
+	}
+	.mayor-stats div p:nth-child(2) {
+		padding-top: 15px;
+		font-size: 1.25rem;
+	}
+
+	.city-marketcaps {
+		width: 370px;
+height: 483px;
+border: 1px solid #444D66;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+	}
+
+	.city-marketcaps p:first-child{
+		padding-top: 20px;
+	}
+
 	
 </style>

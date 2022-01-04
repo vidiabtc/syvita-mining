@@ -1,8 +1,8 @@
-import { BASE_URL, CYCLE_LENGTH } from './constants.js';
+import { BASE_URL, API_URL, CYCLE_LENGTH } from './constants.js';
 import { getReadOnlyTxOptions } from './contractCalls.js';
 import { callReadOnlyFunction } from 'micro-stacks/transactions';
 
-import { uintCV } from 'micro-stacks/clarity';
+import { standardPrincipalCV, uintCV } from 'micro-stacks/clarity';
 
 export const getStxBalance = async (stxAddress) => {
 	let url = `${BASE_URL}/address/${stxAddress}/balances`;
@@ -15,12 +15,12 @@ export const getStxBalance = async (stxAddress) => {
 };
 
 export const getBlockHeight = async () => {
-	let url = `${BASE_URL}/block`;
+	let url = `${API_URL}/blockheight`;
+	console.log(url);
 	let res = await fetch(url);
-	let data = await res.json();
-	let block = data.total;
+	let block = await res.json();
 	console.log('Block height: ', block);
-	return block;
+	return parseInt(block);
 };
 
 export const getCoinBalance = async (city, stxAddress) => {
@@ -33,11 +33,12 @@ export const getCoinBalance = async (city, stxAddress) => {
 	return balance;
 };
 
-export const getStackingStatsAtCycle = async (city, cycle) => {
-	const options = getReadOnlyTxOptions(city, 'get-stacking-stats-at-cycle', [uintCV(cycle)]);
-	let res = await callReadOnlyFunction(options);
-
-	console.log('RESPONSE: ', res);
+export const getStackingCycleStats = async (city) => {
+	let url = `${API_URL}/${city.coin}/cycles`;
+	let res = await fetch(url);
+	let cycles = await res.json();
+	console.log(`Stacking Cycle Stats for ${city.name}: `, cycles);
+	return cycles;
 };
 
 export const getCurrentCycle = async (city) => {
@@ -47,3 +48,25 @@ export const getCurrentCycle = async (city) => {
 	);
 	return currentCycle;
 };
+
+export const getUserId = async (city, stxAddress) => {
+	const options = getReadOnlyTxOptions(city, 'get-user-id', [standardPrincipalCV(stxAddress)]);
+	let res = await callReadOnlyFunction(options);
+	let userId = parseInt(res.value.value);
+	console.log('user id', userId);
+	return userId;
+};
+
+export const getStackingReward = async (city, userId, cycle) => {
+	const options = getReadOnlyTxOptions(city, 'get-stacking-reward', [
+		uintCV(userId),
+		uintCV(cycle)
+	]);
+	let res = await callReadOnlyFunction(options);
+	// let userId = parseInt(res.value.value);
+	console.log('stacking reward', res);
+	return userId;
+};
+
+// get-user-id
+// get-stacking-reward

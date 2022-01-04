@@ -1,19 +1,23 @@
 <script>
 	import StackingCycles from '$components/stackingCycles.svelte';
 	import SelectCity from '$components/selectCity.svelte';
-	import { getCurrentCycle } from '$lib/apiCalls.js';
+  import Stack from '$components/stack.svelte';
+  import { getUserId } from '$lib/apiCalls';
+  import { getStxAddress } from '$lib/auth';
+
 	import { user, city } from '$lib/stores.js';
 
-	$: currentCycle = getCurrentCycle($city);
+  $: stxAddress = getStxAddress($user);
+
 </script>
 
+<button on:click={getUserId($city, stxAddress)}>
+  Get user id
+</button>
+
 <div>
-	{#await currentCycle}
-		<h1>Current Cycle: 0</h1>
-	{:then currentCycle}
-		<h1>Current Cycle: {currentCycle}</h1>
-		<StackingCycles {currentCycle} />
-	{/await}
+  <SelectCity />
+	<StackingCycles />
+  <Stack />
 </div>
 
-<SelectCity />

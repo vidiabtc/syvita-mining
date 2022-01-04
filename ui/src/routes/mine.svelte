@@ -1,7 +1,7 @@
 <script>
-	import MineMany from '$components/mineMany.svelte';
+	import MineMany from '$components/stack.svelte';
 	import SelectCity from '$components/selectCity.svelte';
-	import MinedBlocks from '$components/minedBlocks.svelte';
+	// import MinedBlocks from '$components/minedBlocks.svelte';
 	import { user, city } from '$lib/stores.js';
 	import CityStats from '$components/index/cityStats.svelte';
 	import { getStxBalance, getBlockHeight, getCoinBalance } from '$lib/apiCalls.js';
@@ -66,7 +66,7 @@
 		<button class="join">+ Join Mining Pool</button>
 	</a>
 
-	<MinedBlocks />
+	<!-- <MinedBlocks /> -->
 	<CityStats />
 </div>
 

@@ -1,55 +1,61 @@
 <script>
-	import { getStackingStatsAtCycle } from '$lib/apiCalls';
+	import { getStackingCycleStats, getBlockHeight } from '$lib/apiCalls';
 	import { city } from '$lib/stores.js';
 
-	export let currentCycle;
+  $: stackingCycleStats = getStackingCycleStats($city);
+  $: blockHeight = getBlockHeight($city);
 
-	const getCycleInfo = async () => {
-		const cycles = [];
-		for (let i = 1; i <= currentCycle; i++) {
-			await getStackingStatsAtCycle($city, i);
-			cycles.push(i);
-		}
-		return cycles;
-	};
 
-	let promise = getCycleInfo();
 </script>
 
+<!-- <button on:click={getStackingCycleStats($city)}>EE</button> -->
 <div class="stacking-blocks-wrapper">
-	{#await promise}
-		<h1>loading ...</h1>
-	{:then cycles}
-		<!-- promise was fulfilled -->
-		{#each cycles as cycle}
-			<div class="stacking-block-winner">
-				<div>
-					<p>{cycle}</p>
-					<p>Cycle</p>
-				</div>
-				<div>
-					<p>2,620,000,000</p>
-					<p>MIA Stacked</p>
-				</div>
-				<div>
-					<p>5</p>
-					<p>STX/MIA</p>
-				</div>
-				<div>
-					<p>43397</p>
-					<p>Start Block</p>
-				</div>
-				<div>
-					<p>4,918</p>
-					<p>STX to Stackers</p>
-				</div>
-				<div>
-					<p>0.00%</p>
-					<p>Percent Complete</p>
-				</div>
-			</div>
-		{/each}
-	{/await}
+      {#await stackingCycleStats}
+        <h1>loading ...</h1>
+      {:then cycles}
+        <!-- promise was fulfilled -->
+        {#each Object.keys(cycles).reverse() as cycle}
+           <!-- content here -->
+           <div class="stacking-block-winner">
+            <div>
+              <p>{cycle}</p>
+              <p>Cycle</p>
+            </div>
+            <div>
+              <p>{cycles[cycle][$city.coin].toLocaleString()}</p>
+              <p>{$city.coin} Stacked</p>
+            </div>
+            <div>
+              <p>5</p>
+              <p>STX/MIA</p>
+            </div>
+            <div>
+              <p>{parseInt($city.activationBlock) + (2100 * parseInt(cycle))}</p>
+              <p>Start Block</p>
+            </div>
+            <div>
+              <p>{cycles[cycle].stx.toLocaleString()}</p>
+              <p>STX to Stackers</p>
+            </div>
+            <div>
+              {#if cycle == Object.keys(cycles)[Object.keys(cycles).length - 1]}
+                 <p>0.00%</p>
+              {:else if cycle == Object.keys(cycles)[Object.keys(cycles).length - 2]}
+                {#await blockHeight}
+                  <p>loading...</p>>
+                {:then currentBlock}
+                  <p>{Math.round((2100 - ((parseInt($city.activationBlock) + (2100 * (parseInt(cycle) + 1))) - currentBlock)) / 21 * 100) / 100}%</p>
+                {/await}
+              {:else}
+                 <p>100.00%</p>
+              {/if}
+              <p>Percent Complete</p>
+            </div>
+          </div>
+    
+        {/each}
+      {/await}
+			
 </div>
 
 <style>
@@ -79,8 +85,8 @@
 	}
 
 	.stacking-block-winner {
+    border: 2px solid #4dba5f;
 		background: linear-gradient(180deg, rgba(77, 186, 95, 0.1) 0%, rgba(77, 186, 95, 0) 104.88%);
-		border: 2px solid #4dba5f;
 		width: 1180px;
 		height: 82.3px;
 		border-radius: 5px;

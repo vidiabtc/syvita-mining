@@ -2,27 +2,21 @@
 	import Header from '$components/index/header.svelte';
 	import PoolStats from '$components/index/poolStats.svelte';
 	import CityStats from '$components/index/cityStats.svelte';
+	import News from '$components/index/news.svelte';
 </script>
 
-<div class="homepage-wrapper">
+<div >
 	<Header />
 	<img class="city-coins-logo" src="/city-coins-header.svg" alt="" />
 
 	<PoolStats />
 	<CityStats />
-
-	<widgetbot
-  server="827950736087449601"
-  channel="905622527211106334"
-  width="300"
-  height="500"
-></widgetbot>
-<script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+	<News/>
+	
 </div>
 
 <style>
-	.homepage-wrapper {
-	}
+
 
 	.city-coins-logo {
 		position: absolute;

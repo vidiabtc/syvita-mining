@@ -76,6 +76,15 @@ const updateSyvitaMiningData = async currentBlock => {
             [city.coin]: parseInt(cycleStackingStats.amountToken.value),
             stx: parseInt(cycleStackingStats.amountUstx.value) / 1000000,
           }
+
+          cycleStackingStats = await getStackingStatsAtCycle(
+            city,
+            currentCycle - 1,
+          )
+          allCycleData[currentCycle - 1] = {
+            [city.coin]: parseInt(cycleStackingStats.amountToken.value),
+            stx: parseInt(cycleStackingStats.amountUstx.value) / 1000000,
+          }
         }
       }
 

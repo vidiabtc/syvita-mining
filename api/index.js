@@ -1,12 +1,6 @@
 import { Router } from 'itty-router'
 import { runCron } from './cron.js'
 
-const crons = {
-  latestPoolId: '*/1 * * * *',
-  pools: '*/3 * * * *',
-  mineManys: '*/5 * * * *',
-}
-
 const router = Router({ base: '/api' })
 
 const headers = {
@@ -16,27 +10,18 @@ const headers = {
 
 router.get('/', async () => new Response('zoopy poopy', headers))
 
-// return latest pool id
-router.get('/:city/latestpoolid', async ({ params }) => {
+// return stacking cycle stats for city
+router.get('/:city/cycles', async ({ params }) => {
   const { city } = params
-  let latestPoolId = await POOL.get(`latest-pool-id-${city}`)
 
-  return new Response(latestPoolId, { headers })
-})
+  let cycles = await CITYCOINS.get(`cycle-stacking-stats-${city}`)
 
-// return specific pool
-router.get('/:city/pool/:id', async ({ params }) => {
-  const { city } = params
-  const { id } = params
-
-  let pool = await POOL.get(`${city}-pool-${id}`)
-
-  return new Response(pool, { headers })
+  return new Response(cycles, { headers })
 })
 
 // return latest block height
 router.get('/blockheight', async () => {
-  let blockHeight = await POOL.get('current-block-height')
+  let blockHeight = await CITYCOINS.get('current-block-height')
   return new Response(blockHeight, { headers })
 })
 

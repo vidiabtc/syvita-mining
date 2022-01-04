@@ -8,7 +8,9 @@ import {
 	AnchorMode,
 	PostConditionMode,
 	makeStandardSTXPostCondition,
-	FungibleConditionCode
+	makeStandardFungiblePostCondition,
+	FungibleConditionCode,
+	createAssetInfo
 } from 'micro-stacks/transactions';
 import { listCV, uintCV, standardPrincipalCV } from 'micro-stacks/clarity';
 import { user, city } from '$lib/stores.js';
@@ -92,9 +94,23 @@ export const mineMany = async (numOfBlocks, stxPerBlock) => {
 	);
 };
 
-// 'get-mining-stats-at-block'
-// 'get-block-winner-id'
-// 'get-user'
-// 'get-coinbase-amount'
+export const stack = async (amountToStack, numOfCycles) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
 
-export const getMiningStatsAtBlock = async () => {};
+	let coin = get(city);
+
+	await callContract(
+		'stack-tokens',
+		[uintCV(amountToStack), uintCV(numOfCycles)],
+		[
+			makeStandardFungiblePostCondition(
+				stxAddress,
+				FungibleConditionCode.Equal,
+				uintCV(amountToStack).value,
+				createAssetInfo(coin.contractAddress, coin.tokenContractName, coin.tokenName)
+			)
+		]
+	);
+};
