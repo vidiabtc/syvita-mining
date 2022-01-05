@@ -27,32 +27,32 @@
 	<div class="stats">
 		<div class="city-wallet">
 			{#await cityWalletBalance}
-				<p>0</p>
+				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" /> 0</p>
 			{:then balance}
-				<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />
-				<p>{balance.toLocaleString()}</p>
+			
+				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" /> {balance.toLocaleString()}</p>
 			{/await}
 			<p>{$city.name} Wallet Balance</p>
 		</div>
-		<div>
+		<div class="coin-balance">
 			{#await coinBalance}
-				<p>0</p>
+				<p> 	<img width="20px" height="20px" src={$city.img} alt={`${$city}`} />0</p>
 			{:then balance}
-				<img width="20px" height="20px" src={$city.img} alt={`${$city}`} />
-				<p>{balance.toLocaleString()}</p>
+			
+				<p> 	<img width="25px" height="20px" src={$city.img} alt={`${$city}`} />{balance.toLocaleString()}</p>
 			{/await}
 			<p>My {$city.coin.toUpperCase()} balance</p>
 		</div>
-		<div>
+		<div class="stx-balance"> 
 			{#await stxBalance}
-				<p>0</p>
+				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />0</p>
 			{:then balance}
-				<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />
-				<p>{balance.toLocaleString()}</p>
+			
+				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />{balance.toLocaleString()}</p>
 			{/await}
 			<p>My STX balance</p>
 		</div>
-		<div>
+		<div class="current-block">
 			{#await blockHeight}
 				<p>0</p>
 			{:then block}
@@ -67,7 +67,7 @@
 	</a>
 
 	<!-- <MinedBlocks /> -->
-	<CityStats />
+
 </div>
 
 <style>
@@ -82,11 +82,14 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 770px;
+		padding-bottom: 25px;
 	}
 
 	.stats {
 		display: flex;
 		gap: 30px;
+		padding-top: 50px;
+		padding-bottom: 30px;
 	}
 
 	.stats div {
@@ -100,7 +103,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: space-between;
+		gap: 30px;
+    justify-content: center;
 	}
 
 	.join {
@@ -108,9 +112,51 @@
 		height: 50px;
 		background-color: #384cff;
 		border-radius: 50px;
+	
 	}
 
 	.city-wallet {
 		display: flex;
+	}
+
+	.city-wallet p:first-child {
+		display: flex;
+		gap: 5px;
+		font-size: 1.75rem;
+		align-items: center;
+	}
+
+	.city-Wallet p:nth-child(2) {
+		font-size: 1.25rem;
+	}
+
+	.coin-balance p:first-child {
+		display: flex;
+		gap: 5px;
+		font-size: 1.75rem;
+		align-items: center;
+	}
+
+	.coin-balance p:nth-child(2) {
+		font-size: 1.25rem;
+	}
+
+	.stx-balance p:first-child{
+		display: flex;
+		gap: 5px;
+		font-size: 1.75rem;
+		align-items: center;
+	}
+
+	.stx-balance p:nth-child(2) {
+		font-size: 1.25rem;
+	}
+
+	.current-block p:first-child {
+	font-size: 1.75rem
+	}
+
+	.current-block p:nth-child(2) {
+		font-size: 1.25rem;
 	}
 </style>

@@ -77,6 +77,13 @@
 		display: flex;
 		flex-direction: column;
 		left: 50px;
+		padding-top: 10px;
+		background-color: #050810;
+	}
+
+	.dropdown div:hover {
+		cursor: pointer;
+	
 	}
 
 	.dropdown p {

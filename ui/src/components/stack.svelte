@@ -1,7 +1,6 @@
 <script>
 	import { stack } from '$lib/contractCalls.js';
   import { city } from '$lib/stores.js';
-	import StackCycleTool from "$components/stacking/stackCycleTool.svelte";
 	let amountToStack = 0;
 	let numOfCycles = 0;
 </script>
@@ -43,7 +42,6 @@
 	</div>
 
 </div>
-<StackCycleTool/>
 <style>
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {

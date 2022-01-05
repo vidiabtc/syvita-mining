@@ -1,59 +1,65 @@
+<script>
+  import { getStackingCycleStats, getBlockHeight, getUserId, getStackingReward } from '$lib/apiCalls';
+	import { user, city } from '$lib/stores.js';
+  import { getStxAddress } from '$lib/auth';
+
+  $: stxAddress = getStxAddress($user);
+  $: userId = stxAddress ? getUserId($city, stxAddress) : null;
+  // $: userId = 50;
+
+
+
+  $: stackingCycleStats = getStackingCycleStats($city);
+  $: blockHeight = getBlockHeight($city);
+  
+  // $: stackingReward = userId ? getStackingReward($city, userId, cycle) : null;
+</script>
+
 <div class="stack-cycle-tool">
   <div class="table-wrapper">
     <table>
       <tr>
         <th>Stack Cycle</th>
-        <th>Starting Block</th>
-        <th>Ending Block</th>
         <th>MIA Stacked</th>
         <th>STX Claimed</th>
         <th>Claim Date</th>
       </tr>
-      <tr>
-        <td>Cycle 1</td>
-        <td>257893</td>
-        <td>265597</td>
-        <td >0</td>
-        <td>0</td>
-        <td>STX Claimed</td>
-      
-      </tr>
-      <tr>
-        <td>Cycle 1</td>
-        <td>257893</td>
-        <td>265597</td>
-        <td >0</td>
-        <td>0</td>
-        <td>STX Claimed</td>
-      </tr>
-      <tr>
-        <td>Cycle 1</td>
-        <td>257893</td>
-        <td>265597</td>
-        <td >0</td>
-        <td>0</td>
-        <td>STX Claimed</td>
-      </tr>
-      <tr>
-        <td>Cycle 1</td>
-        <td>257893</td>
-        <td>265597</td>
-        <td>0</td>
-        <td>0</td>
-        <td>5/05/2021 09:52 am</td>
-      </tr>
-      <tr>
-        <td>Cycle 1</td>
-        <td>257893</td>
-        <td>265597</td>
-        <td >130,500</td>
-        <td>0</td>
-        <td>STX Claimed</td>
-      </tr>
-    
-    </table>
-    </div>
+      {#await userId}
+        <tr>
+          <td />
+          <td />
+          <td />
+          <td />
+        </tr>
+        {:then userId}
+          {#await stackingCycleStats}
+          <h1>loading ...</h1>
+          {:then cycles}
+            {#each Object.keys(cycles).reverse() as cycle}
+              {#await getStackingReward($city, userId, cycle)}
+              <tr>
+                <td />
+                <td />
+                <td />
+                <td />
+              </tr>
+              {:then reward}
+                <tr>
+                  <td>Cycle {cycle}</td>
+                  <td >0</td>
+                  <td>0</td>
+                  <td>{(Math.floor(cycles.claimableStx / 10000) / 100).toLocaleString()} STX to claim</td>
+                </tr>
+              {/await}
+
+              <!-- content here -->
+            {/each}
+          {/await}
+       {/await}
+      </table>
+  </div>
 </div>
+
 
 
 <style>
@@ -91,8 +97,6 @@
 		width: 302px;
 		height: 58px;
 		text-align: center;
-	
-
 	}
 
 	table tr td {

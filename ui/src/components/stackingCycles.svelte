@@ -1,9 +1,17 @@
 <script>
-	import { getStackingCycleStats, getBlockHeight } from '$lib/apiCalls';
-	import { city } from '$lib/stores.js';
+	import { getStackingCycleStats, getBlockHeight, getUserId, getStackingReward } from '$lib/apiCalls';
+	import { user, city } from '$lib/stores.js';
+  import { getStxAddress } from '$lib/auth';
+
+  $: stxAddress = getStxAddress($user);
+  // $: userId = stxAddress ? getUserId($city, stxAddress) : null;
+  // $: userId = 50;
+
 
   $: stackingCycleStats = getStackingCycleStats($city);
   $: blockHeight = getBlockHeight($city);
+  
+  // $: stackingReward = userId ? getStackingReward($city, userId, cycle) : null;
 
 
 </script>
