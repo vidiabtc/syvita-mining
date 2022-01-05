@@ -9,6 +9,8 @@ import {
 	PostConditionMode,
 	makeStandardSTXPostCondition,
 	makeStandardFungiblePostCondition,
+	makeContractSTXPostCondition,
+	makeContractFungiblePostCondition,
 	FungibleConditionCode,
 	createAssetInfo
 } from 'micro-stacks/transactions';
@@ -109,6 +111,38 @@ export const stack = async (amountToStack, numOfCycles) => {
 				stxAddress,
 				FungibleConditionCode.Equal,
 				uintCV(amountToStack).value,
+				createAssetInfo(coin.contractAddress, coin.tokenContractName, coin.tokenName)
+			)
+		]
+	);
+};
+
+export const claimStackingReward = async (cycleNumber, cycleInfo, amountStacked, toReturn) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+
+	let coin = get(city);
+
+	let claimableStx =
+		((amountStacked / cycleInfo[coin.coin]) * cycleInfo.stx).toFixed(7).slice(0, -1) * 1000000;
+	console.log('CLAIMABLE STX: ', claimableStx);
+
+	await callContract(
+		'claim-stacking-reward',
+		[uintCV(cycleNumber)],
+		[
+			makeContractSTXPostCondition(
+				coin.contractAddress,
+				coin.contractName,
+				FungibleConditionCode.LessEqual,
+				uintCV(claimableStx).value
+			),
+			makeContractFungiblePostCondition(
+				coin.contractAddress,
+				coin.contractName,
+				FungibleConditionCode.LessEqual,
+				uintCV(toReturn).value,
 				createAssetInfo(coin.contractAddress, coin.tokenContractName, coin.tokenName)
 			)
 		]

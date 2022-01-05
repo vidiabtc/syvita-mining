@@ -6,6 +6,7 @@
 	import CityStats from '$components/index/cityStats.svelte';
 	import { getStxBalance, getBlockHeight, getCoinBalance } from '$lib/apiCalls.js';
 	import { getStxAddress } from '$lib/auth';
+	import StackToolTest from '$components/index/stackToolTest.svelte';
 
 	// server side
 	$: stxAddress = getStxAddress($user);
@@ -67,6 +68,8 @@
 	</a>
 
 	<!-- <MinedBlocks /> -->
+
+	<StackToolTest/>
 
 </div>
 

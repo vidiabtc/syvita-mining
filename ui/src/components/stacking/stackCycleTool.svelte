@@ -1,13 +1,12 @@
 <script>
-  import { getStackingCycleStats, getBlockHeight, getUserId, getStackingReward } from '$lib/apiCalls';
+  import { getStackingCycleStats, getBlockHeight, getUserId, getStackingReward } from '$lib/apiCalls.js';
+  import { claimStackingReward } from '$lib/contractCalls.js';
 	import { user, city } from '$lib/stores.js';
-  import { getStxAddress } from '$lib/auth';
+  import { getStxAddress } from '$lib/auth.js';
 
   $: stxAddress = getStxAddress($user);
-  $: userId = stxAddress ? getUserId($city, stxAddress) : null;
-  // $: userId = 50;
-
-
+  // $: userId = stxAddress ? getUserId($city, stxAddress) : null;
+  $: userId = 50;
 
   $: stackingCycleStats = getStackingCycleStats($city);
   $: blockHeight = getBlockHeight($city);
@@ -19,13 +18,15 @@
   <div class="table-wrapper">
     <table>
       <tr>
-        <th>Stack Cycle</th>
-        <th>MIA Stacked</th>
-        <th>STX Claimed</th>
-        <th>Claim Date</th>
+        <th>Stacking Cycle</th>
+        <th>{$city.coin.toUpperCase()} Stacked</th>
+        <th>STX to claim</th>
+        <th>{$city.coin.toUpperCase()} to Return</th>
+        <th>Claim Rewards</th>
       </tr>
       {#await userId}
         <tr>
+          <td />
           <td />
           <td />
           <td />
@@ -36,23 +37,33 @@
           <h1>loading ...</h1>
           {:then cycles}
             {#each Object.keys(cycles).reverse() as cycle}
-              {#await getStackingReward($city, userId, cycle)}
-              <tr>
-                <td />
-                <td />
-                <td />
-                <td />
-              </tr>
-              {:then reward}
-                <tr>
-                  <td>Cycle {cycle}</td>
-                  <td >0</td>
-                  <td>0</td>
-                  <td>{(Math.floor(cycles.claimableStx / 10000) / 100).toLocaleString()} STX to claim</td>
-                </tr>
-              {/await}
-
-              <!-- content here -->
+              {#if (cycle <= Object.keys(cycles)[Object.keys(cycles).length - 1] && cycle > (Object.keys(cycles)[Object.keys(cycles).length - 1]) - 5)}
+                 {#await getStackingReward($city, userId, cycle)}
+                 <tr>
+                   <td />
+                   <td />
+                   <td />
+                   <td />
+                 </tr>
+                 {:then reward}
+                 {#if reward.amountStacked > 0}
+                  <tr>
+                    <td>Cycle {cycle}</td>
+                    <td>{reward.amountStacked.toLocaleString()}</td>
+                    <td>{Math.floor((reward.amountStacked / cycles[cycle][$city.coin] * cycles[cycle].stx).toFixed(7).slice(0, -1))}</td>
+                    <td>{reward.toReturn.toLocaleString()}</td>
+                    <td>
+                      {#if cycle < Object.keys(cycles)[Object.keys(cycles).length - 2]}
+                      <!-- content here -->
+                        <button on:click={claimStackingReward(cycle, cycles[cycle], reward.amountStacked, reward.toReturn)}>Claim Now</button>
+                      {:else}
+                        Claimable at block #{parseInt($city.activationBlock) + ((parseInt(cycle) + 1) * 2100)}
+                      {/if}
+                    </td>
+                  </tr>
+                 {/if}
+                 {/await}
+              {/if}
             {/each}
           {/await}
        {/await}

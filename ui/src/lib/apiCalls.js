@@ -91,37 +91,20 @@ export const getStackingReward = async (city, userId, cycle) => {
 	if (data.type == 9) {
 		console.log("didn't stack this cycle");
 		data = {
-			[`${city.coin}Stacked`]: 0,
-			claimableStx: 0
+			amountStacked: 0,
+			toReturn: 0
 		};
 
-		return 0;
+		return data;
 	} else {
 		data = data.value.data;
 		// console.log('data2:', data);
 		data = {
-			[`${city.coin}Stacked`]: parseInt(data.amountStacked.value),
-			claimableStx: parseInt(data.toReturn.value)
+			amountStacked: parseInt(data.amountStacked.value),
+			toReturn: parseInt(data.toReturn.value)
 		};
 		console.log(`Stacking data for ${city.coin} cycle ${cycleNum}`, data);
 	}
 
 	return data;
 };
-
-// export const getStackingReward = async (city, userId, cycle) => {
-// 	console.log(userId);
-// 	console.log(cycle);
-// 	const options = getReadOnlyTxOptions(city, 'get-stacking-reward', [
-// 		uintCV(userId),
-// 		uintCV(cycle)
-// 	]);
-// 	let res = await callReadOnlyFunction(options);
-// 	let reward = parseInt(res.value);
-// 	// let userId = parseInt(res.value.value);
-// 	console.log(`stacking reward for cycle ${cycle}`, reward);
-// 	return reward;
-// };
-
-// get-user-id
-// get-stacking-reward

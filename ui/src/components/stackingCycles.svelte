@@ -1,5 +1,5 @@
 <script>
-	import { getStackingCycleStats, getBlockHeight, getUserId, getStackingReward } from '$lib/apiCalls';
+	import { getStackingCycleStats, getBlockHeight, getUserId } from '$lib/apiCalls';
 	import { user, city } from '$lib/stores.js';
   import { getStxAddress } from '$lib/auth';
 
@@ -42,7 +42,7 @@
               <p>Start Block</p>
             </div>
             <div>
-              <p>{cycles[cycle].stx.toLocaleString()}</p>
+              <p>{Math.floor(cycles[cycle].stx).toLocaleString()}</p>
               <p>STX to Stackers</p>
             </div>
             <div>
