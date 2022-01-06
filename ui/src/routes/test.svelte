@@ -1,3 +1,13 @@
-<script>import CityStats from '$components/index/cityStats.svelte';</script>
+<script>
+	import MobileStackingCycles from '$components/stacking/mobileStackingCycles.svelte';
+</script>
 
-<CityStats />;
+<div>
+	<MobileStackingCycles />
+</div>
+
+<style>
+	div {
+		padding: 0px 20px;
+	}
+</style>

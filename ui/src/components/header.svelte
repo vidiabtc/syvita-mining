@@ -55,11 +55,17 @@
 	}
 
 	a:visited {
-	text-decoration: none;
-	color: white;
-}
+		text-decoration: none;
+		color: white;
+	}
 
-a {
-	color: white;
-}
+	a {
+		color: white;
+	}
+
+	@media (max-width: 1200px) {
+		nav {
+			display: none;
+		}
+	}
 </style>

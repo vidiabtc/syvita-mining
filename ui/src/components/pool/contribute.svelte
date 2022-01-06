@@ -1,31 +1,32 @@
 <script>
-	import Info from "$components/info.svelte";
+	import Info from '$components/info.svelte';
+	import { contribute } from '$lib/contractCalls.js';
+	export let city;
+	export let poolId;
 
-	
+	let amount = 0;
 </script>
+
 <div class="contribute-wrapper">
-<div class="title">	<h3>Contribute</h3> <Info/></div>
-<div class="contributions">
-	<div class="add-contributions">
-		<div>
-			<input
-			placeholder="40 STX Minimum"
-				type="number"
-			/>
-		</div>
-		<button>Contribute</button>
+	<div class="title">
+		<h3>Contribute</h3>
+		<Info />
 	</div>
-	
-</div>
+	<div class="contributions">
+		<div class="add-contributions">
+			<div>
+				<input bind:value={amount} placeholder="40 STX Minimum" type="number" />
+			</div>
+			<button on:click={contribute(city, poolId, amount * 1000000)}>Contribute</button>
+		</div>
+	</div>
 </div>
 
 <style>
-
 	.contribute-wrapper {
 		width: 770px;
 		margin: auto;
-    margin-top: 144px;
-
+		margin-top: 144px;
 	}
 
 	.title {
@@ -37,13 +38,12 @@
 	}
 
 	.contributions {
-    width: 770px;
-height: 110px;
+		width: 770px;
+		height: 110px;
 		border: 2px solid transparent;
 		border-radius: 10px;
 		border: 1px solid blue;
 		padding: 10px;
-   
 	}
 
 	.add-contributions {
@@ -51,11 +51,8 @@ height: 110px;
 		position: relative;
 		display: flex;
 		justify-content: space-between;
-    gap: 30px;
- 
+		gap: 30px;
 	}
-
-
 
 	input {
 		color: white;
@@ -63,17 +60,17 @@ height: 110px;
 		height: 50px;
 		padding-left: 10px;
 	}
-::placeholder {
-	color: white;
-	font-size: 1rem;
-}
+	::placeholder {
+		color: white;
+		font-size: 1rem;
+	}
 
 	button {
-    width: 180px;
-height: 50px;
+		width: 180px;
+		height: 50px;
 
-background: #384CFF;
-border-radius: 4px;
+		background: #384cff;
+		border-radius: 4px;
 	}
 
 	input::-webkit-outer-spin-button,
@@ -86,5 +83,4 @@ border-radius: 4px;
 	input[type='number'] {
 		-moz-appearance: textfield;
 	}
-
 </style>

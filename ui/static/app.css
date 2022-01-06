@@ -14,6 +14,13 @@ body {
 	padding: 0;
 }
 
+input,
+textarea,
+button {
+	width: 100%;
+	display: block;
+}
+
 #svelte {
 	height: 100%;
 }

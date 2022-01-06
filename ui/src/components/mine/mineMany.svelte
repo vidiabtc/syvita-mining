@@ -56,7 +56,9 @@
 	}
 
 	.mineMany-wrapper {
-		width: 770px;
+		max-width: 770px;
+		min-width: 354px;
+		margin: auto;
 		height: max-content;
 		border: 2px solid transparent;
 		border-radius: 10px;
@@ -80,7 +82,8 @@
 
 	input {
 		color: white;
-		width: 569px;
+		max-width: 569px;
+		min-width: 227px;
 		height: 50px;
 		padding-left: 10px;
 	}

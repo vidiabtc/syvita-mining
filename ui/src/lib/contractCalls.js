@@ -148,3 +148,49 @@ export const claimStackingReward = async (cycleNumber, cycleInfo, amountStacked,
 		]
 	);
 };
+
+export const contribute = async (city, poolId, amount) => {
+	let stxAddress = IS_MAINNET
+	? JSON.parse(get(user)).addresses.mainnet
+	: JSON.parse(get(user)).addresses.testnet;
+
+	await callPoolContract(
+		city,
+		'contribute',
+		[uintCV(poolId), uintCV(amount)],
+		[
+			makeStandardSTXPostCondition(
+				stxAddress,
+				FungibleConditionCode.Equal,
+				uintCV(amount).value
+			)
+		]
+	);
+};
+
+const callPoolContract = async (city, functionName, functionArgs, postConditions) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	let privateKey = JSON.parse(get(user)).appPrivateKey;
+
+	const token = await makeContractCallToken({
+		appDetails: { name: 'syvita mining', icon: '/' },
+		privateKey: privateKey,
+		contractAddress: city.poolContractAddress,
+		contractName: city.poolContractName,
+		functionName: functionName,
+		functionArgs: functionArgs,
+		network: NETWORK,
+		stxAddress: stxAddress,
+		AnchorMode: AnchorMode.Any,
+		postConditionMode: PostConditionMode.Deny,
+		postConditions: postConditions
+	});
+
+	return openTransactionPopup({
+		token,
+		onFinish: (result) => {},
+		onCancel: () => {}
+	});
+};

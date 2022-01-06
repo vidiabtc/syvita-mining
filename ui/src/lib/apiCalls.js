@@ -1,4 +1,4 @@
-import { BASE_URL, API_URL, CYCLE_LENGTH } from './constants.js';
+import { BASE_URL, API_URL, CYCLE_LENGTH, POOL_API_URL } from './constants.js';
 import { getReadOnlyTxOptions } from './contractCalls.js';
 import { callReadOnlyFunction } from 'micro-stacks/transactions';
 
@@ -70,6 +70,30 @@ export const getUserId = async (city, stxAddress) => {
 	return parseInt(userId);
 };
 
+export const getLatestPoolId = async (city) => {
+	let url = `${POOL_API_URL}/${city.coin}/latestpoolid`
+	let res = await fetch(url);
+	let id = 0;
+
+	try {
+		id = await res.json();
+	} catch (error) {
+		console.log('pool not found')
+	}
+	return id
+}
+
+export const getPool = async (city, poolId) => {
+	console.log(city)
+	console.log(poolId)
+	let url = `${POOL_API_URL}/${city.coin}/pool/${poolId}`
+	console.log('URL: ', url)
+	let res = await fetch(url);
+	let pool = await res.json()
+	return pool
+}
+
+
 export const getStackingReward = async (city, userId, cycle) => {
 	let cycleNum = cycle;
 	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/get-stacker-at-cycle`;
@@ -108,3 +132,11 @@ export const getStackingReward = async (city, userId, cycle) => {
 
 	return data;
 };
+
+export const getContributionSum = (contributions) => {
+	let sum = 0
+	for (let contribution in contributions) {
+		sum = sum + (parseInt(contributions[contribution]) / 1000000)
+	}
+	return sum
+}

@@ -1,66 +1,74 @@
 <script>
 	import { stack } from '$lib/contractCalls.js';
-  import { city } from '$lib/stores.js';
+	import { city } from '$lib/stores.js';
+	import SelectCity from './selectCity.svelte';
+
 	let amountToStack = 0;
 	let numOfCycles = 0;
 </script>
 
 <div class="stack-wrapper">
-	<div class="number-of-blocks">
-		<div>
+	<div>
+		<h1>Stack</h1>
+		<SelectCity />
+	</div>
+	<div class="stacking">
+		<div class="number-of-blocks">
 			<p>Amount of {$city.coin.toUpperCase()} to stack</p>
+			<input bind:value={amountToStack} type="number" />
+		</div>
+		<div class="stx-per-block">
+			<p>Number of cycles</p>
 			<input
-				bind:value={amountToStack}
+				on:change={() => {
+					if (numOfCycles > 32) numOfCycles = 32;
+				}}
+				bind:value={numOfCycles}
 				type="number"
 			/>
+			<button on:click={() => (numOfCycles = 32)} class="max">Max</button>
+		</div>
+		<div class="submit">
+			<button
+				on:click={() => {
+					numOfCycles = 0;
+					amountToStack = 0;
+				}}
+				class="reset-button">Reset</button
+			>
+			<button on:click={() => stack(amountToStack, numOfCycles)} class="stack-button"
+				>Stack for {numOfCycles} cycles</button
+			>
 		</div>
 	</div>
-	<div class="stx-per-block">
-		<div>
-			<p>Number of cycles</p>
-			<input 	on:change={() => {
-        if (numOfCycles > 32) numOfCycles = 32;
-      }} bind:value={numOfCycles} type="number" />
-      <button on:click={() => (numOfCycles = 32)} class="max">Max</button>
-		</div>
-		<!-- <div class="total-stx">
-			<div>{numOfBlocks * stxPerBlock}</div>
-			<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />
-		</div> -->
-	</div>
-	<div class="submit">
-		<button
-			on:click={() => {
-				numOfCycles = 0;
-				amountToStack = 0;
-			}}
-			class="reset-button">Reset</button
-		>
-		<button on:click={() => stack(amountToStack, numOfCycles)} class="stack-button"
-			>Stack for {numOfCycles} cycles</button
-		>
-	</div>
-
 </div>
-<style>
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
 
-	/* Firefox */
-	input[type='number'] {
-		-moz-appearance: textfield;
+<style>
+	h1 {
+		font-size: 2.5rem;
 	}
 
 	.stack-wrapper {
-		width: 770px;
+		margin: auto;
+		max-width: 770px;
+		min-width: 354px;
 		height: max-content;
+		padding-top: 103px;
+	}
+
+	.stack-wrapper div:first-child {
+		padding-bottom: 30px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.stacking {
 		border: 2px solid transparent;
 		border-radius: 10px;
 		border: 1px solid blue;
 		padding: 20px;
+		width: 100%;
 	}
 
 	.number-of-blocks {
@@ -75,11 +83,13 @@
 		position: relative;
 		display: flex;
 		justify-content: space-between;
+		gap: 10px;
 	}
 
 	input {
 		color: white;
-		width: 569px;
+		max-width: 570px;
+		min-width: 224px;
 		height: 50px;
 		padding-left: 10px;
 	}
@@ -95,7 +105,8 @@
 	}
 
 	.max {
-		width: 111px;
+		max-width: 111px;
+		min-width: 80px;
 		height: 50px;
 		border: 1px solid #384cff;
 	}
@@ -105,7 +116,8 @@
 		justify-content: center;
 		align-items: center;
 		gap: 7px;
-		width: 111px;
+		max-width: 111px;
+		min-width: 139px;
 		height: 50px;
 		border: 1px solid #384cff;
 		border-radius: 4px;
@@ -115,10 +127,12 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 36px;
 	}
 
 	.reset-button {
-		width: 170px;
+		max-width: 170px;
+		min-width: 139px;
 		height: 50px;
 		border: 1px solid #ffffff;
 		margin-left: 20px;
@@ -126,10 +140,22 @@
 	}
 
 	.stack-button {
-		width: 170px;
+		max-width: 170px;
+		min-width: 139px;
 		height: 50px;
 		background: #384cff;
 		margin-right: 20px;
 		margin-top: 20px;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type='number'] {
+		-moz-appearance: textfield;
 	}
 </style>

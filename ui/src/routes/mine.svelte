@@ -1,12 +1,13 @@
 <script>
-	import MineMany from '$components/stack.svelte';
+	import MineMany from '$components/mine/mineMany.svelte';
 	import SelectCity from '$components/selectCity.svelte';
 	// import MinedBlocks from '$components/minedBlocks.svelte';
 	import { user, city } from '$lib/stores.js';
-	import CityStats from '$components/index/cityStats.svelte';
+	// import CityStats from '$components/index/cityStats.svelte';
 	import { getStxBalance, getBlockHeight, getCoinBalance } from '$lib/apiCalls.js';
-	import { getStxAddress } from '$lib/auth';
-	import StackToolTest from '$components/index/stackToolTest.svelte';
+	import { getStxAddress } from '$lib/auth.js';
+	import StackToolTest from '$components/stacking/stackToolTest.svelte';
+	import MobileStackToolTest from '$components/stacking/mobileStackToolTest.svelte';
 
 	// server side
 	$: stxAddress = getStxAddress($user);
@@ -28,28 +29,42 @@
 	<div class="stats">
 		<div class="city-wallet">
 			{#await cityWalletBalance}
-				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" /> 0</p>
+				<p><img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" /> 0</p>
 			{:then balance}
-			
-				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" /> {balance.toLocaleString()}</p>
+				<p>
+					<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />
+					{balance.toLocaleString()}
+				</p>
 			{/await}
 			<p>{$city.name} Wallet Balance</p>
 		</div>
 		<div class="coin-balance">
 			{#await coinBalance}
-				<p> 	<img width="20px" height="20px" src={$city.img} alt={`${$city}`} />0</p>
+				<p><img width="20px" height="20px" src={$city.img} alt={`${$city}`} />0</p>
 			{:then balance}
-			
-				<p> 	<img width="25px" height="20px" src={$city.img} alt={`${$city}`} />{balance.toLocaleString()}</p>
+				<p>
+					<img
+						width="25px"
+						height="20px"
+						src={$city.img}
+						alt={`${$city}`}
+					/>{balance.toLocaleString()}
+				</p>
 			{/await}
 			<p>My {$city.coin.toUpperCase()} balance</p>
 		</div>
-		<div class="stx-balance"> 
+		<div class="stx-balance">
 			{#await stxBalance}
-				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />0</p>
+				<p><img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />0</p>
 			{:then balance}
-			
-				<p>	<img width="20px" height="20px" src="/icons/stx.svg" alt="Total STX" />{balance.toLocaleString()}</p>
+				<p>
+					<img
+						width="20px"
+						height="20px"
+						src="/icons/stx.svg"
+						alt="Total STX"
+					/>{balance.toLocaleString()}
+				</p>
 			{/await}
 			<p>My STX balance</p>
 		</div>
@@ -69,23 +84,23 @@
 
 	<!-- <MinedBlocks /> -->
 
-	<StackToolTest/>
-
+	<StackToolTest />
+	<MobileStackToolTest />
 </div>
 
 <style>
 	.mine-wrapper {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		padding: 0 30px;
+		text-align: center;
 	}
 	.title {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 770px;
+		max-width: 770px;
+		min-width: 354px;
 		padding-bottom: 25px;
+		margin: auto;
 	}
 
 	.stats {
@@ -93,6 +108,8 @@
 		gap: 30px;
 		padding-top: 50px;
 		padding-bottom: 30px;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 
 	.stats div {
@@ -107,7 +124,7 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 30px;
-    justify-content: center;
+		justify-content: center;
 	}
 
 	.join {
@@ -115,7 +132,6 @@
 		height: 50px;
 		background-color: #384cff;
 		border-radius: 50px;
-	
 	}
 
 	.city-wallet {
@@ -144,7 +160,7 @@
 		font-size: 1.25rem;
 	}
 
-	.stx-balance p:first-child{
+	.stx-balance p:first-child {
 		display: flex;
 		gap: 5px;
 		font-size: 1.75rem;
@@ -156,7 +172,7 @@
 	}
 
 	.current-block p:first-child {
-	font-size: 1.75rem
+		font-size: 1.75rem;
 	}
 
 	.current-block p:nth-child(2) {
