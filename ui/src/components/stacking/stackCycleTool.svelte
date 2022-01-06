@@ -5,8 +5,8 @@
   import { getStxAddress } from '$lib/auth.js';
 
   $: stxAddress = getStxAddress($user);
-  // $: userId = stxAddress ? getUserId($city, stxAddress) : null;
-  $: userId = 50;
+  $: userId = stxAddress ? getUserId($city, stxAddress) : null;
+  // $: userId = 50;
 
   $: stackingCycleStats = getStackingCycleStats($city);
   $: blockHeight = getBlockHeight($city);

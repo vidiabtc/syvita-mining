@@ -4,7 +4,7 @@
 	import PoolHistory from "$components/pool/poolHistory.svelte";
 	import SelectCity from "$components/selectCity.svelte";
 	import Contribute from "$components/pool/contribute.svelte";
-	import Info from "$components/info.svelte";
+
 </script>
 
 <div class="pool-wrapper">
