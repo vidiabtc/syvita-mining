@@ -39,3 +39,27 @@ export const CITIES = {
 		startingPoolId: '8',
 	}
 };
+
+export const LANGUAGES = {
+	English: {
+		name: 'English',
+		img: '🇺🇸',
+		mining: {
+			title: 'This is a title in english'
+		}
+	},
+	Korean: {
+		name: 'Korean',
+		img: '🇰🇷',
+		mining: {
+			title: 'This is a title in korean'
+		}
+	},
+	Japanese: {
+		name: 'Japanese',
+		img: '🇯🇵',
+		mining: {
+			title: 'This is a title in japanese'
+		}
+	}
+}

@@ -1,6 +1,6 @@
 <script>
 	import StackingCycles from '$components/stacking/stackingCycles.svelte';
-	import Stack from '$components/stack.svelte';
+	import Stack from '$components/stacking/stack.svelte';
 	import StackCycleTool from '$components/stacking/stackCycleTool.svelte';
 	import StackToolTest from '$components/stacking/stackToolTest.svelte';
 	import MobileStackToolTest from '$components/stacking/mobileStackToolTest.svelte';

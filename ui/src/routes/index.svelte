@@ -5,19 +5,16 @@
 	import News from '$components/index/news.svelte';
 </script>
 
-<div >
+<div>
 	<Header />
 	<img class="city-coins-logo" src="/city-coins-header.svg" alt="" />
 
 	<PoolStats />
 	<CityStats />
-	<News/>
-	
+	<News />
 </div>
 
 <style>
-
-
 	.city-coins-logo {
 		position: absolute;
 		left: 0;
@@ -25,5 +22,4 @@
 		margin: auto;
 		margin-top: -10px;
 	}
-
 </style>

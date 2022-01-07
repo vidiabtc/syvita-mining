@@ -1,5 +1,6 @@
 <script>
 	import ConnectWallet from '$components/connectWallet.svelte';
+	import SelectLanguage from './selectLanguage.svelte';
 </script>
 
 <div class="nav-wrapper">
@@ -7,6 +8,7 @@
 		<p class="logo">Syvita Mining</p>
 	</a>
 	<nav>
+		<SelectLanguage />
 		<a href="/pool"><p>Pool</p></a>
 		<a href="/mine"><p>Mine</p></a>
 		<a href="/stack"><p>Stack</p></a>

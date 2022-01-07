@@ -108,9 +108,13 @@
 <style>
 	.stacking-wrapper {
 		max-width: 800px;
-		min-width: 354px;
+		min-width: 320px;
 		margin: auto;
 		margin-top: 10px;
+		font-size: 0.9rem;
+		height: 492px;
+		overflow: auto;
+		overflow-x: hidden;
 	}
 
 	.stacking-box {
@@ -130,6 +134,9 @@
 	}
 
 	.box-info-top div {
+		max-width: 200px;
+		min-width: 100px;
+		text-align: center;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
@@ -143,6 +150,8 @@
 	}
 
 	.box-info-bottom div {
+		max-width: 200px;
+		min-width: 100px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

@@ -1,7 +1,7 @@
 <script>
 	import { stack } from '$lib/contractCalls.js';
 	import { city } from '$lib/stores.js';
-	import SelectCity from './selectCity.svelte';
+	import SelectCity from '$components/selectCity.svelte';
 
 	let amountToStack = 0;
 	let numOfCycles = 0;

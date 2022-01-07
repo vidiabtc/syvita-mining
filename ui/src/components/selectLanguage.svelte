@@ -1,31 +1,45 @@
+<script context="module">
+	export const load = async () => {
+		return {
+			props: {
+				test: 123
+			}
+		};
+	};
+</script>
+
 <script>
-	import { CITIES } from '$lib/constants.js';
-	import { city } from '$lib/stores.js';
+	import { LANGUAGES } from '$lib/constants.js';
+	import { t } from '$lib/stores.js';
+
+	export let test;
 
 	let toggle = false;
 </script>
 
+<h1>{JSON.stringify(test)}</h1>
+
 <div class="selector-wrapper" on:click={() => (toggle = !toggle)}>
 	<div class="city-selector">
 		<p>
-			<img class="coin" src={$city.img} alt={`${$city}`} />
-			{$city.name}
+			{$t.img}
+			{$t.name}
 		</p>
 		<img class={toggle ? 'chevron' : 'chevron-up'} src="/icons/arrow-down.svg" alt="arrow down" />
 	</div>
 	{#if toggle}
 		<div class="dropdown">
-			{#each Object.keys(CITIES) as selectedCity}
-				{#if selectedCity != $city.coin}
+			{#each Object.keys(LANGUAGES) as selectedLanguage}
+				{#if selectedLanguage != $t.name}
 					<div>
 						<p
 							on:click={() => {
-								city.set(CITIES[selectedCity]);
-								console.log('city set to ', CITIES[selectedCity]);
+								t.set(LANGUAGES[selectedLanguage]);
+								console.log('city set to ', LANGUAGES[selectedLanguage]);
 							}}
 						>
-							<img class="coin" src={CITIES[selectedCity].img} alt={`${selectedCity}`} />
-							{CITIES[selectedCity].name}
+							{LANGUAGES[selectedLanguage].img}
+							{LANGUAGES[selectedLanguage].name}
 						</p>
 					</div>
 				{/if}
@@ -68,19 +82,24 @@
 		height: 15px;
 	}
 
-	.coin {
+	.language {
 		width: 31px;
 		height: 31px;
 		margin-right: 8px;
 	}
 
 	.dropdown {
+		display: flex;
 		position: absolute;
 		display: flex;
 		flex-direction: column;
+
 		left: 50px;
 		padding-top: 10px;
 		background-color: #050810;
+	}
+
+	.dropdown div {
 	}
 
 	.dropdown div:hover {

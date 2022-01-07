@@ -278,11 +278,13 @@
 
 <style>
 	.mining-blocks-wrapper {
-		width: 1200px;
+		max-width: 1200px;
+		min-width: 800px;
 		height: 492px;
 		margin: auto;
 		overflow: auto;
 		overflow-x: hidden;
+		padding-right: 10px;
 	}
 
 	.mining-blocks-wrapper div:first-of-type {
@@ -290,14 +292,14 @@
 	}
 
 	.mining-block {
-		width: 1180px;
+		width: 100%;
 		height: 82.3px;
 		border: 1px solid rgba(255, 255, 255, 0.5);
 		border-radius: 5px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding-left: 103px;
+		padding-left: 9vw;
 		padding-right: 27px;
 		margin-top: 20px;
 	}
@@ -312,7 +314,6 @@
 		justify-content: space-between;
 		align-items: center;
 		padding-left: 103px;
-		padding-right: 27px;
 		margin-top: 20px;
 	}
 
@@ -352,13 +353,16 @@
 
 	.block-dropdown-wrapper {
 		border: 1px solid rgba(255, 255, 255, 0.5);
-		width: 1180px;
+		max-width: 1180px;
+		min-width: 800px;
+		margin-top: -1px;
+		border-top: none;
 	}
 
 	.block-dropdown {
 		display: flex;
 		justify-content: space-around;
-		padding-right: 130px;
+		padding-right: 27px;
 		padding-top: 14px;
 		padding-bottom: 14px;
 	}
@@ -379,5 +383,11 @@
 		height: 62px;
 		background: #ffffff;
 		border-radius: 10px;
+	}
+
+	@media (max-width: 800px) {
+		.mining-blocks-wrapper {
+			display: none;
+		}
 	}
 </style>

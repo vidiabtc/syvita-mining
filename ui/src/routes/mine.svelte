@@ -6,8 +6,6 @@
 	// import CityStats from '$components/index/cityStats.svelte';
 	import { getStxBalance, getBlockHeight, getCoinBalance } from '$lib/apiCalls.js';
 	import { getStxAddress } from '$lib/auth.js';
-	import StackToolTest from '$components/stacking/stackToolTest.svelte';
-	import MobileStackToolTest from '$components/stacking/mobileStackToolTest.svelte';
 
 	// server side
 	$: stxAddress = getStxAddress($user);
