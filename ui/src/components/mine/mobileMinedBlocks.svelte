@@ -1,5 +1,6 @@
 <script>
 	let toggle = false;
+	import { t } from '$lib/stores.js';
 </script>
 
 <div class="mining-blocks-wrapper">

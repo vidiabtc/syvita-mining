@@ -1,8 +1,9 @@
 <script>
 	import MineMany from '$components/mine/mineMany.svelte';
 	import SelectCity from '$components/selectCity.svelte';
+	import ClaimMiningReward from '$components/mine/claimMiningReward.svelte';
 	// import MinedBlocks from '$components/minedBlocks.svelte';
-	import { user, city } from '$lib/stores.js';
+	import { user, city, t } from '$lib/stores.js';
 	// import CityStats from '$components/index/cityStats.svelte';
 	import { getStxBalance, getBlockHeight, getCoinBalance } from '$lib/apiCalls.js';
 	import { getStxAddress } from '$lib/auth.js';
@@ -19,9 +20,10 @@
 
 <div class="mine-wrapper">
 	<div class="title">
-		<h1>Mine</h1>
+		<h1>{$t.header.mine}</h1>
 		<SelectCity />
 	</div>
+	<ClaimMiningReward />
 	<MineMany />
 
 	<div class="stats">
@@ -34,7 +36,7 @@
 					{balance.toLocaleString()}
 				</p>
 			{/await}
-			<p>{$city.name} Wallet Balance</p>
+			<p>{$t.mine.miamiWalletBalance}</p>
 		</div>
 		<div class="coin-balance">
 			{#await coinBalance}
@@ -64,7 +66,7 @@
 					/>{balance.toLocaleString()}
 				</p>
 			{/await}
-			<p>My STX balance</p>
+			<p>{$t.mine.mySTXBalance}</p>
 		</div>
 		<div class="current-block">
 			{#await blockHeight}
@@ -72,18 +74,15 @@
 			{:then block}
 				<p>#{block}</p>
 			{/await}
-			<p>Current Block</p>
+			<p>{$t.mine.currentBlock}</p>
 		</div>
 	</div>
 
 	<a href="/pool">
-		<button class="join">+ Join Mining Pool</button>
+		<button class="join">+ {$t.mine.joinMiningPool}</button>
 	</a>
 
 	<!-- <MinedBlocks /> -->
-
-	<StackToolTest />
-	<MobileStackToolTest />
 </div>
 
 <style>
@@ -130,6 +129,7 @@
 		height: 50px;
 		background-color: #384cff;
 		border-radius: 50px;
+		margin: auto;
 	}
 
 	.city-wallet {

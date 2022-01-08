@@ -1,6 +1,8 @@
 <script>
 	import Info from '$components/info.svelte';
 	import { contribute } from '$lib/contractCalls.js';
+	import { t } from '$lib/stores.js';
+
 	export let city;
 	export let poolId;
 
@@ -9,7 +11,7 @@
 
 <div class="contribute-wrapper">
 	<div class="title">
-		<h3>Contribute</h3>
+		<h3>{$t.pool.contribute}</h3>
 		<Info />
 	</div>
 	<div class="contributions">
@@ -17,7 +19,7 @@
 			<div>
 				<input bind:value={amount} placeholder="40 STX Minimum" type="number" />
 			</div>
-			<button on:click={contribute(city, poolId, amount * 1000000)}>Contribute</button>
+			<button on:click={contribute(city, poolId, amount * 1000000)}>{$t.pool.contribute}</button>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 <script>
 	// import { getPrevMinedBlocks } from '$lib/apiCalls.js';
-	import { city } from '$lib/stores.js';
+	import { city, t } from '$lib/stores.js';
 
 	let toggle = false;
 

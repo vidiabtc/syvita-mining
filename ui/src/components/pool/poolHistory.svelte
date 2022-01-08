@@ -1,6 +1,7 @@
 <script>
 	export let poolId;
 	export let city;
+	import { t } from '$lib/stores.js';
 	import { getPool } from '$lib/apiCalls';
 
 	const poolIdList = [];
@@ -11,7 +12,7 @@
 </script>
 
 <div class="pool-history-wrapper">
-	<h3>All Pools</h3>
+	<h3>{$t.pool.allPools}</h3>
 	<div class="pools">
 		{#each poolIdList as poolId}
 			{#await getPool(city, poolId)}
@@ -19,43 +20,39 @@
 			{:then pool}
 				<div class="pool">
 					<div class="pool-info">
-						<p>Pool {poolId + parseInt(city.startingPoolId)}</p>
-						<p>Current</p>
+						<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
+						<p>{$t.pool.current}</p>
 					</div>
 					<div class="block-dates">
 						<div>
-							<p>Start block</p>
+							<p>{$t.pool.startBlock}</p>
 							<p>{pool.stats.contributionsStartBlock}</p>
 						</div>
 						<div>
-							<p>End block</p>
+							<p>{$t.pool.endBlock}</p>
 							<p>{pool.stats.contributionsEndBlock}</p>
 						</div>
 					</div>
 					<div class="pool-contributions">
-						<!-- <div>
-							<p>Block Opened</p>
-							<p>432602</p>
-						</div> -->
 						<div>
-							<p>Contributors</p>
+							<p>{$t.pool.contributors}</p>
 							<p>{Object.keys(pool.contributions).length}</p>
 						</div>
 					</div>
 					<div class="pool-performance">
 						<div>
-							<p>Committed</p>
+							<p>{$t.pool.committedStx}</p>
 							<p>{Math.floor(pool.stats.totalContributed / 1000000).toLocaleString()} STX</p>
 						</div>
 						<div>
-							<p>MIA Won</p>
+							<p>{$t.pool.miaWon}</p>
 							<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
 						</div>
 					</div>
 					<div>
 						<button>
 							<a href={`/pool/${city.coin}/${poolId + parseInt(city.startingPoolId)}`}>
-								View Pool Details
+								{$t.pool.viewPoolDetails}
 							</a>
 						</button>
 					</div>
@@ -67,10 +64,13 @@
 
 <style>
 	.pool-history-wrapper {
-		width: 1170px;
+		max-width: 1170px;
+		min-width: 345px;
+		width: 100%;
 		margin: auto;
 		font-size: 1rem;
 		margin-bottom: 50px;
+		padding: 0 20px;
 	}
 
 	h3 {
@@ -79,15 +79,15 @@
 	}
 
 	.pools {
-		display: grid;
+		display: flex;
 		gap: 30px;
 		font-size: 1rem;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		flex-wrap: wrap;
 	}
 
 	.pool {
 		height: 345px;
-		width: 345px;
+		max-width: 345px;
 		border: 1px solid #273296;
 		border-radius: 10px;
 		display: flex;

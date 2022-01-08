@@ -2,13 +2,18 @@
 	export let city;
 	import { getPool, getContributionSum } from '$lib/apiCalls';
 	import Contribute from '$components/pool/contribute.svelte';
+	import { t } from '$lib/stores.js';
+	import SelectCity from '$components/selectCity.svelte';
 
 	export let poolId;
 	export let blockHeight;
 	export let stxAddress;
 </script>
 
-<div>
+<div class="pool-stats-wrapper">
+	<div class="select-city">
+		<SelectCity />
+	</div>
 	<div class="stats-wrapper">
 		{#await poolId}
 			<h1 />
@@ -17,8 +22,7 @@
 				<h1 />
 			{:then pool}
 				<div>
-					<p>MIA Pool {poolId + parseInt(city.startingPoolId)}</p>
-					<p>Current Pool</p>
+					<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
 				</div>
 				<div>
 					<p class="stx-logo">
@@ -26,7 +30,7 @@
 							pool.stats.totalContributed / 1000000
 						).toLocaleString()}
 					</p>
-					<p>Total Raised STX</p>
+					<p>{$t.pool.totalRaiseStx}</p>
 				</div>
 				<div>
 					{#await blockHeight}
@@ -34,7 +38,7 @@
 					{:then currentBlock}
 						<p>{currentBlock}</p>
 					{/await}
-					<p>Current Block</p>
+					<p>{$t.pool.currentBlock}</p>
 				</div>
 				<div>
 					{#await blockHeight}
@@ -42,13 +46,13 @@
 					{:then currentBlock}
 						{#if currentBlock < pool.stats.contributionsStartBlock}
 							<p>{pool.stats.contributionsStartBlock}</p>
-							<p>Contributions Open At Block</p>
+							<p>{$t.pool.contributionsOpen}</p>
 						{:else if currentBlock >= pool.stats.contributionsStartBlock && currentBlock < pool.stats.contributionsEndBlock}
 							<p>{pool.stats.contributionsEndBlock}</p>
-							<p>Contributions Open Until Block</p>
+							<p>{$t.pool.contributionsUntil}</p>
 						{:else}
 							<p>{pool.stats.contributionsEndBlock}</p>
-							<p>Contributions Closed At Block</p>
+							<p>{$t.pool.contributionsClosed}</p>
 						{/if}
 					{/await}
 				</div>
@@ -61,7 +65,7 @@
 					{:else}
 						<p>0 STX</p>
 					{/if}
-					<p>Your contribution</p>
+					<p>{$t.pool.yourContribution}</p>
 				</div>
 				<div>
 					<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
@@ -85,6 +89,19 @@
 </div>
 
 <style>
+	.pool-stats-wrapper {
+		max-width: 1170px;
+		margin: auto;
+		padding: 0 20px;
+	}
+
+	.select-city {
+		width: fit-content;
+		margin-left: auto;
+
+		padding-bottom: 35px;
+	}
+
 	.stats-wrapper {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -94,7 +111,10 @@
 	.stats-wrapper div {
 		display: flex;
 		flex-direction: column;
-		width: 370px;
+		max-width: 370px;
+
+		width: 100%;
+		min-width: 310px;
 		height: 141px;
 		justify-content: center;
 		align-items: center;
@@ -135,5 +155,25 @@
 
 	.coin-logo img {
 		width: 30px;
+	}
+
+	@media (max-width: 1220px) {
+		.pool-stats-wrapper {
+			max-width: 750px;
+		}
+		.stats-wrapper {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		@media (max-width: 800px) {
+			.pool-stats-wrapper {
+				max-width: 370px;
+			}
+			.stats-wrapper {
+				display: grid;
+				grid-template-columns: repeat(1, minmax(0, 1fr));
+			}
+		}
 	}
 </style>

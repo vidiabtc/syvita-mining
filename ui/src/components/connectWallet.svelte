@@ -1,16 +1,14 @@
 <script>
 	import { signIn, signOut } from '$lib/auth.js';
-	import { user } from '$lib/stores.js';
+	import { user, t } from '$lib/stores.js';
 </script>
 
 {#if $user == 'null'}
 	<button on:click={() => signIn()} class="connect-wallet"
-		><img src="/icons/stx.svg" alt="Connect" /> Connect</button
+		><img src="/icons/stx.svg" alt="Connect" />{$t.header.connect}</button
 	>
 {:else}
-	<button on:click={() => signOut()} class="logout"
-		>Logout</button
-	>
+	<button on:click={() => signOut()} class="logout">{$t.header.logOut}</button>
 {/if}
 
 <style>
@@ -27,7 +25,7 @@
 	.connect-wallet {
 		min-width: 154px;
 		min-height: 50px;
-		background-color: #384CFF;
+		background-color: #384cff;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -37,7 +35,7 @@
 	.logout {
 		min-width: 103px;
 		min-height: 50px;
-		border: 1px solid #FFFFFF;
+		border: 1px solid #ffffff;
 		background-color: transparent;
 	}
 </style>

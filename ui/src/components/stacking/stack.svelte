@@ -1,6 +1,6 @@
 <script>
 	import { stack } from '$lib/contractCalls.js';
-	import { city } from '$lib/stores.js';
+	import { city, t } from '$lib/stores.js';
 	import SelectCity from '$components/selectCity.svelte';
 
 	let amountToStack = 0;
@@ -9,16 +9,16 @@
 
 <div class="stack-wrapper">
 	<div>
-		<h1>Stack</h1>
+		<h1>{$t.header.stack}</h1>
 		<SelectCity />
 	</div>
 	<div class="stacking">
 		<div class="number-of-blocks">
-			<p>Amount of {$city.coin.toUpperCase()} to stack</p>
+			<p>{$t.stack.miaAmountToStack}</p>
 			<input bind:value={amountToStack} type="number" />
 		</div>
 		<div class="stx-per-block">
-			<p>Number of cycles</p>
+			<p>{$t.stack.numOfCycles}</p>
 			<input
 				on:change={() => {
 					if (numOfCycles > 32) numOfCycles = 32;
@@ -26,7 +26,7 @@
 				bind:value={numOfCycles}
 				type="number"
 			/>
-			<button on:click={() => (numOfCycles = 32)} class="max">Max</button>
+			<button on:click={() => (numOfCycles = 32)} class="max">{$t.mine.max}</button>
 		</div>
 		<div class="submit">
 			<button
@@ -34,10 +34,10 @@
 					numOfCycles = 0;
 					amountToStack = 0;
 				}}
-				class="reset-button">Reset</button
+				class="reset-button">{$t.mine.reset}</button
 			>
 			<button on:click={() => stack(amountToStack, numOfCycles)} class="stack-button"
-				>Stack for {numOfCycles} cycles</button
+				>{$t.stack.stackForCycles}</button
 			>
 		</div>
 	</div>

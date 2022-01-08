@@ -1,6 +1,7 @@
 <script>
 	import ConnectWallet from '$components/connectWallet.svelte';
 	import SelectLanguage from './selectLanguage.svelte';
+	import { t } from '$lib/stores.js';
 </script>
 
 <div class="nav-wrapper">
@@ -9,15 +10,16 @@
 	</a>
 	<nav>
 		<SelectLanguage />
-		<a href="/pool"><p>Pool</p></a>
-		<a href="/mine"><p>Mine</p></a>
-		<a href="/stack"><p>Stack</p></a>
+		<a href="/pool"><p>{$t.header.pool}</p></a>
+		<a href="/mine"><p>{$t.header.mine}</p></a>
+		<a href="/stack"><p>{$t.header.stack}</p></a>
 		<a class="discord" href="">
 			<img src="/discord.svg" alt="Discord Logo" />
-			<p>Discord</p>
+			<p>{$t.header.discord}</p>
 		</a>
 		<ConnectWallet />
 	</nav>
+	<img class="mobile-menu" src="icons/hamburger.svg" alt="" />
 </div>
 
 <style>
@@ -65,9 +67,34 @@
 		color: white;
 	}
 
-	@media (max-width: 1200px) {
+	.mobile-menu {
+		display: none;
+		width: 25px;
+		margin-left: auto;
+		filter: invert(100%) sepia(99%) saturate(1%) hue-rotate(199deg) brightness(108%) contrast(100%);
+	}
+
+	@media (max-width: 1284px) {
+		.nav-wrapper {
+			padding-right: 30px;
+		}
+	}
+
+	@media (max-width: 1284px) {
+		.nav-wrapper {
+			padding-left: 40px;
+			padding-right: 30px;
+		}
+	}
+	@media (max-width: 1105px) {
 		nav {
 			display: none;
+		}
+	}
+
+	@media (max-width: 1105px) {
+		.mobile-menu {
+			display: block;
 		}
 	}
 </style>

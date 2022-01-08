@@ -18,7 +18,7 @@
 		margin: auto;
 		flex-wrap: wrap;
 		gap: 30px;
-		padding-top: 300px;
+		padding-top: 30px;
 		justify-content: center;
 	}
 

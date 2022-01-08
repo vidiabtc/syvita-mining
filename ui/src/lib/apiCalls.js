@@ -133,6 +133,26 @@ export const getStackingReward = async (city, userId, cycle) => {
 	return data;
 };
 
+export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
+	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/can-claim-mining-reward`;
+
+	stxAddress = cvToHex(standardPrincipalCV(stxAddress))
+	blockHeight = '010000000000000000' + intToHex(blockHeight);
+
+	let res = await fetch(url, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			sender: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+			arguments: [stxAddress, blockHeight]
+		})
+	});
+	let data = await res.json();
+	data = hexToCV(data.result).type;
+	console.log('CAN CLAIM MINING', data);
+	return data == 3 ? true : false
+};
+
 export const getContributionSum = (contributions) => {
 	let sum = 0
 	for (let contribution in contributions) {

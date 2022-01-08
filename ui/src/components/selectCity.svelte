@@ -1,6 +1,6 @@
 <script>
 	import { CITIES } from '$lib/constants.js';
-	import { city } from '$lib/stores.js';
+	import { city, t } from '$lib/stores.js';
 
 	let toggle = false;
 </script>

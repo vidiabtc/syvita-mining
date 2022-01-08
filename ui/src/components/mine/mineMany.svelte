@@ -1,5 +1,6 @@
 <script>
 	import { mineMany } from '$lib/contractCalls.js';
+	import { t } from '$lib/stores.js';
 
 	let numOfBlocks = 0;
 	let stxPerBlock = 0;
@@ -8,7 +9,7 @@
 <div class="mineMany-wrapper">
 	<div class="number-of-blocks">
 		<div>
-			<p>Number of blocks to Mine</p>
+			<p>{$t.mine.blocksToMine}</p>
 			<input
 				on:change={() => {
 					if (numOfBlocks > 200) numOfBlocks = 200;
@@ -17,11 +18,11 @@
 				type="number"
 			/>
 		</div>
-		<button on:click={() => (numOfBlocks = 200)} class="max">Max</button>
+		<button on:click={() => (numOfBlocks = 200)} class="max">{$t.mine.max}</button>
 	</div>
 	<div class="stx-per-block">
 		<div>
-			<p>Stx per block</p>
+			<p>{$t.mine.stxPerBlock}</p>
 			<input bind:value={stxPerBlock} type="number" />
 		</div>
 		<div class="total-stx">
@@ -35,7 +36,7 @@
 				numOfBlocks = 0;
 				stxPerBlock = 0;
 			}}
-			class="reset-button">Reset</button
+			class="reset-button">{$t.mine.reset}</button
 		>
 		<button on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)} class="mine-button"
 			>Mine for {numOfBlocks} blocks</button

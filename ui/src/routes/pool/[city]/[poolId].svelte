@@ -45,7 +45,7 @@
 	import SelectCity from '$components/selectCity.svelte';
 	import Contribute from '$components/pool/contribute.svelte';
 
-	import { user } from '$lib/stores.js';
+	import { user, t } from '$lib/stores.js';
 	import { getLatestPoolId, getPool, getBlockHeight, getContributionSum } from '$lib/apiCalls';
 	import { getStxAddress } from '$lib/auth';
 

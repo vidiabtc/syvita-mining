@@ -1,6 +1,10 @@
+<script>
+	import { t } from '$lib/stores.js';
+</script>
+
 <footer>
-	<p>Created and Maintained by Syvita Guild</p>
-	<p class="twitter">Follow Us on<img src="/twitter.svg" alt="Twitter Logo" /></p>
+	<p>{$t.footer.syvita}</p>
+	<p class="twitter">{$t.footer.follow}<img src="/twitter.svg" alt="Twitter Logo" /></p>
 </footer>
 
 <style>

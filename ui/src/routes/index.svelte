@@ -1,25 +1,28 @@
 <script>
 	import Header from '$components/index/header.svelte';
 	import PoolStats from '$components/index/poolStats.svelte';
+	import MayorStats from '$components/index/mayorStats.svelte';
+	import MobileMayorStats from '$components/index/mobileMayorStats.svelte';
 	import CityStats from '$components/index/cityStats.svelte';
 	import News from '$components/index/news.svelte';
+	import MobileNews from '$components/index/mobileNews.svelte';
+	import Mobilenews from '$components/index/mobileNews.svelte';
 </script>
 
 <div>
 	<Header />
-	<img class="city-coins-logo" src="/city-coins-header.svg" alt="" />
 
 	<PoolStats />
+	<MayorStats />
+	<MobileMayorStats />
 	<CityStats />
 	<News />
+	<Mobilenews />
 </div>
 
 <style>
-	.city-coins-logo {
-		position: absolute;
-		left: 0;
-		right: 0;
+	div {
 		margin: auto;
-		margin-top: -10px;
+		padding: 0 20px;
 	}
 </style>

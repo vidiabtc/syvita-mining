@@ -1,6 +1,6 @@
 <script>
 	import { getStackingCycleStats, getBlockHeight, getUserId } from '$lib/apiCalls';
-	import { user, city } from '$lib/stores.js';
+	import { user, city, t } from '$lib/stores.js';
 	import { getStxAddress } from '$lib/auth';
 
 	$: stxAddress = getStxAddress($user);
@@ -24,11 +24,11 @@
 			<div class="stacking-block-winner">
 				<div>
 					<p>{cycle}</p>
-					<p>Cycle</p>
+					<p>{$t.stack.cycle}</p>
 				</div>
 				<div>
 					<p>{cycles[cycle][$city.coin].toLocaleString()}</p>
-					<p>{$city.coin} Stacked</p>
+					<p>{$t.stack.miaStacked}</p>
 				</div>
 				<div>
 					<p>5</p>
@@ -36,11 +36,11 @@
 				</div>
 				<div>
 					<p>{parseInt($city.activationBlock) + 2100 * parseInt(cycle)}</p>
-					<p>Start Block</p>
+					<p>{$t.pool.startBlock}</p>
 				</div>
 				<div>
 					<p>{Math.floor(cycles[cycle].stx).toLocaleString()}</p>
-					<p>STX to Stackers</p>
+					<p>{$t.stack.stxToStackers}</p>
 				</div>
 				<div>
 					{#if cycle == Object.keys(cycles)[Object.keys(cycles).length - 1]}
@@ -64,7 +64,7 @@
 					{:else}
 						<p>100.00%</p>
 					{/if}
-					<p>Percent Complete</p>
+					<p>{$t.stack.percentComplete}</p>
 				</div>
 			</div>
 		{/each}

@@ -3,13 +3,11 @@
 </script>
 
 <header>
-	<!-- <h1>{$t.mining.title}</h1> -->
-	<h1>Mine City Coins</h1>
-	<p>
-		The most efficient way to mine CityCoins. With Syvita Mining your contributions are pooled with
-		others to increase the pools chances of winning. Upon winning blocks you will receive the
-		percentage of your total contribution for the pool in relation to everyone elses.
+	<h1 class="flex-item">{$t.home.title}</h1>
+	<p class="flex-item">
+		{$t.home.subHeading}
 	</p>
+	<img class="city-coins-logo flex-item" src="/city-coins-header.svg" alt="" />
 </header>
 
 <style>
@@ -20,7 +18,7 @@
 		align-items: center;
 	}
 	h1 {
-		font-size: 5.75rem;
+		font-size: clamp(4rem, 10vw, 5.75rem);
 		max-width: 525px;
 	}
 
@@ -28,5 +26,30 @@
 		font-size: 1.25rem;
 		max-width: 550px;
 		line-height: 32px;
+	}
+
+	.city-coins-logo {
+		margin: auto;
+		margin-top: -10px;
+		min-width: 404px;
+		width: 100%;
+	}
+
+	@media (max-width: 1129px) {
+		header {
+			text-align: center;
+		}
+
+		.flex-item:nth-child(1) {
+			order: 1;
+		}
+
+		.flex-item:nth-child(2) {
+			order: 3;
+		}
+
+		.flex-item:nth-child(3) {
+			order: 2;
+		}
 	}
 </style>

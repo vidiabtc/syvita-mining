@@ -2,115 +2,20 @@
 	<div class="cycle">
 		<div><p class="title">Cycle #1</p></div>
 		<div>
-			<p>Starting Block</p>
-			<p>26597</p>
+			<p>MIA stacked</p>
+			<p>100,000,000</p>
 		</div>
 		<div>
-			<p>Ending Block</p>
-			<p>26597</p>
+			<p>STX to claim</p>
+			<p>50,000</p>
 		</div>
 		<div>
-			<p>MIA Stacked</p>
+			<p>MIA to return</p>
 			<p>0</p>
 		</div>
+
 		<div>
-			<p>STX Claimed</p>
-			<p>500,000</p>
-		</div>
-		<div>
-			<p>Claim Date</p>
-			<p class="claim">Claim Now</p>
-		</div>
-	</div>
-	<div class="cycle">
-		<div><p class="title">Cycle #1</p></div>
-		<div>
-			<p>Starting Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>Ending Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>MIA Stacked</p>
-			<p>0</p>
-		</div>
-		<div>
-			<p>STX Claimed</p>
-			<p>500,000</p>
-		</div>
-		<div>
-			<p>Claim Date</p>
-			<p class="claim">Claim Now</p>
-		</div>
-	</div>
-	<div class="cycle">
-		<div><p class="title">Cycle #1</p></div>
-		<div>
-			<p>Starting Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>Ending Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>MIA Stacked</p>
-			<p>0</p>
-		</div>
-		<div>
-			<p>STX Claimed</p>
-			<p>500,000</p>
-		</div>
-		<div>
-			<p>Claim Date</p>
-			<p class="claim">Claim Now</p>
-		</div>
-	</div>
-	<div class="cycle">
-		<div><p class="title">Cycle #1</p></div>
-		<div>
-			<p>Starting Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>Ending Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>MIA Stacked</p>
-			<p>0</p>
-		</div>
-		<div>
-			<p>STX Claimed</p>
-			<p>500,000</p>
-		</div>
-		<div>
-			<p>Claim Date</p>
-			<p class="claim">Claim Now</p>
-		</div>
-	</div>
-	<div class="cycle">
-		<div><p class="title">Cycle #1</p></div>
-		<div>
-			<p>Starting Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>Ending Block</p>
-			<p>26597</p>
-		</div>
-		<div>
-			<p>MIA Stacked</p>
-			<p>0</p>
-		</div>
-		<div>
-			<p>STX Claimed</p>
-			<p>500,000</p>
-		</div>
-		<div>
-			<p>Claim Date</p>
+			<p>Claim Rewards</p>
 			<p class="claim">Claim Now</p>
 		</div>
 	</div>

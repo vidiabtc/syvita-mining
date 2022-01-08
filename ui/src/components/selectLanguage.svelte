@@ -1,23 +1,9 @@
-<script context="module">
-	export const load = async () => {
-		return {
-			props: {
-				test: 123
-			}
-		};
-	};
-</script>
-
 <script>
 	import { LANGUAGES } from '$lib/constants.js';
 	import { t } from '$lib/stores.js';
 
-	export let test;
-
 	let toggle = false;
 </script>
-
-<h1>{JSON.stringify(test)}</h1>
 
 <div class="selector-wrapper" on:click={() => (toggle = !toggle)}>
 	<div class="city-selector">

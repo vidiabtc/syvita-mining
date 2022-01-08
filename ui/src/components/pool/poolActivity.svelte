@@ -1,9 +1,11 @@
 <script>
+	import { t } from '$lib/stores.js';
+
 	export let city;
 </script>
 
 <div class="activity-wrapper">
-	<p>Activity <img src="/icons/notifications.svg" alt="" /></p>
+	<p>{$t.pool.activity}<img src="/icons/notifications.svg" alt="" /></p>
 	<div class="activity-box">
 		<div>
 			<p>Pool 3 wins another block - #4351222</p>
@@ -29,10 +31,12 @@
 
 <style>
 	.activity-wrapper {
-		width: 1170px;
+		max-width: 1170px;
+		min-width: 354px;
 		margin: auto;
 		margin-top: 50px;
 		font-size: 36px;
+		padding: 0 20px;
 	}
 
 	.activity-wrapper p:first-child {
@@ -84,5 +88,11 @@
 
 	.padding {
 		padding-bottom: 10px;
+	}
+
+	@media (max-width: 534px) {
+		.activity-box div {
+			font-size: 0.9rem;
+		}
 	}
 </style>
