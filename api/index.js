@@ -25,6 +25,13 @@ router.get('/blockheight', async () => {
   return new Response(blockHeight, { headers })
 })
 
+// return stx price
+router.get('/price', async () => {
+  let price = await CITYCOINS.get('stx-price')
+  return new Response(price, { headers })
+})
+
+
 router.all(
   '*',
   () => new Response('404, not found!', { headers }, { status: 404 }),

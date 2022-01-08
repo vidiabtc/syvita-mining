@@ -14,8 +14,10 @@ export const runCron = async () => {
 
   if (currentBlock) {
     console.log('Running cron for new block...')
+    let price = await getStxPrice()
     await updateSyvitaMiningData(currentBlock)
     await CITYCOINS.put('current-block-height', currentBlock.toString())
+    await CITYCOINS.put('stx-price', price.toString())
   } else {
     console.log('Cron already ran for this block')
   }
@@ -77,6 +79,14 @@ const updateSyvitaMiningData = async currentBlock => {
 //   await CITYCOINS.put(`user-ids-${city.coin}`, JSON.stringify(allUserIds))
 //   console.log('user ids: ', allUserIds)
 // }
+
+const getStxPrice = async () => {
+  let url = 'https://api.coingecko.com/api/v3/simple/price?ids=blockstack&vs_currencies=USD'
+  let res = await fetch(url);
+  let data = await res.json();
+  let price = data.blockstack.usd;
+  return price;
+}
 
 const updateStackingCycleData = async (city, currentBlock) => {
   let currentCycle =
