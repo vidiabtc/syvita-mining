@@ -14,7 +14,6 @@ export const runCron = async () => {
   // if (currentBlock != lastBlockChecked) {
 
   if (currentBlock != lastBlockChecked) {
- 
     console.log('Running cron for new block...')
     console.log('Updating STX Price')
     let price = await getStxPrice()
