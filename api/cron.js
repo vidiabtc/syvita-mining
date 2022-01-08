@@ -9,15 +9,18 @@ export const runCron = async () => {
   let lastBlockChecked = await CITYCOINS.get('current-block-height')
   // console.log('Last block checked: ', lastBlockChecked)
   let currentBlock = await getBlockHeight()
+
   // console.log('Current block: ', currentBlock)
   // if (currentBlock != lastBlockChecked) {
 
-  if (currentBlock) {
+  if (currentBlock != lastBlockChecked) {
+ 
     console.log('Running cron for new block...')
+    console.log('Updating STX Price')
     let price = await getStxPrice()
+    await CITYCOINS.put('stx-price', price.toString())
     await updateSyvitaMiningData(currentBlock)
     await CITYCOINS.put('current-block-height', currentBlock.toString())
-    await CITYCOINS.put('stx-price', price.toString())
   } else {
     console.log('Cron already ran for this block')
   }
