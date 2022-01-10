@@ -1,5 +1,9 @@
 <script>
+	export let stxPrice;
+	export let miaBalance;
+	export let nycBalance;
 	import { t } from '$lib/stores.js';
+	import { CITIES } from '$lib/constants.js';
 </script>
 
 <div class="mayor-stats-wrapper">
@@ -12,7 +16,6 @@
 				<p>{$t.home.walletBalance}</p>
 				<p>{$t.home.miningStatus}</p>
 			</div>
-
 			<div class="table-data">
 				<p class="mayor-table">
 					<img
@@ -20,7 +23,7 @@
 					/>Francis Suarez
 				</p>
 				<p>MIAMI</p>
-				<p>$25,000,000</p>
+				<p>${Math.floor(miaBalance * stxPrice).toLocaleString()}</p>
 				<p><span class="status-active">{$t.home.active}</span></p>
 			</div>
 			<div class="table-data">
@@ -30,7 +33,7 @@
 					/>Eric Adams
 				</p>
 				<p>NEW YORK CITY</p>
-				<p>$30,000,000</p>
+				<p>${Math.floor(nycBalance * stxPrice).toLocaleString()}</p>
 				<p><span class="status-active">{$t.home.active}</span></p>
 			</div>
 

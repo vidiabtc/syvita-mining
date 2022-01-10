@@ -19,12 +19,13 @@
 </script>
 
 <div class="mine-wrapper">
-	<div class="title">
-		<h1>{$t.header.mine}</h1>
-		<SelectCity />
+	<MineMany />
+	<div class="join">
+		<a href="/pool">
+			<button>+ {$t.mine.joinMiningPool}</button>
+		</a>
 	</div>
 	<ClaimMiningReward />
-	<MineMany />
 
 	<div class="stats">
 		<div class="city-wallet">
@@ -78,16 +79,12 @@
 		</div>
 	</div>
 
-	<a href="/pool">
-		<button class="join">+ {$t.mine.joinMiningPool}</button>
-	</a>
-
 	<!-- <MinedBlocks /> -->
 </div>
 
 <style>
 	.mine-wrapper {
-		padding: 0 30px;
+		padding: 0 20px;
 		text-align: center;
 	}
 	.title {
@@ -125,11 +122,15 @@
 	}
 
 	.join {
+		margin: auto;
+		width: 200px;
+		padding-top: 50px;
+	}
+	.join button {
 		width: 200px;
 		height: 50px;
 		background-color: #384cff;
 		border-radius: 50px;
-		margin: auto;
 	}
 
 	.city-wallet {

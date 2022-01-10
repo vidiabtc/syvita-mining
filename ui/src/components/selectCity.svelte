@@ -46,6 +46,7 @@
 		justify-content: space-between;
 		padding: 0 10px;
 		width: 212px;
+
 		height: 50px;
 		border-radius: 4px;
 		border: 1px solid #444d66;
@@ -89,11 +90,26 @@
 
 	.dropdown p {
 		width: 212px;
+
 		height: 50px;
 		border-radius: 4px;
 		border: 1px solid #444d66;
 		align-items: center;
 		padding-left: 10px;
 		display: flex;
+	}
+
+	@media (max-width: 400px) {
+		.selector-wrapper {
+			font-size: 1rem;
+		}
+
+		.city-selector {
+			width: 150px;
+		}
+
+		.dropdown p {
+			width: 150px;
+		}
 	}
 </style>

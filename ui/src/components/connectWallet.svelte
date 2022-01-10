@@ -38,4 +38,16 @@
 		border: 1px solid #ffffff;
 		background-color: transparent;
 	}
+
+	@media (max-width: 1105px) {
+		.connect-wallet {
+			margin: auto;
+			width: 200px;
+		}
+
+		.logout {
+			width: 200px;
+			margin: auto;
+		}
+	}
 </style>

@@ -87,7 +87,7 @@
 
 	.pool {
 		height: 345px;
-		max-width: 345px;
+		max-width: 320px;
 		border: 1px solid #273296;
 		border-radius: 10px;
 		display: flex;

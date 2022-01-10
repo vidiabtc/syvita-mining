@@ -81,7 +81,9 @@
 		padding-bottom: 20px;
 	}
 	.news-story {
-		width: 354px;
+		width: 320px;
+		/* width: 100%; */
+		max-width: 354px;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;

@@ -1,20 +1,21 @@
 <script>
-	import Header from '$components/header.svelte';
+	import NavBar from '$components/navigation/navBar.svelte';
 	import Footer from '$components/footer.svelte';
 	import '@fontsource/inter/400.css';
 </script>
 
 <div>
-	<Header />
+	<NavBar />
 	<main>
 		<slot />
 	</main>
-	<Footer />
+	<!-- <Footer /> -->
 </div>
 
 <style>
 	div {
 		display: grid;
+		width: 100%;
 
 		grid-template-areas:
 			'nav'
@@ -28,6 +29,7 @@
 		grid-area: nav;
 	}
 	main {
+		max-width: 100%;
 		grid-area: main;
 	}
 	footer {

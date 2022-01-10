@@ -9,7 +9,7 @@
 			<p>{$t.home.totalMayors}</p>
 		</div>
 		<div>
-			<p>120,000,000,000,000</p>
+			<p>120,000,000</p>
 			<p>{$t.home.currentCityCoins}</p>
 		</div>
 		<div>
@@ -32,6 +32,7 @@
 	.mayor-stats {
 		height: 485px;
 		max-width: 380px;
+		width: 100%;
 		display: flex;
 
 		flex-direction: column;
@@ -41,7 +42,8 @@
 
 	.mayor-stats div {
 		border: 1px solid #444d66;
-		width: 370px;
+		max-width: 360px;
+		width: 100%;
 		height: 141px;
 		border-radius: 10px;
 		display: flex;
@@ -64,7 +66,9 @@
 	}
 
 	.city-marketcaps {
-		width: 370px;
+		max-width: 380px;
+		width: 100%;
+		min-width: 320px;
 		height: 483px;
 		border: 1px solid #444d66;
 		border-radius: 10px;

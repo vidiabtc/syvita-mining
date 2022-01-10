@@ -31,7 +31,6 @@
 	.city-coins-logo {
 		margin: auto;
 		margin-top: -10px;
-		min-width: 404px;
 		width: 100%;
 	}
 

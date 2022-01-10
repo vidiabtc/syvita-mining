@@ -1,13 +1,17 @@
+<script>
+	import { STATS } from '$lib/constants.js';
+</script>
+
 <div class="pool-stats">
 	<div>
-		<p class="stx-contributed"><img src="/icons/stx.svg" />8,990</p>
-		<p>Total Raised STX for Pool <img class="info-img" src="/info.svg" alt="" /></p>
+		<p class="stx-contributed"><img src="/icons/stx.svg" />{STATS.totalSTXRaised}</p>
+		<p>Total Raised STX for Pool</p>
 	</div>
 	<div>
 		<p class="city-coins-won">
-			<img class="city-coin-img" src="/city-coins.svg" />65,580,520,212.33
+			<img class="city-coin-img" src="/city-coins.svg" />{STATS.totalCityCoinsWon}
 		</p>
-		<p>Total City Coins Won <img class="info-img" src="/info.svg" alt="" /></p>
+		<p>Total City Coins Won</p>
 	</div>
 </div>
 <div class="divider" />
@@ -25,7 +29,7 @@
 	.pool-stats div {
 		width: 100%;
 		max-width: 600px;
-		min-width: 324px;
+		width: 100%;
 		height: 195px;
 		border: 1px solid blue;
 		border-radius: 10px;

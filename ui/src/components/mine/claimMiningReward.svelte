@@ -9,30 +9,34 @@
 
 	let blockHeight = 0;
 	let blockToCheck = 0;
+	let claimBlockHeight = 0;
 	$: isWinner = blockToCheck > 0 ? canClaimMiningReward($city, stxAddress, blockToCheck) : null;
+
+	// $: claim = isWinner == true ? console.log('WINNER') : console.log('LOSER');
+
 	// let blockWon = false;
 </script>
 
 <div class="claim-block-wrapper">
+	<div>
+		<h2>Claim Mining Reward</h2>
+	</div>
 	<div class="claim-block">
 		<div class="block-to-claim">
 			<p>Block To Check</p>
 			<input bind:value={blockHeight} type="number" />
 		</div>
 		<div class="submit">
-			<button on:click={() => (blockToCheck = blockHeight)} class="stack-button"
+			<button on:click={() => (blockToCheck = blockHeight)} class="check-button"
 				>Check block {blockHeight}</button
 			>
 		</div>
 		{#if isWinner !== null}
 			{#await isWinner}
-				<h1>checking block...</h1>
+				<p class="checking-winner">Checking if won...</p>
 			{:then isWinner}
-				{#if isWinner == true}
-					<h1>block won</h1>
-				{:else}
-					<h1>block lost</h1>
-					{isWinner}
+				{#if !isWinner == true}
+					<p class="checking-winner">Block lost</p>
 				{/if}
 			{/await}
 		{/if}
@@ -47,9 +51,9 @@
 	.claim-block-wrapper {
 		margin: auto;
 		max-width: 770px;
-		min-width: 354px;
+		min-width: 315px;
 		height: max-content;
-		padding-top: 103px;
+		padding-top: 50px;
 	}
 
 	.claim-block-wrapper div:first-child {
@@ -65,6 +69,14 @@
 		border: 1px solid blue;
 		padding: 20px;
 		width: 100%;
+	}
+
+	.check-button {
+		width: 170px;
+		height: 50px;
+		background: #384cff;
+		margin-right: 20px;
+		margin-top: 20px;
 	}
 
 	.block-to-claim {
@@ -92,11 +104,20 @@
 		padding-right: 5px;
 	}
 
+	.checking-winner {
+		position: relative;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		font-size: 1.25rem;
+		max-width: fit-content;
+	}
+
 	.submit {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 36px;
+		padding-left: 20px;
 	}
 
 	input::-webkit-outer-spin-button,

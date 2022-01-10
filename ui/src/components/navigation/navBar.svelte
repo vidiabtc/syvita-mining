@@ -1,29 +1,35 @@
 <script>
 	import ConnectWallet from '$components/connectWallet.svelte';
-	import SelectLanguage from './selectLanguage.svelte';
-	import { t } from '$lib/stores.js';
+	import SelectLanguage from '$components/selectLanguage.svelte';
+	import NavLinks from './navLinks.svelte';
+	import MobileNavBar from './mobileNavBar.svelte';
+	let toggle = false;
 </script>
 
 <div class="nav-wrapper">
 	<a href="/">
 		<p class="logo">Syvita Mining</p>
 	</a>
-	<nav>
+	<div class="navigation-items">
 		<SelectLanguage />
-		<a href="/pool"><p>{$t.header.pool}</p></a>
-		<a href="/mine"><p>{$t.header.mine}</p></a>
-		<a href="/stack"><p>{$t.header.stack}</p></a>
-		<a class="discord" href="">
-			<img src="/discord.svg" alt="Discord Logo" />
-			<p>{$t.header.discord}</p>
-		</a>
+		<NavLinks />
 		<ConnectWallet />
-	</nav>
-	<img class="mobile-menu" src="icons/hamburger.svg" alt="" />
+	</div>
+	<div class="mobile-menu">
+		<img
+			on:click={() => (toggle = !toggle)}
+			src={toggle ? 'icons/close.svg' : 'icons/hamburger.svg'}
+			alt=""
+		/>
+		{#if toggle}
+			<MobileNavBar />
+		{/if}
+	</div>
 </div>
 
 <style>
 	.nav-wrapper {
+		max-width: 100%;
 		display: flex;
 		align-items: center;
 		font-size: 1.25rem;
@@ -41,7 +47,7 @@
 		text-transform: uppercase;
 	}
 
-	nav {
+	.navigation-items {
 		display: flex;
 		margin-left: auto;
 		align-items: center;
@@ -49,28 +55,13 @@
 		padding-right: 20px;
 	}
 
-	.discord {
-		display: flex;
-		margin-left: -20px;
-	}
-
-	.discord p {
-		margin-left: -10px;
-	}
-
-	a:visited {
-		text-decoration: none;
-		color: white;
-	}
-
-	a {
-		color: white;
-	}
-
 	.mobile-menu {
 		display: none;
-		width: 25px;
 		margin-left: auto;
+	}
+
+	.mobile-menu img {
+		width: 25px;
 		filter: invert(100%) sepia(99%) saturate(1%) hue-rotate(199deg) brightness(108%) contrast(100%);
 	}
 
@@ -87,14 +78,14 @@
 		}
 	}
 	@media (max-width: 1105px) {
-		nav {
-			display: none;
-		}
-	}
-
-	@media (max-width: 1105px) {
 		.mobile-menu {
 			display: block;
+		}
+		.navigation-items {
+			display: none;
+		}
+		.nav-wrapper {
+			padding-top: 35px;
 		}
 	}
 </style>

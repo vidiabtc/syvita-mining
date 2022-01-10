@@ -1,5 +1,5 @@
 import { BASE_URL, API_URL, CYCLE_LENGTH, POOL_API_URL } from './constants.js';
-import { getReadOnlyTxOptions } from './contractCalls.js';
+import { getReadOnlyTxOptions, claimMiningReward } from './contractCalls.js';
 import { callReadOnlyFunction } from 'micro-stacks/transactions';
 
 import { cvToHex, hexToCV, hexToValue, standardPrincipalCV, uintCV } from 'micro-stacks/clarity';
@@ -17,7 +17,6 @@ export const getStxBalance = async (stxAddress) => {
 
 export const getBlockHeight = async () => {
 	let url = `${API_URL}/blockheight`;
-	console.log(url);
 	let res = await fetch(url);
 	let block = await res.json();
 	console.log('Block height: ', block);
@@ -135,6 +134,7 @@ export const getStackingReward = async (city, userId, cycle) => {
 
 export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
 	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/can-claim-mining-reward`;
+	let block = blockHeight;
 
 	stxAddress = cvToHex(standardPrincipalCV(stxAddress))
 	blockHeight = '010000000000000000' + intToHex(blockHeight);
@@ -150,7 +150,7 @@ export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
 	let data = await res.json();
 	data = hexToCV(data.result).type;
 	console.log('CAN CLAIM MINING', data);
-	return data == 3 ? true : false
+	return data == 3 ? claimMiningReward(block) : false
 };
 
 export const getContributionSum = (contributions) => {

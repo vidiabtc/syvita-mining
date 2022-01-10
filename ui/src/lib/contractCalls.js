@@ -60,7 +60,7 @@ export const callContract = async (functionName, functionArgs, postConditions) =
 		network: NETWORK,
 		stxAddress: stxAddress,
 		AnchorMode: AnchorMode.Any,
-		postConditionMode: PostConditionMode.Deny,
+		postConditionMode: functionName == 'claim-mining-reward' ? PostConditionMode.Allow : PostConditionMode.Deny,
 		postConditions: postConditions
 	});
 
@@ -147,6 +147,15 @@ export const claimStackingReward = async (cycleNumber, cycleInfo, amountStacked,
 			)
 		]
 	);
+};
+
+export const claimMiningReward = async (blockHeight) => {
+	await callContract(
+		'claim-mining-reward',
+		[uintCV(blockHeight)],
+		[]
+	);
+	return true;
 };
 
 export const contribute = async (city, poolId, amount) => {

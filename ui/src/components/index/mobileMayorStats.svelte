@@ -72,7 +72,7 @@
 
 <style>
 	.mayor-stats-wrapper {
-		max-width: 370px;
+		max-width: 320px;
 		margin: auto;
 	}
 
@@ -84,6 +84,7 @@
 	.mayor-box-wrapper {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: 25px;
 	}
 
@@ -95,7 +96,8 @@
 		border: solid 1px rgba(255, 255, 255, 0.2);
 		border-radius: 10px;
 		height: 200px;
-		width: 370px;
+		max-width: 320px;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -145,7 +147,7 @@
 		gap: 10px;
 	}
 	.mayor-box div:nth-child(2) div p:nth-child(2) {
-		font-size: 1.25rem;
+		font-size: 1.15rem;
 	}
 
 	.status-active {
