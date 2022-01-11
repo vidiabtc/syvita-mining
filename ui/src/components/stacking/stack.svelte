@@ -14,7 +14,7 @@
 	</div>
 	<div class="stacking">
 		<div class="number-of-blocks">
-			<p>{$t.stack.miaAmountToStack}</p>
+			<p>{$t.stack[`${$city.coin}AmountToStack`]}</p>
 			<input bind:value={amountToStack} type="number" />
 		</div>
 		<div class="stx-per-block">
@@ -37,24 +37,28 @@
 				class="reset-button">{$t.mine.reset}</button
 			>
 			<button on:click={() => stack(amountToStack, numOfCycles)} class="stack-button"
-				>{$t.stack.stackForCycles}</button
+				>{$t.header.stack}</button
 			>
 		</div>
 	</div>
 </div>
 
 <style>
+		.stack-wrapper {
+		margin: auto;
+		max-width: 770px;
+		min-width: 320px;
+		height: max-content;
+		padding-top: 103px;
+		padding-bottom: 75px;
+
+	}
+
 	h1 {
 		font-size: 2.5rem;
 	}
 
-	.stack-wrapper {
-		margin: auto;
-		max-width: 770px;
-		min-width: 354px;
-		height: max-content;
-		padding-top: 103px;
-	}
+
 
 	.stack-wrapper div:first-child {
 		padding-bottom: 30px;
@@ -89,7 +93,7 @@
 	input {
 		color: white;
 		max-width: 570px;
-		min-width: 224px;
+		min-width: 160px;
 		height: 50px;
 		padding-left: 10px;
 	}
@@ -106,7 +110,7 @@
 
 	.max {
 		max-width: 111px;
-		min-width: 80px;
+		min-width: 60px;
 		height: 50px;
 		border: 1px solid #384cff;
 	}
@@ -116,7 +120,7 @@
 		justify-content: center;
 		align-items: center;
 		gap: 7px;
-		max-width: 111px;
+		max-width: 105px;
 		min-width: 139px;
 		height: 50px;
 		border: 1px solid #384cff;
@@ -132,7 +136,7 @@
 
 	.reset-button {
 		max-width: 170px;
-		min-width: 139px;
+		min-width: 110px;
 		height: 50px;
 		border: 1px solid #ffffff;
 		margin-left: 20px;
@@ -141,11 +145,20 @@
 
 	.stack-button {
 		max-width: 170px;
-		min-width: 139px;
+		min-width: 110px;
 		height: 50px;
 		background: #384cff;
 		margin-right: 20px;
 		margin-top: 20px;
+	}
+
+	.stack-button:hover {
+	background-color: rgba(56, 76, 255, 0.9);
+	cursor: pointer;	
+	}
+
+	.stack-button:active {
+	background-color: rgba(56, 76, 255, 0.8);	
 	}
 
 	input::-webkit-outer-spin-button,
@@ -157,5 +170,11 @@
 	/* Firefox */
 	input[type='number'] {
 		-moz-appearance: textfield;
+	}
+
+	@media(max-width:400px) {
+		.submit {
+			gap: 18px;
+		}
 	}
 </style>

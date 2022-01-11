@@ -1,17 +1,18 @@
 <script>
 	import { STATS } from '$lib/constants.js';
+	import { t } from '$lib/stores.js';
 </script>
 
 <div class="pool-stats">
 	<div>
 		<p class="stx-contributed"><img src="/icons/stx.svg" />{STATS.totalSTXRaised}</p>
-		<p>Total Raised STX for Pool</p>
+		<p>{$t.home.totalStx}</p>
 	</div>
 	<div>
 		<p class="city-coins-won">
 			<img class="city-coin-img" src="/city-coins.svg" />{STATS.totalCityCoinsWon}
 		</p>
-		<p>Total City Coins Won</p>
+		<p>{$t.home.totalCityCoins}</p>
 	</div>
 </div>
 <div class="divider" />

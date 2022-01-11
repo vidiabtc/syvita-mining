@@ -18,15 +18,15 @@
 	$: stxBalance = stxAddress ? getStxBalance(stxAddress) : 0;
 </script>
 
-<div class="mine-wrapper">
-	<MineMany />
-	<div class="join">
-		<a href="/pool">
-			<button>+ {$t.mine.joinMiningPool}</button>
-		</a>
-	</div>
-	<ClaimMiningReward />
+<svelte:head>
+	<title>Mine CityCoins | Syvita Mining</title>
+	<meta
+		name="description"
+		content="The best place to mine for CityCoins. Mine individually or pool your funds with others for a higher win probability."
+	/>
+</svelte:head>
 
+<div class="mine-wrapper">
 	<div class="stats">
 		<div class="city-wallet">
 			{#await cityWalletBalance}
@@ -37,7 +37,7 @@
 					{balance.toLocaleString()}
 				</p>
 			{/await}
-			<p>{$t.mine.miamiWalletBalance}</p>
+			<p>{$t.mine[`${$city.coin}WalletBalance`]}</p>
 		</div>
 		<div class="coin-balance">
 			{#await coinBalance}
@@ -52,7 +52,7 @@
 					/>{balance.toLocaleString()}
 				</p>
 			{/await}
-			<p>My {$city.coin.toUpperCase()} balance</p>
+			<p>{$t.mine[`my${$city.coin.toUpperCase()}Balance`]}</p>
 		</div>
 		<div class="stx-balance">
 			{#await stxBalance}
@@ -78,13 +78,24 @@
 			<p>{$t.mine.currentBlock}</p>
 		</div>
 	</div>
+	<MineMany />
+	<div class="join">
+		<a href="/pool">
+			<button>+ {$t.mine.joinMiningPool}</button>
+		</a>
+	</div>
+	<ClaimMiningReward />
+
+
 
 	<!-- <MinedBlocks /> -->
 </div>
 
 <style>
 	.mine-wrapper {
-		padding: 0 20px;
+		padding-right: 20px;
+		padding-left: 20px;
+		padding-top: 100px;
 		text-align: center;
 	}
 	.title {
@@ -97,6 +108,15 @@
 		margin: auto;
 	}
 
+	.join button:hover {
+		background-color: rgba(56, 76, 255, 0.9);
+		cursor: pointer;
+	}
+
+	.join button:active {
+	background-color: rgba(56, 76, 255, 0.8);	
+	}
+
 	.stats {
 		display: flex;
 		gap: 30px;
@@ -104,6 +124,7 @@
 		padding-bottom: 30px;
 		justify-content: center;
 		flex-wrap: wrap;
+		padding-bottom: 75px;
 	}
 
 	.stats div {

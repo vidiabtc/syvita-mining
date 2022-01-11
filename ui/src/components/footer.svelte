@@ -4,7 +4,11 @@
 
 <footer>
 	<p>{$t.footer.syvita}</p>
-	<p class="twitter">{$t.footer.follow}<img src="/twitter.svg" alt="Twitter Logo" /></p>
+	<a target="_blank"
+	rel="noopener noreferrer"
+	href="https://twitter.com/syvitamining">
+		<p class="twitter">{$t.footer.follow}<img src="/twitter.svg" alt="Twitter Logo" /></p>
+	</a>
 </footer>
 
 <style>
@@ -31,4 +35,12 @@
 		filter: invert(50%) sepia(93%) saturate(2751%) hue-rotate(165deg) brightness(100%)
 			contrast(105%);
 	}
+
+	@media(max-width: 530px) {
+		footer {
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+
 </style>

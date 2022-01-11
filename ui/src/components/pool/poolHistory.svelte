@@ -1,7 +1,7 @@
 <script>
 	export let poolId;
-	export let city;
-	import { t } from '$lib/stores.js';
+
+	import { t, city } from '$lib/stores.js';
 	import { getPool } from '$lib/apiCalls';
 
 	const poolIdList = [];
@@ -15,12 +15,12 @@
 	<h3>{$t.pool.allPools}</h3>
 	<div class="pools">
 		{#each poolIdList as poolId}
-			{#await getPool(city, poolId)}
+			{#await getPool($city, poolId)}
 				<h1>loading...</h1>
 			{:then pool}
 				<div class="pool">
 					<div class="pool-info">
-						<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
+						<p>{$t.pool.pool} {poolId + parseInt($city.startingPoolId)}</p>
 						<p>{$t.pool.current}</p>
 					</div>
 					<div class="block-dates">
@@ -45,13 +45,13 @@
 							<p>{Math.floor(pool.stats.totalContributed / 1000000).toLocaleString()} STX</p>
 						</div>
 						<div>
-							<p>{$t.pool.miaWon}</p>
+							<p>{$t.pool[`${$city.coin}Won`]}</p>
 							<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
 						</div>
 					</div>
 					<div>
 						<button>
-							<a href={`/pool/${city.coin}/${poolId + parseInt(city.startingPoolId)}`}>
+							<a href={`/pool/${$city.coin}/${poolId + parseInt($city.startingPoolId)}`}>
 								{$t.pool.viewPoolDetails}
 							</a>
 						</button>
@@ -70,11 +70,13 @@
 		margin: auto;
 		font-size: 1rem;
 		margin-bottom: 50px;
-		padding: 0 20px;
+		padding-right: 20px;
+		padding-left: 20px;
+		padding-top: 50px;
 	}
 
 	h3 {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		padding-bottom: 20px;
 	}
 

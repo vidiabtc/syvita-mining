@@ -32,6 +32,14 @@
 		gap: 10px;
 	}
 
+	.connect-wallet:hover {
+	background-color: rgba(56, 76, 255, 0.9);	
+	}
+
+	.connect-wallet:active {
+	background-color: rgba(56, 76, 255, 0.8);	
+	}
+
 	.logout {
 		min-width: 103px;
 		min-height: 50px;
@@ -39,7 +47,19 @@
 		background-color: transparent;
 	}
 
-	@media (max-width: 1105px) {
+	.logout:hover {
+		color: black;
+		background-color: white;
+	}
+
+	.logout:active {
+		color: black;
+		background-color: white;
+
+	}
+
+
+	@media (max-width: 1140px) {
 		.connect-wallet {
 			margin: auto;
 			width: 200px;

@@ -24,9 +24,9 @@
 	<div>
 		<div class="table-headers">
 			<p>{$t.stack.cycle}</p>
-			<p>{$t.stack.miaStacked}</p>
+			<p>{$t.stack[`${$city.coin}Stacked`]}</p>
 			<p>{$t.stack.stxToClaim}</p>
-			<p>{$t.stack.miaToReturn}</p>
+			<p>{$t.stack[`${$city.coin}ToReturn`]}</p>
 			<p>{$t.stack.claimRewards}</p>
 		</div>
 		{#each Object.keys(cycles).reverse() as cycle}

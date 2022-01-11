@@ -2,8 +2,9 @@
 	import Info from '$components/info.svelte';
 	import { contribute } from '$lib/contractCalls.js';
 	import { t } from '$lib/stores.js';
+	import { city } from '$lib/stores.js';
+// import SelectCity from '$components/selectCity.svelte';
 
-	export let city;
 	export let poolId;
 
 	let amount = 0;
@@ -12,35 +13,37 @@
 <div class="contribute-wrapper">
 	<div class="title">
 		<h3>{$t.pool.contribute}</h3>
-		<Info />
+		<!-- <SelectCity/> -->
 	</div>
 	<div class="contributions">
 		<div class="add-contributions">
-			<div>
+			<div class="input-field">
 				<input bind:value={amount} placeholder="40 STX Minimum" type="number" />
 			</div>
-			<button on:click={contribute(city, poolId, amount * 1000000)}>{$t.pool.contribute}</button>
+			<button on:click={contribute($city, poolId, amount * 1000000)}>{$t.pool.contribute}</button>
 		</div>
 	</div>
 </div>
 
 <style>
 	.contribute-wrapper {
-		width: 770px;
+		max-width: 770px;
+		min-width: 300px;
 		margin: auto;
-		margin-top: 144px;
+		padding: 0 20px;
 	}
 
 	.title {
 		font-size: 1.5rem;
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		gap: 5px;
+	
 		padding-bottom: 15px;
 	}
 
 	.contributions {
-		width: 770px;
+		max-width: 770px;
 		height: 110px;
 		border: 2px solid transparent;
 		border-radius: 10px;
@@ -56,9 +59,15 @@
 		gap: 30px;
 	}
 
+	.input-field {
+		max-width: 500px;
+		min-width: 45px;
+		width: 100%;
+	}
+
 	input {
 		color: white;
-		width: 500px;
+		width: 100%;
 		height: 50px;
 		padding-left: 10px;
 	}
@@ -84,5 +93,13 @@
 	/* Firefox */
 	input[type='number'] {
 		-moz-appearance: textfield;
+	}
+
+	@media(max-width: 400px) {
+	.add-contributions {	gap: 10px; }
+
+	.title {
+		font-size: 1.25rem;
+	}
 	}
 </style>

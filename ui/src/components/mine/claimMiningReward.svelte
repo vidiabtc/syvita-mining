@@ -4,8 +4,8 @@
 	import { getStxAddress } from '$lib/auth.js';
 	import { canClaimMiningReward } from '$lib/apiCalls.js';
 
-	// $: stxAddress = getStxAddress($user);
-	$: stxAddress = 'SP18XC4F27VQ8P2QGKZ5P6KR41GK77ZVFWV468P1';
+	$: stxAddress = getStxAddress($user);
+	// $: stxAddress = 'SP18XC4F27VQ8P2QGKZ5P6KR41GK77ZVFWV468P1';
 
 	let blockHeight = 0;
 	let blockToCheck = 0;
@@ -19,16 +19,16 @@
 
 <div class="claim-block-wrapper">
 	<div>
-		<h2>Claim Mining Reward</h2>
+		<h2>{$t.stack.claimRewards}</h2>
 	</div>
 	<div class="claim-block">
 		<div class="block-to-claim">
-			<p>Block To Check</p>
+			<p>{$t.mine.block}</p>
 			<input bind:value={blockHeight} type="number" />
 		</div>
 		<div class="submit">
 			<button on:click={() => (blockToCheck = blockHeight)} class="check-button"
-				>Check block {blockHeight}</button
+				>{$t.stack.claimNow}</button
 			>
 		</div>
 		{#if isWinner !== null}
@@ -77,6 +77,14 @@
 		background: #384cff;
 		margin-right: 20px;
 		margin-top: 20px;
+	}
+
+	.check-button:hover {
+	background-color: rgba(56, 76, 255, 0.9);
+	}
+
+	.check-button:active {
+	background-color: rgba(56, 76, 255, 0.8);	
 	}
 
 	.block-to-claim {

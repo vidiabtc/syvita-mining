@@ -1,7 +1,6 @@
 <script>
 	import { t } from '$lib/stores.js';
 
-	export let city;
 </script>
 
 <div class="activity-wrapper">
@@ -36,7 +35,7 @@
 		margin: auto;
 		margin-top: 50px;
 		font-size: 36px;
-		padding: 0 20px;
+		padding: 0px 20px;
 	}
 
 	.activity-wrapper p:first-child {

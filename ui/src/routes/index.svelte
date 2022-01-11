@@ -42,11 +42,19 @@
 	import Mobilenews from '$components/index/mobileNews.svelte';
 </script>
 
+<svelte:head>
+	<title>Syvita Mining | CityCoins Mining Pool</title>
+	<meta
+		name="description"
+		content="Democratizing CityCoin mining. Pool your funds with others to afforably and potentially profitabilty mine New York Coin or Miami Coin."
+	/>
+</svelte:head>
+
 <div>
 	<Header />
 	<PoolStats />
 	<MayorStats {stxPrice} {miaBalance} {nycBalance} />
-	<MobileMayorStats />
+	<MobileMayorStats {stxPrice} {miaBalance} {nycBalance}/>
 	<!-- <CityStats /> -->
 	<News />
 	<Mobilenews />
@@ -56,5 +64,6 @@
 	div {
 		margin: auto;
 		padding: 0 20px;
+		padding-top: 110px;
 	}
 </style>

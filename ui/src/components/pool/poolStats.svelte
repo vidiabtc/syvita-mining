@@ -1,105 +1,187 @@
 <script>
-	export let city;
-	import { getPool, getContributionSum } from '$lib/apiCalls';
+	import { getPool, getContributionSum, getUserContributions, getMineManyClaims } from '$lib/apiCalls';
 	import Contribute from '$components/pool/contribute.svelte';
-	import { t } from '$lib/stores.js';
-	import SelectCity from '$components/selectCity.svelte';
+	import { t, city } from '$lib/stores.js';
+
+	import { claimAllRewardsForPool } from '$lib/contractCalls.js'
+	import MineManyHistory from './MineManyHistory.svelte';
 
 	export let poolId;
 	export let blockHeight;
 	export let stxAddress;
 </script>
 
-<div class="pool-stats-wrapper">
-	<div class="select-city">
-		<SelectCity />
-	</div>
-	<div class="stats-wrapper">
-		{#await poolId}
-			<h1 />
-		{:then poolId}
-			{#await getPool(city, poolId)}
-				<h1 />
-			{:then pool}
-				<div>
-					<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
-				</div>
-				<div>
-					<p class="stx-logo">
-						<img src="/icons/stx.svg" />{Math.floor(
-							pool.stats.totalContributed / 1000000
-						).toLocaleString()}
-					</p>
-					<p>{$t.pool.totalRaiseStx}</p>
-				</div>
-				<div>
-					{#await blockHeight}
-						<p />
-					{:then currentBlock}
-						<p>{currentBlock}</p>
-					{/await}
-					<p>{$t.pool.currentBlock}</p>
-				</div>
-				<div>
-					{#await blockHeight}
-						<p />
-					{:then currentBlock}
-						{#if currentBlock < pool.stats.contributionsStartBlock}
-							<p>{pool.stats.contributionsStartBlock}</p>
-							<p>{$t.pool.contributionsOpen}</p>
-						{:else if currentBlock >= pool.stats.contributionsStartBlock && currentBlock < pool.stats.contributionsEndBlock}
-							<p>{pool.stats.contributionsEndBlock}</p>
-							<p>{$t.pool.contributionsUntil}</p>
-						{:else}
-							<p>{pool.stats.contributionsEndBlock}</p>
-							<p>{$t.pool.contributionsClosed}</p>
-						{/if}
-					{/await}
-				</div>
+{#await getPool($city, poolId)}
+{:then pool}
+	<div class="pool-stats-wrapper">
 
-				<div>
-					{#if pool.contributions[stxAddress]}
-						<p>
-							{Math.floor(getContributionSum(pool.contributions[stxAddress])).toLocaleString()} STX
-						</p>
-					{:else}
-						<p>0 STX</p>
-					{/if}
-					<p>{$t.pool.yourContribution}</p>
-				</div>
-				<div>
-					<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
-					<p class="coin-logo">
-						<img src={`/citycoins/${city.coin.toUpperCase()}.svg`} />{city.coin.toUpperCase()} Won
-					</p>
-				</div>
-
+		<div class="stats-wrapper">
+			<div>
+				<p>{$t.pool.pool} {poolId + parseInt($city.startingPoolId)}</p>
+			</div>
+			<div>
+				<p class="stx-logo">
+					<img src="/icons/stx.svg" />{Math.floor(
+						pool.stats.totalContributed / 1000000
+					).toLocaleString()}
+				</p>
+				<p>{$t.pool.totalRaisedStx}</p>
+			</div>
+			<div>
 				{#await blockHeight}
 					<p />
 				{:then currentBlock}
-					{#if currentBlock >= pool.stats.contributionsStartBlock && currentBlock < pool.stats.contributionsEndBlock}
-						<Contribute {city} {poolId} />
+					<p>{currentBlock}</p>
+				{/await}
+				<p>{$t.pool.currentBlock}</p>
+			</div>
+			<div>
+				{#await blockHeight}
+					<p />
+				{:then currentBlock}
+					{#if currentBlock < pool.stats.contributionsStartBlock}
+						<p>{pool.stats.contributionsStartBlock}</p>
+						<p>{$t.pool.contributionsOpen}</p>
+					{:else if currentBlock >= pool.stats.contributionsStartBlock && currentBlock < pool.stats.contributionsEndBlock}
+						<p>{pool.stats.contributionsEndBlock}</p>
+						<p>{$t.pool.contributionsUntil}</p>
 					{:else}
-						<p />
+						<p>{pool.stats.contributionsEndBlock}</p>
+						<p>{$t.pool.contributionsClosed}</p>
 					{/if}
 				{/await}
+			</div>
+			<div>
+				{#if pool.contributions[stxAddress]}
+					<p>
+						{Math.floor(getContributionSum(pool.contributions[stxAddress])).toLocaleString()} STX
+					</p>
+				{:else}
+					<p>0 STX</p>
+				{/if}
+				<p>{$t.pool.yourContribution}</p>
+			</div>
+			<div>
+				<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
+				<p class="coin-logo">
+					<img src={`/citycoins/${$city.coin.toUpperCase()}.svg`} />{$t.pool[`${$city.coin}Won`]}
+				</p>
+			</div>
+		</div>
+
+		<div class='contribute'>
+			{#await blockHeight}
+			{:then currentBlock}
+					{#if currentBlock >= pool.stats.contributionsStartBlock && currentBlock < pool.stats.contributionsEndBlock}
+						<Contribute {poolId} />
+					{/if}
 			{/await}
-		{/await}
+		</div>
+
+		<div class='contribution-activity'>
+			{#if getUserContributions(stxAddress, pool).length > 0}
+			<h3>{$t.pool.activity}</h3>
+			<div class="individual-contributions">
+				{#each getUserContributions(stxAddress, pool) as contribution}
+
+					<div >
+						<p>{contribution.amount.toLocaleString()} STX</p>
+						<a
+							class="contributeLink"
+							href={`https://explorer.syvita.org/txid/${contribution.txId}?chain=mainnet`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							View in Explorer
+						</a>
+					</div>	
+				{/each}
+			</div>
+			{/if}
+		</div>
+
+		{#if stxAddress}
+		<div class='mine-many-history'>
+			<h3>{$t.stack.claimRewards}</h3>
+			{#await getMineManyClaims($city, poolId, stxAddress, pool)}
+				<!-- promise is pending -->
+				<p>Checking for claimable MineManys...</p>
+			{:then mineManys}
+				<MineManyHistory {poolId} {mineManys}/>
+			{/await}
+		</div>
+		{/if}
+
 	</div>
-</div>
+{/await}
+
 
 <style>
+	.contributions {
+		margin: auto;
+		max-width: 700px;
+		max-height: 150px;
+		background-color: white;
+		border-radius: 10px;
+		overflow-x: hidden;
+		overflow-y: auto;
+
+	}
+
+	.contribution-activity {
+		padding: 80px 0;
+	}
+	.contribution-activity h3{
+		font-size: 2rem;
+	}
+
+
+
+	.individual-contributions {
+		display: flex;
+		gap: 30px;
+		flex-wrap: wrap;
+		padding-top: 20px;
+	
+	}
+
+	.mine-many-history h3 {
+		padding-bottom: 20px;
+		font-size: 2rem;
+	}
+
+	.individual-contributions div {
+		height: 141px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		color: white;
+		font-size: 1.5rem;
+		max-width: 370px;
+    width: 100%;
+    min-width: 310px;
+		border-radius: 10px;
+		border: solid 1px blue;
+
+	}
+
+	.individual-contributions div a {
+		color: blue;
+		text-decoration: underline;
+	}
+
+	.individual-contributions div a:hover {
+		color: white;
+		text-decoration: underline;
+	}
+
+
 	.pool-stats-wrapper {
 		max-width: 1170px;
 		margin: auto;
 		padding: 0 20px;
-	}
-
-	.select-city {
-		width: fit-content;
-		margin-left: auto;
-
-		padding-bottom: 35px;
 	}
 
 	.stats-wrapper {

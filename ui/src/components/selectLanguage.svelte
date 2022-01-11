@@ -9,7 +9,7 @@
 	<div class="city-selector">
 		<p>
 			{$t.img}
-			{$t.name}
+			{$t.translatedName}
 		</p>
 		<img class={toggle ? 'chevron' : 'chevron-up'} src="/icons/arrow-down.svg" alt="arrow down" />
 	</div>
@@ -25,7 +25,7 @@
 							}}
 						>
 							{LANGUAGES[selectedLanguage].img}
-							{LANGUAGES[selectedLanguage].name}
+							{LANGUAGES[selectedLanguage].translatedName}
 						</p>
 					</div>
 				{/if}
@@ -50,6 +50,7 @@
 		border-radius: 4px;
 		border: 1px solid #444d66;
 		margin-left: 50px;
+	cursor: pointer;
 	}
 
 	.city-selector p {

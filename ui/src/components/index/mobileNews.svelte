@@ -126,6 +126,11 @@
 		border-radius: 10px;
 	}
 
+	a:hover {
+		color: rgba(56, 76, 255, 0.5);	
+	}
+
+
 	@media (min-width: 775px) {
 		.news-stories-wrapper {
 			display: none;

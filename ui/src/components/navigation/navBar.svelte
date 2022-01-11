@@ -1,9 +1,10 @@
 <script>
 	import ConnectWallet from '$components/connectWallet.svelte';
-	import SelectLanguage from '$components/selectLanguage.svelte';
 	import NavLinks from './navLinks.svelte';
 	import MobileNavBar from './mobileNavBar.svelte';
-	let toggle = false;
+	import { page } from '$app/stores';
+	let toggle = false
+	$: $page, (toggle = false);
 </script>
 
 <div class="nav-wrapper">
@@ -11,16 +12,16 @@
 		<p class="logo">Syvita Mining</p>
 	</a>
 	<div class="navigation-items">
-		<SelectLanguage />
 		<NavLinks />
 		<ConnectWallet />
 	</div>
 	<div class="mobile-menu">
 		<img
 			on:click={() => (toggle = !toggle)}
-			src={toggle ? 'icons/close.svg' : 'icons/hamburger.svg'}
+			src={toggle ? '../../icons/close.svg' : '../../icons/hamburger.svg'}
 			alt=""
 		/>
+
 		{#if toggle}
 			<MobileNavBar />
 		{/if}
@@ -35,7 +36,7 @@
 		font-size: 1.25rem;
 		color: white;
 		padding-top: 60px;
-		padding-bottom: 150px;
+
 		padding-left: 8%;
 		padding-right: 135px;
 	}
@@ -65,19 +66,19 @@
 		filter: invert(100%) sepia(99%) saturate(1%) hue-rotate(199deg) brightness(108%) contrast(100%);
 	}
 
-	@media (max-width: 1284px) {
+	@media (max-width: 1308px) {
 		.nav-wrapper {
 			padding-right: 30px;
 		}
 	}
 
-	@media (max-width: 1284px) {
+	@media (max-width: 1308px) {
 		.nav-wrapper {
 			padding-left: 40px;
 			padding-right: 30px;
 		}
 	}
-	@media (max-width: 1105px) {
+	@media (max-width: 1140px) {
 		.mobile-menu {
 			display: block;
 		}
@@ -85,7 +86,7 @@
 			display: none;
 		}
 		.nav-wrapper {
-			padding-top: 35px;
+			padding-top: 60px;
 		}
 	}
 </style>

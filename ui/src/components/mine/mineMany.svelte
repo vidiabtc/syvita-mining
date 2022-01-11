@@ -45,7 +45,7 @@
 				class="reset-button">{$t.mine.reset}</button
 			>
 			<button on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)} class="mine-button"
-				>Mine for {numOfBlocks} blocks</button
+				>{$t.header.mine}</button
 			>
 		</div>
 	</div>
@@ -157,6 +157,15 @@
 		background: #384cff;
 		margin-right: 20px;
 		margin-top: 20px;
+	}
+
+	.mine-button:hover {
+	background-color: rgba(56, 76, 255, 0.9);	
+	cursor: pointer;
+	}
+
+	.mine-button:active {
+	background-color: rgba(56, 76, 255, 0.8);	
 	}
 
 	input::-webkit-outer-spin-button,

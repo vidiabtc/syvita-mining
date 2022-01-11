@@ -130,6 +130,10 @@
 		color: #384cff;
 	}
 
+	a:hover {
+		color: rgba(56, 76, 255, 0.5);	
+	}
+
 	@media (max-width: 775px) {
 		.news-wrapper {
 			display: none;

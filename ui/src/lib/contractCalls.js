@@ -158,6 +158,17 @@ export const claimMiningReward = async (blockHeight) => {
 	return true;
 };
 
+export const claimAllRewardsForPool = async (city, poolId) => {
+	await callPoolContract(
+		city,
+		'contributor-claim-all-rewards-for-pool',
+		[uintCV(poolId)],
+		[
+		]
+	);
+};
+
+
 export const contribute = async (city, poolId, amount) => {
 	let stxAddress = IS_MAINNET
 	? JSON.parse(get(user)).addresses.mainnet

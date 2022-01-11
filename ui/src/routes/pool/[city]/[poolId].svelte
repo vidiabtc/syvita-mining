@@ -25,7 +25,6 @@
 
 			return {
 				props: {
-					city,
 					poolId,
 					pool
 				}
@@ -35,7 +34,6 @@
 </script>
 
 <script>
-	export let city;
 	export let poolId;
 	export let pool;
 
@@ -45,27 +43,41 @@
 	import SelectCity from '$components/selectCity.svelte';
 	import Contribute from '$components/pool/contribute.svelte';
 
-	import { user, t } from '$lib/stores.js';
-	import { getLatestPoolId, getPool, getBlockHeight, getContributionSum } from '$lib/apiCalls';
+	import { user, t, city } from '$lib/stores.js';
+	import { getPool, getBlockHeight } from '$lib/apiCalls';
 	import { getStxAddress } from '$lib/auth';
 
-	// $: stxAddress = getStxAddress($user);
-	$: stxAddress = 'SP3YXDXXHX1KQWG7N7G9WJQR69QGYN6DR1NK5H8XK';
-	$: blockHeight = getBlockHeight(city);
+	$: stxAddress = getStxAddress($user);
+	// $: stxAddress = 'SP3YXDXXHX1KQWG7N7G9WJQR69QGYN6DR1NK5H8XK';
+	$: blockHeight = getBlockHeight($city);
 </script>
 
 <div class="pool-wrapper">
+	<div class="select-city">
+		<SelectCity/>
+	</div>
 	{#await poolId}
 		<h1>loading...</h1>
 	{:then poolId}
-		<PoolStats {city} {poolId} {blockHeight} {stxAddress} />
-		<PoolHistory {city} {poolId} />
-		<PoolActivity {city} />
+		<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
+		<PoolHistory city={$city} {poolId} />
+		<!-- <PoolActivity city={$city} /> -->
 	{/await}
 </div>
 
 <style>
+	
 	.pool-wrapper {
-		margin-top: -30px;
+		max-width: 1170px;
+		margin: auto;
+		padding-top: 75px;
+	}
+
+	.select-city {
+		width: fit-content;
+		max-width: 770px;
+		margin-left: auto;
+		margin-right: 20px;
+		padding-bottom: 35px;
 	}
 </style>

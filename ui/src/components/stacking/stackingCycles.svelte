@@ -4,20 +4,13 @@
 	import { getStxAddress } from '$lib/auth';
 
 	$: stxAddress = getStxAddress($user);
-	// $: userId = stxAddress ? getUserId($city, stxAddress) : null;
-	// $: userId = 50;
 
-	$: stackingCycleStats = getStackingCycleStats($city);
-	$: blockHeight = getBlockHeight($city);
-
-	// $: stackingReward = userId ? getStackingReward($city, userId, cycle) : null;
+	export let cycles;
+	export let blockHeight;
 </script>
 
 <!-- <button on:click={getStackingCycleStats($city)}>EE</button> -->
 <div class="stacking-blocks-wrapper">
-	{#await stackingCycleStats}
-		<h1>loading ...</h1>
-	{:then cycles}
 		<!-- promise was fulfilled -->
 		{#each Object.keys(cycles).reverse() as cycle}
 			<!-- content here -->
@@ -28,11 +21,7 @@
 				</div>
 				<div>
 					<p>{cycles[cycle][$city.coin].toLocaleString()}</p>
-					<p>{$t.stack.miaStacked}</p>
-				</div>
-				<div>
-					<p>5</p>
-					<p>STX/MIA</p>
+					<p>{$t.stack[`${$city.coin}Stacked`]}</p>
 				</div>
 				<div>
 					<p>{parseInt($city.activationBlock) + 2100 * parseInt(cycle)}</p>
@@ -46,21 +35,16 @@
 					{#if cycle == Object.keys(cycles)[Object.keys(cycles).length - 1]}
 						<p>0.00%</p>
 					{:else if cycle == Object.keys(cycles)[Object.keys(cycles).length - 2]}
-						{#await blockHeight}
-							<p>loading...</p>
-							>
-						{:then currentBlock}
 							<p>
 								{Math.round(
 									((2100 -
 										(parseInt($city.activationBlock) +
 											2100 * (parseInt(cycle) + 1) -
-											currentBlock)) /
+											blockHeight)) /
 										21) *
 										100
 								) / 100}%
 							</p>
-						{/await}
 					{:else}
 						<p>100.00%</p>
 					{/if}
@@ -68,18 +52,18 @@
 				</div>
 			</div>
 		{/each}
-	{/await}
 </div>
 
 <style>
 	.stacking-blocks-wrapper {
-		max-width: 1200px;
+		max-width: 1000px;
 		min-width: 800px;
 		height: 492px;
 		margin: auto;
 		overflow: auto;
 		overflow-x: hidden;
 		padding-right: 10px;
+	
 	}
 
 	.stacking-blocks-wrapper div:first-of-type {

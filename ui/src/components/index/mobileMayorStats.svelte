@@ -1,4 +1,7 @@
 <script>
+	export let stxPrice;
+	export let miaBalance;
+	export let nycBalance;
 	import { t } from '$lib/stores.js';
 </script>
 
@@ -21,7 +24,7 @@
 				</div>
 				<div>
 					<p>{$t.home.walletBalance}</p>
-					<p>$1,000,000,000</p>
+					<p>${Math.floor(miaBalance * stxPrice).toLocaleString()}</p>
 				</div>
 			</div>
 		</div>
@@ -42,7 +45,7 @@
 				</div>
 				<div>
 					<p>{$t.home.walletBalance}</p>
-					<p>$31,000,000,000</p>
+					<p>${Math.floor(nycBalance * stxPrice).toLocaleString()}</p>
 				</div>
 			</div>
 		</div>

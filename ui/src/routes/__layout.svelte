@@ -9,7 +9,7 @@
 	<main>
 		<slot />
 	</main>
-	<!-- <Footer /> -->
+	<Footer />
 </div>
 
 <style>
