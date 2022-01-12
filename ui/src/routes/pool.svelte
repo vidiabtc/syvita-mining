@@ -37,7 +37,6 @@
 
 <style>
 	.pool-wrapper {
-
 		max-width: 1170px;
 		margin: auto;
 		padding-top: 75px;

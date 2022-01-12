@@ -41,13 +41,13 @@
 		</div>
 		<div class="coin-balance">
 			{#await coinBalance}
-				<p><img width="20px" height="20px" src={$city.img} alt={`${$city}`} />0</p>
+				<p><img width="20px" height="20px" src={`/citycoins/${$city.coin.toUpperCase()}.svg`} alt={`${$city}`} />0</p>
 			{:then balance}
 				<p>
 					<img
 						width="25px"
 						height="20px"
-						src={$city.img}
+						src={`/citycoins/${$city.coin.toUpperCase()}.svg`}
 						alt={`${$city}`}
 					/>{balance.toLocaleString()}
 				</p>

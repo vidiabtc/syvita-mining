@@ -8,7 +8,7 @@
 <div class="selector-wrapper" on:click={() => (toggle = !toggle)}>
 	<div class="city-selector">
 		<p>
-			<img class="coin" src={`../../${$city.img}`} alt={`${$city}`} />
+			<img class="coin" src={$city.img} alt={`${$city}`} />
 			{$city.name}
 		</p>
 		<img class={toggle ? 'chevron' : 'chevron-up'} src="/icons/arrow-down.svg" alt="arrow down" />
@@ -24,7 +24,7 @@
 								console.log('city set to ', CITIES[selectedCity]);
 							}}
 						>
-							<img class="coin" src={`../../${CITIES[selectedCity].img}`} alt={`${selectedCity}`} />
+							<img class="coin" src={`/citycoins/${$city.coin.toUpperCase()}.svg`} alt={`${selectedCity}`} />
 							{CITIES[selectedCity].name}
 						</p>
 					</div>

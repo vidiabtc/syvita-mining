@@ -64,7 +64,7 @@
 			<div>
 				<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
 				<p class="coin-logo">
-					<img src={`/citycoins/${$city.coin.toUpperCase()}.svg`} />{$t.pool[`${$city.coin}Won`]}
+					<img src={`/citycoins/${$city.coin.toUpperCase()}.svg`}/>{$t.pool[`${$city.coin}Won`]}
 				</p>
 			</div>
 		</div>
