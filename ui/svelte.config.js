@@ -1,3 +1,4 @@
+// import adapter from '@sveltejs/adapter-auto';
 import path from 'path';
 import cloudflare from '@sveltejs/adapter-cloudflare';
 
