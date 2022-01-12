@@ -46,7 +46,7 @@
 	<title>Syvita Mining | CityCoins Mining Pool</title>
 	<meta
 		name="description"
-		content="Democratizing CityCoin mining. Pool your funds with others to afforably and potentially profitabilty mine New York Coin or Miami Coin."
+		content="Democratizing CityCoin mining. Pool your funds with others to affordably and potentially profitabily mine NewYorkCoin or MiamiCoin."
 	/>
 </svelte:head>
 
