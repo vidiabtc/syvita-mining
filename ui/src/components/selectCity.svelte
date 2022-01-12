@@ -24,7 +24,7 @@
 								console.log('city set to ', CITIES[selectedCity]);
 							}}
 						>
-							<img class="coin" src={`/citycoins/${$city.coin.toUpperCase()}.svg`} alt={`${selectedCity}`} />
+							<img class="coin" src={`/citycoins/${CITIES[selectedCity].coin.toUpperCase()}.svg`} alt={`${selectedCity}`} />
 							{CITIES[selectedCity].name}
 						</p>
 					</div>
