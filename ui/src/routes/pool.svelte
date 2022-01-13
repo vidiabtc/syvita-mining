@@ -18,7 +18,7 @@
 	<title>CityCoins Mining Pool | Syvita Mining</title>
 	<meta
 		name="description"
-		content="The best place to mine for CityCoins. Pool your funds with others to afforably and potentially profitabilty mine CityCoins."
+		content="Join the Syvita Mining Pool for CityCoins mining. By pooling your funds with others you can affordably and profitably mine for CityCoins."
 	/>
 </svelte:head>
 
