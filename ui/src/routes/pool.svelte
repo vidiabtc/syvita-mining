@@ -3,6 +3,7 @@
 	import PoolActivity from '$components/pool/poolActivity.svelte';
 	import PoolHistory from '$components/pool/poolHistory.svelte';
 	import SelectCity from '$components/selectCity.svelte';
+	import MineManyHistory from '$components/pool/MineManyHistory.svelte';
 
 	import { user, city, t } from '$lib/stores.js';
 	import { getLatestPoolId, getPool, getBlockHeight } from '$lib/apiCalls';
@@ -32,6 +33,7 @@
 		<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
 		<PoolHistory city={$city} {poolId} />
 		<!-- <PoolActivity city={$city} /> -->
+
 	{/await}
 </div>
 
