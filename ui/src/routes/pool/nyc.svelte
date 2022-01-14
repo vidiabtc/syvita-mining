@@ -1,6 +1,6 @@
 <script>
 	import { t } from '$lib/stores.js';
-  import { addFunds} from '$lib/common.js';
+  import { addFunds} from '$lib/contractCalls.js';
   let coin = 'nyc'
   import { onMount } from 'svelte';
   let value;

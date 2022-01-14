@@ -70,28 +70,27 @@ export const getUserId = async (city, stxAddress) => {
 };
 
 export const getLatestPoolId = async (city) => {
-	let url = `${POOL_API_URL}/${city.coin}/latestpoolid`
+	let url = `${POOL_API_URL}/${city.coin}/latestpoolid`;
 	let res = await fetch(url);
 	let id = 0;
 
 	try {
 		id = await res.json();
 	} catch (error) {
-		console.log('pool not found')
+		console.log('pool not found');
 	}
-	return id
-}
+	return id;
+};
 
 export const getPool = async (city, poolId) => {
-	console.log(city)
-	console.log(poolId)
-	let url = `${POOL_API_URL}/${city.coin}/pool/${poolId}`
-	console.log('URL: ', url)
+	console.log(city);
+	console.log(poolId);
+	let url = `${POOL_API_URL}/${city.coin}/pool/${poolId}`;
+	console.log('URL: ', url);
 	let res = await fetch(url);
-	let pool = await res.json()
-	return pool
-}
-
+	let pool = await res.json();
+	return pool;
+};
 
 export const getStackingReward = async (city, userId, cycle) => {
 	let cycleNum = cycle;
@@ -133,12 +132,14 @@ export const getStackingReward = async (city, userId, cycle) => {
 };
 
 export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
-	console.log(poolId)
+	stxAddress = 'SP1C6WQ9KTV3769S8X8YNAWBXKDG2Y65P5EEDRWR6';
+	let address = stxAddress;
+	console.log(poolId);
 	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.poolContractAddress}/${city.poolContractName}/get-claims-for-pool`;
-	console.log(url)
+	console.log(url);
 	// console.log(poolId)
 	// console.log(stxAddress)
-	stxAddress = cvToHex(standardPrincipalCV(stxAddress))
+	stxAddress = cvToHex(standardPrincipalCV(stxAddress));
 	poolId = '010000000000000000' + intToHex(poolId);
 
 	let res = await fetch(url, {
@@ -151,25 +152,27 @@ export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
 	});
 	let data = await res.json();
 	console.log('CLAIMS FOR POOL', data);
-	data = hexToCV(data.result) 
+	data = hexToCV(data.result);
+	console.log('TEST ');
+	console.log('DATA ', data);
 
 	if (data.type == 8) {
-		console.log('Participant not in pool')
-		return []
+		console.log('Participant not in pool');
+		return [];
 	} else {
-		console.log('Claims found')
+		console.log('Claims found');
 		data = data.value.data.mineManysClaimed.list;
 		console.log('CLAIMS FOR POOL PARSED', data);
 	}
 
-	let claimedMineManys = []
+	let claimedMineManys = [];
 
 	for (let num in data) {
-		claimedMineManys.push(parseInt(data[num].value))
+		claimedMineManys.push(parseInt(data[num].value));
 	}
-	console.log(claimedMineManys)
+	console.log(claimedMineManys);
 
-	let claimingEnabledMineManys = []
+	let claimingEnabledMineManys = [];
 
 	for (let id in pool.mineManys) {
 		let mineMany = pool.mineManys[id];
@@ -179,7 +182,7 @@ export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
 		}
 	}
 
-	console.log('Claiming enabled mine manys: ', claimingEnabledMineManys)
+	console.log('Claiming enabled mine manys: ', claimingEnabledMineManys);
 
 	// let claimableMineManys = []
 	// claimingEnabledMineManys.map((id) => {
@@ -189,43 +192,40 @@ export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
 	// });
 	// console.log('CLAIMABLE MINE ANYS: ', claimableMineManys)
 
-	let mineManys = {}
+	let mineManys = {};
 
 	claimingEnabledMineManys.map((mineManyId) => {
-		let claimable =  claimedMineManys.includes(mineManyId) ? false : true
+		let claimable = claimedMineManys.includes(mineManyId) ? false : true;
 		let mineMany = pool.mineManys[mineManyId];
 		let coinsWon = parseInt(mineMany.coinsWon);
 		let fee = parseInt(pool.stats.feePercentage) / 100;
 		let poolContribution = parseInt(pool.stats.totalContributed) / 1000000;
-		let userContribution = parseInt(getContributionSum(pool.contributions[stxAddress]))
-		console.log('coinsWon: ', coinsWon)
-		console.log('pool fee: ', fee)
-		console.log('user contribution ', userContribution)
-		console.log('pool contribution ', poolContribution)
-		
+		let userContribution = parseInt(getContributionSum(pool.contributions[address]));
+		console.log('coinsWon: ', coinsWon);
+		console.log('pool fee: ', fee);
+		console.log('user contribution ', userContribution);
+		console.log('pool contribution ', poolContribution);
 
-		let claimAmount = Math.floor((userContribution / poolContribution) * (coinsWon * (1 - fee)))
+		let claimAmount = Math.floor((userContribution / poolContribution) * (coinsWon * (1 - fee)));
 
-		console.log('amount to claim ', claimAmount)
+		console.log('amount to claim ', claimAmount);
 
 		mineManys[mineManyId] = {
 			claimable: claimable,
 			claimAmount: claimAmount
-		}
+		};
+	});
 
-	})
+	console.log('Mine Manys to claim:', mineManys);
 
-	console.log('Mine Manys to claim:', mineManys)
-
-	return mineManys
-}
-
+	return mineManys;
+};
 
 export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
 	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/can-claim-mining-reward`;
 	let block = blockHeight;
 
-	stxAddress = cvToHex(standardPrincipalCV(stxAddress))
+	stxAddress = cvToHex(standardPrincipalCV(stxAddress));
 	blockHeight = '010000000000000000' + intToHex(blockHeight);
 
 	let res = await fetch(url, {
@@ -239,19 +239,19 @@ export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
 	let data = await res.json();
 	data = hexToCV(data.result).type;
 	console.log('CAN CLAIM MINING', data);
-	return data == 3 ? claimMiningReward(block) : false
+	return data == 3 ? claimMiningReward(block) : false;
 };
 
 export const getContributionSum = (contributions) => {
-	let sum = 0
+	let sum = 0;
 	for (let contribution in contributions) {
-		sum = sum + (parseInt(contributions[contribution]) / 1000000)
+		sum = sum + parseInt(contributions[contribution]) / 1000000;
 	}
-	return sum
-}
+	return sum;
+};
 
 export const getUserContributions = (stxAddress, pool) => {
-	let contributions = []
+	let contributions = [];
 	let userContributions = pool.contributions[stxAddress];
 	for (let contribution in pool.contributions[stxAddress]) {
 		contributions.push({
@@ -260,5 +260,5 @@ export const getUserContributions = (stxAddress, pool) => {
 		});
 		console.log(contributions);
 	}
-return contributions
-}
+	return contributions;
+};

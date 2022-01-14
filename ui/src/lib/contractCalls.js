@@ -60,7 +60,8 @@ export const callContract = async (functionName, functionArgs, postConditions) =
 		network: NETWORK,
 		stxAddress: stxAddress,
 		AnchorMode: AnchorMode.Any,
-		postConditionMode: functionName == 'claim-mining-reward' ? PostConditionMode.Allow : PostConditionMode.Deny,
+		postConditionMode:
+			functionName == 'claim-mining-reward' ? PostConditionMode.Allow : PostConditionMode.Deny,
 		postConditions: postConditions
 	});
 
@@ -150,41 +151,24 @@ export const claimStackingReward = async (cycleNumber, cycleInfo, amountStacked,
 };
 
 export const claimMiningReward = async (blockHeight) => {
-	await callContract(
-		'claim-mining-reward',
-		[uintCV(blockHeight)],
-		[]
-	);
+	await callContract('claim-mining-reward', [uintCV(blockHeight)], []);
 	return true;
 };
 
 export const claimAllRewardsForPool = async (city, poolId) => {
-	await callPoolContract(
-		city,
-		'contributor-claim-all-rewards-for-pool',
-		[uintCV(poolId)],
-		[
-		]
-	);
+	await callPoolContract(city, 'contributor-claim-all-rewards-for-pool', [uintCV(poolId)], []);
 };
-
 
 export const contribute = async (city, poolId, amount) => {
 	let stxAddress = IS_MAINNET
-	? JSON.parse(get(user)).addresses.mainnet
-	: JSON.parse(get(user)).addresses.testnet;
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
 
 	await callPoolContract(
 		city,
 		'contribute',
 		[uintCV(poolId), uintCV(amount)],
-		[
-			makeStandardSTXPostCondition(
-				stxAddress,
-				FungibleConditionCode.Equal,
-				uintCV(amount).value
-			)
-		]
+		[makeStandardSTXPostCondition(stxAddress, FungibleConditionCode.Equal, uintCV(amount).value)]
 	);
 };
 
@@ -206,6 +190,46 @@ const callPoolContract = async (city, functionName, functionArgs, postConditions
 		AnchorMode: AnchorMode.Any,
 		postConditionMode: PostConditionMode.Deny,
 		postConditions: postConditions
+	});
+
+	return openTransactionPopup({
+		token,
+		onFinish: (result) => {},
+		onCancel: () => {}
+	});
+};
+
+export const addFunds = async (city, amount) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	let privateKey = JSON.parse(get(user)).appPrivateKey;
+
+	console.log('adding funds');
+
+	token = await makeStxTransferToken({
+		recipient: 'SP18XC4F27VQ8P2QGKZ5P6KR41GK77ZVFWV468P1',
+		amount: amount * 1000000,
+		memo: 'UI DISCLAIMER ACKNOWLEDGED',
+		network: new StacksMainnet(),
+		appDetails: {
+			name: `NYC Pool`,
+			icon: `citycoins/e.svg`
+		},
+		privateKey: privateKey,
+		senderAddress: stxAddress,
+
+		PostConditionMode: PostConditionMode.Deny,
+		postConditions: [
+			makeStandardSTXPostCondition(
+				stxAddress,
+				FungibleConditionCode.Equal,
+				uintCV(amount * 1000000).value
+			)
+		],
+		onFinish: (data) => {
+			setTxId(data.txId);
+		}
 	});
 
 	return openTransactionPopup({
