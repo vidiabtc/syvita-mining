@@ -5,12 +5,14 @@
 	import { claimAllRewardsForPool } from '$lib/contractCalls.js'
 
   const canClaim = () => {
-    for (let id in Object.keys(mineManys).reverse()) {
+    let can = false;
+    Object.keys(mineManys).reverse().map(id =>{
+      console.log('MMM', mineManys[id])
       if (mineManys[id].claimable) {
-        return true
+        can = true
       }
-    }
-    return false
+    })
+    return can
   }
 </script>
 

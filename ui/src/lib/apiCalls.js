@@ -132,7 +132,6 @@ export const getStackingReward = async (city, userId, cycle) => {
 };
 
 export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
-	// stxAddress = 'SP1C6WQ9KTV3769S8X8YNAWBXKDG2Y65P5EEDRWR6';
 	let address = stxAddress;
 	console.log(poolId);
 	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.poolContractAddress}/${city.poolContractName}/get-claims-for-pool`;
