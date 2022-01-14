@@ -188,7 +188,8 @@ const callPoolContract = async (city, functionName, functionArgs, postConditions
 		network: NETWORK,
 		stxAddress: stxAddress,
 		AnchorMode: AnchorMode.Any,
-		postConditionMode: PostConditionMode.Deny,
+		postConditionMode:
+			functionName == 'contribute' ? PostConditionMode.Deny : PostConditionMode.Allow,
 		postConditions: postConditions
 	});
 
