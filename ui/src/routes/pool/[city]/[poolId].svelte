@@ -1,8 +1,8 @@
 <script context="module">
 	import { CITIES } from '$lib/constants';
+
 	export async function load({ page, fetch }) {
 		let city = CITIES[page.params.city];
-
 		if (!city) {
 			return {
 				status: 303,
@@ -44,12 +44,13 @@
 	import Contribute from '$components/pool/contribute.svelte';
 
 	import { user, t, city } from '$lib/stores.js';
-	import { getPool, getBlockHeight } from '$lib/apiCalls';
+	import { getPool, getBlockHeight, getLatestPoolId } from '$lib/apiCalls';
 	import { getStxAddress } from '$lib/auth';
 
 	$: stxAddress = getStxAddress($user);
 	// $: stxAddress = 'SP3YXDXXHX1KQWG7N7G9WJQR69QGYN6DR1NK5H8XK';
 	$: blockHeight = getBlockHeight($city);
+  $: latestPoolId = getLatestPoolId($city);
 </script>
 
 <div class="pool-wrapper">
@@ -59,8 +60,13 @@
 	{#await poolId}
 		<h1>loading...</h1>
 	{:then poolId}
-		<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
-		<PoolHistory city={$city} {poolId} />
+  {#await latestPoolId}
+  <h1>loading...</h1>
+  {:then latestPoolId}
+    <PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
+    <PoolHistory city={$city} poolId={latestPoolId} />
+  {/await}
+	
 		<!-- <PoolActivity city={$city} /> -->
 	{/await}
 </div>
