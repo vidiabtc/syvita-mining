@@ -18,7 +18,7 @@
   // TEMPORARY FOR MANUAL POOL
 
   import { onMount } from 'svelte';
-	import Modal from '$components/nycModal.svelte';
+	import Modal from '$components/modal.svelte';
 	let poolAddress = 'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW';
 	let isModalOpen = false;
 	let contributeAmount;

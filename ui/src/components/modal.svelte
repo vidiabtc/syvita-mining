@@ -7,7 +7,6 @@
 
 	export let coin;
 	export let contributeAmount;
-	export let poolId;
 </script>
 
 <div class="modal-bg">
