@@ -207,8 +207,8 @@ export const addFunds = async (city, amount) => {
 
 	console.log('adding funds');
 
-	token = await makeStxTransferToken({
-		recipient: 'SP18XC4F27VQ8P2QGKZ5P6KR41GK77ZVFWV468P1',
+	let token = await makeStxTransferToken({
+		recipient: 'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW',
 		amount: amount * 1000000,
 		memo: 'UI DISCLAIMER ACKNOWLEDGED',
 		network: new StacksMainnet(),

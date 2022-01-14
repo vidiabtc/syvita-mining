@@ -1,202 +1,117 @@
+   
 <script>
-	import { t } from '$lib/stores.js';
-  import { addFunds} from '$lib/contractCalls.js';
-  let coin = 'nyc'
-  import { onMount } from 'svelte';
-  let value;
-  let totalContributed;
-  onMount(async () => {
-		let url = `https://mainnet.syvita.org/extended/v1/address/SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW/balances`;
+	// import { t } from '$lib/stores.js';
+	import { onMount } from 'svelte';
+	import Modal from '$components/nycModal.svelte';
+	let poolAddress = 'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW';
+	let isModalOpen = false;
+	let contributeAmount;
+	let totalContributed = -1;
+	const toggleModal = () => (isModalOpen = !isModalOpen);
+	onMount(async () => {
+		let url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/balances?unanchored=true`;
 		let res = await fetch(url);
 		let balance = await res.json();
-    totalContributed = Math.floor(balance.stx.total_received / 1000000)
-  });
-
+		url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/balances`;
+		res = await fetch(url);
+		let test = await res.json();
+		url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/mempool`;
+		res = await fetch(url);
+		let data = await res.json();
+		let mempool = data.results;
+		let pendingBalance = 0;
+		for (let i = 0; i < mempool.length; i++) {
+			if (
+				mempool[i].sender_address != poolAddress &&
+				mempool[i].tx_status == 'pending' &&
+				mempool[i].tx_type == 'token_transfer'
+			) {
+				pendingBalance += Math.floor(parseInt(mempool[i].token_transfer.amount) / 1000000);
+			}
+		}
+		console.log(balance.stx.total_received - test.stx.total_received / 1000000);
+		console.log(pendingBalance);
+		// console.log(pendingBalance)
+		totalContributed = Math.floor(balance.stx.total_received / 1000000) + pendingBalance;
+	});
 </script>
+<div class="toggle-wrapper">
+	<h1>NYC Pool 5</h1>
+	{#if totalContributed > -1}
+		<h2>Total Contributed: {totalContributed.toLocaleString()} STX</h2>
+	{:else}
+		<h2>Total Contributed: loading...</h2>
+	{/if}
+	<h4>Cap: 1,000,000 STX</h4>
 
-
-	<div class="pool-stats-wrapper">
-
-		<div class="stats-wrapper">
-			<div>
-				<p>{$t.pool.pool} 9</p>
-        
-			</div>
-	<div>	<p><img src="/icons/stx.svg"> {totalContributed}</p>
-  <p>Contributed</p></div>
-
-</div>
-<div class="contribute-wrapper">
-	<div class="title">
-		<h3>{$t.pool.contribute}</h3>
-		<!-- <SelectCity/> -->
-	</div>
-	<div class="contributions">
-		<div class="add-contributions">
-			<div class="input-field">
-				<input bind:value placeholder="50 STX Minimum" type="number" />
-			</div>
-			<button on:click={() => addFunds(coin, Math.floor(value))} >Contribute</button>
-		</div>
+	<div class="contribute-input">
+		<input placeholder="40 STX Minimum" bind:value={contributeAmount} type="number" />
+		{#if contributeAmount >= 50 && totalContributed < 1000000}
+			<button on:click={toggleModal}>Add Funds</button>
+		{:else}
+			<button>Add Funds</button>
+		{/if}
 	</div>
 </div>
 
-	</div>
-
-
+{#if isModalOpen}
+	<Modal on:close={toggleModal} coin="nyc" {contributeAmount} />
+{/if}
 
 <style>
-
-
-
-
-
-
-
-	.pool-stats-wrapper {
-		max-width: 1170px;
-		margin: auto;
-		padding: 0 20px;
-    font-size: 2rem;
-
-	}
-
-	.stats-wrapper {
-padding-top: 106px;
-gap: 10px;
-    display: flex;
-    flex-wrap: wrap;
-	}
-
-	.stats-wrapper div {
-		display: flex;
-		flex-direction: column;
-		max-width: 370px;
-    gap: 10px;
-		width: 100%;
-		min-width: 310px;
-		height: 141px;
-		justify-content: center;
-		align-items: center;
-		border: 1px solid blue;
-		border-radius: 10px;
-		margin: auto;
-	}
-
-	.stats-wrapper div:first-child {
-		background: linear-gradient(149.52deg, #384cff 8.64%, #ff38d3 86.61%);
-		background-blend-mode: lighten;
-		border-radius: 10px;
-	}
-
-  .stats-wrapper div:nth-child(2) p:first-child {
-    display: flex;
-    gap: 5px;
-  }
-
-
-
-
-
-	@media (max-width: 1220px) {
-		.pool-stats-wrapper {
-			max-width: 750px;
-
-
-		}
-
-
-		@media (max-width: 800px) {
-			.pool-stats-wrapper {
-				max-width: 370px;
-			}
-	
-		}
-	}
-
-
-  .contribute-wrapper {
-		max-width: 770px;
-		min-width: 300px;
-		margin: auto;
-		padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 150px;
-	}
-
-	.title {
+	.toggle-wrapper {
+		padding-top: 50px;
+		color: white;
+		text-align: center;
 		font-size: 1.5rem;
+	}
+	.contribute-input {
+		padding-top: 50px;
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	
-		padding-bottom: 15px;
+		justify-content: center;
 	}
-
-	.contributions {
-		max-width: 770px;
-		height: 110px;
-		border: 2px solid transparent;
-		border-radius: 10px;
-		border: 1px solid blue;
-		padding: 10px;
-
+	.contribute-input button {
+		margin-left: 5px;
 	}
-
-	.add-contributions {
-		padding: 20px;
-		position: relative;
-		display: flex;
-		justify-content: space-between;
-		gap: 30px;
-	}
-
-	.input-field {
-		max-width: 500px;
-		min-width: 45px;
-		width: 100%;
-	}
-
 	input {
-		color: white;
-		width: 100%;
-		height: 50px;
-		padding-left: 10px;
+		height: 40px;
+		width: 200px;
+		border: 1px solid lightgray;
+		border-radius: 10px;
+		transition: 0.4s;
+		font-size: 1.25rem;
 	}
-	::placeholder {
-		color: white;
-		font-size: 1rem;
+	input:focus {
+    color: black;
+		outline: none;
+		background-color: lightgrey;
 	}
-
 	button {
-		width: 180px;
-		height: 50px;
-
-		background: #384cff;
-		border-radius: 4px;
+		height: 40px;
+		width: 200px;
+		border-radius: 10px;
+		transition: 0.4s;
+		border: none;
+		cursor: pointer;
+		font-size: 1.5rem;
 	}
-
+	button:hover {
+    color: black;
+		background-color: lightgray;
+	}
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
-
-	/* Firefox */
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
-
-	@media(max-width: 400px) {
-	.add-contributions {	gap: 10px; }
-
-	.title {
-		font-size: 1.25rem;
-	}
-
-  .contribute-wrapper {
-      padding-top: 50px
-
-  }
+	@media (max-width: 768px) {
+		.contribute-input {
+			flex-direction: column;
+			align-items: center;
+			gap: 5px;
+		}
+		.contribute-input button {
+			margin-left: 0;
+		}
 	}
 </style>
