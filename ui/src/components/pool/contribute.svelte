@@ -30,6 +30,7 @@
 		max-width: 770px;
 		min-width: 300px;
 		margin: auto;
+    margin-top: 50px;
 		padding: 0 20px;
 	}
 
