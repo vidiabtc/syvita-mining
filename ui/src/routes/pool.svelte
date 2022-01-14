@@ -89,7 +89,7 @@
 
 	<div class="contribute-input">
 		<input placeholder="40 STX Minimum" bind:value={contributeAmount} type="number" />
-		{#if contributeAmount >= 50 && totalContributed < 1000000}
+		{#if contributeAmount >= 40 && totalContributed < 1000000}
 			<button on:click={toggleModal}>Add Funds</button>
 		{:else}
 			<button>Add Funds</button>
