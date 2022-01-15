@@ -146,6 +146,10 @@ export let amount;
 		.terms {
 			min-width: 95%;
 		}
+
+		.confirm-terms {
+			font-size: 1rem;
+		}
 	}
 
 	@media (max-width: 400px) {
