@@ -10,12 +10,12 @@
 		url = `${BASE_URL}/address/${CITIES['mia'].cityWalletAddress}/balances`;
 		res = await fetch(url);
 		let miaBalance = await res.json();
-		miaBalance = Math.floor(miaBalance.stx.balance / 1000000);
+		miaBalance = Math.floor(miaBalance.stx.total_received / 1000000);
 
 		url = `${BASE_URL}/address/${CITIES['nyc'].cityWalletAddress}/balances`;
 		res = await fetch(url);
 		let nycBalance = await res.json();
-		nycBalance = Math.floor(nycBalance.stx.balance / 1000000);
+		nycBalance = Math.floor(nycBalance.stx.total_received / 1000000);
 
 		return {
 			props: {
