@@ -53,12 +53,9 @@
 						</li>
 					</ul>
 				</div>
-				<p class="confirm-terms">
-					<input
-						on:click={() => addFunds(coin, Math.floor(contributeAmount))}
-						type="checkbox"
-					/>
 
+				<p class="confirm-terms">
+					<input on:click={() => addFunds(coin, Math.floor(contributeAmount))} type="checkbox" />
 					I attest that I have read through the CityCoins docs and understand how {coin.toUpperCase()}
 					coin works.
 				</p>
@@ -75,6 +72,7 @@
 		right: 0;
 		bottom: 0;
 		background: rgba(0, 0, 0, 0.8);
+		z-index: 2;
 	}
 
 	.modal-heading {
@@ -83,8 +81,9 @@
 	}
 
 	.modal {
-    color: black;
-		background: darkgrey;
+		color: white;
+		background-color: #050810;
+		border: 1px solid white;
 		padding: 20px;
 		border-radius: 15px;
 		position: relative;
@@ -104,6 +103,7 @@
 		top: 3px;
 		right: 5px;
 		cursor: pointer;
+		filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(192deg) brightness(103%) contrast(103%);
 	}
 
 	ul {
@@ -120,12 +120,15 @@
 		overflow-y: scroll;
 		height: 200px;
 		font-size: 1.1rem;
-		background: rgba(0, 0, 0, 0.1);
+		background: #050f07;
 		border-radius: 15px;
+		padding-right: 10px;
 	}
 
 	.confirm-terms {
-		padding-top: 30px;
+		padding-top: 25px;
+		font-size: 1.25rem;
+		text-align: left;
 	}
 
 	@media (max-width: 768px) {
@@ -143,5 +146,18 @@
 		.modal {
 			height: 450px;
 		}
+	}
+
+	::-webkit-scrollbar {
+		border: 1px solid #444d66;
+		border-radius: 10px;
+		width: 10px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		width: 8px;
+		height: 62px;
+		background: #ffffff;
+		border-radius: 10px;
 	}
 </style>

@@ -14,10 +14,9 @@
 	$: poolId = getLatestPoolId($city);
 	$: blockHeight = getBlockHeight($city);
 
+	// TEMPORARY FOR MANUAL POOL
 
-  // TEMPORARY FOR MANUAL POOL
-
-  import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import Modal from '$components/modal.svelte';
 	let poolAddress = 'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW';
 	let isModalOpen = false;
@@ -51,7 +50,7 @@
 		totalContributed = Math.floor(balance.stx.total_received / 1000000) + pendingBalance;
 	});
 
-  /////////////////
+	/////////////////
 </script>
 
 <svelte:head>
@@ -64,49 +63,41 @@
 
 <div class="pool-wrapper">
 	<div class="select-city">
-		<SelectCity/>
+		<SelectCity />
 	</div>
-  {#if $city.coin == 'mia'}
-
-    {#await poolId}
-      <h1>loading...</h1>
-    {:then poolId}
-      <PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
-      <PoolHistory city={$city} {poolId} />
-      <!-- <PoolActivity city={$city} /> -->
-    {/await}
-
-    {:else}
-
-<div class="toggle-wrapper">
-	<h1>NYC Pool 5</h1>
-	{#if totalContributed > -1}
-		<h2>Total Contributed: {totalContributed.toLocaleString()} STX</h2>
+	{#if $city.coin == 'mia'}
+		{#await poolId}
+			<h1>loading...</h1>
+		{:then poolId}
+			<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
+			<PoolHistory city={$city} {poolId} />
+			<!-- <PoolActivity city={$city} /> -->
+		{/await}
 	{:else}
-		<h2>Total Contributed: loading...</h2>
-	{/if}
-	<h4>Cap: 1,000,000 STX</h4>
+		<div class="toggle-wrapper">
+			<h1>NYC Pool 5</h1>
+			{#if totalContributed > -1}
+				<h2>Total Contributed: {totalContributed.toLocaleString()} STX</h2>
+			{:else}
+				<h2>Total Contributed: loading...</h2>
+			{/if}
+			<h4>Cap: 1,000,000 STX</h4>
 
-	<div class="contribute-input">
-		<input placeholder="40 STX Minimum" bind:value={contributeAmount} type="number" />
-		{#if contributeAmount >= 40 && totalContributed < 1000000}
-			<button on:click={toggleModal}>Add Funds</button>
-		{:else}
-			<button>Add Funds</button>
+			<div class="contribute-input">
+				<input placeholder="40 STX Minimum" bind:value={contributeAmount} type="number" />
+				{#if contributeAmount >= 40 && totalContributed < 1000000}
+					<button on:click={toggleModal}>Add Funds</button>
+				{:else}
+					<button>Add Funds</button>
+				{/if}
+			</div>
+		</div>
+
+		{#if isModalOpen}
+			<Modal on:close={toggleModal} coin="nyc" {contributeAmount} />
 		{/if}
-	</div>
+	{/if}
 </div>
-
-{#if isModalOpen}
-	<Modal on:close={toggleModal} coin="nyc" {contributeAmount} />
-{/if}
-
-
-  {/if}
-
-</div>
-
-
 
 <style>
 	.pool-wrapper {
@@ -123,8 +114,8 @@
 		padding-bottom: 35px;
 	}
 
-  /* TEMPORARY STYLES FOR MANUAL POOL */
-  .toggle-wrapper {
+	/* TEMPORARY STYLES FOR MANUAL POOL */
+	.toggle-wrapper {
 		padding-top: 50px;
 		color: white;
 		text-align: center;
@@ -147,7 +138,7 @@
 		font-size: 1.25rem;
 	}
 	input:focus {
-    color: black;
+		color: black;
 		outline: none;
 		background-color: lightgrey;
 	}
@@ -159,16 +150,26 @@
 		border: none;
 		cursor: pointer;
 		font-size: 1.5rem;
+		background: #384cff;
 	}
 	button:hover {
-    color: black;
-		background-color: lightgray;
+		background-color: rgba(56, 76, 255, 0.9);
+		cursor: pointer;
+	}
+
+	button:active {
+		background-color: rgba(56, 76, 255, 0.8);
 	}
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
+
+	::placeholder {
+		padding-left: 10px;
+	}
+
 	@media (max-width: 768px) {
 		.contribute-input {
 			flex-direction: column;
