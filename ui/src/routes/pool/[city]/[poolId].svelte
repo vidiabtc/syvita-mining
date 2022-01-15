@@ -55,7 +55,7 @@
 
 <div class="pool-wrapper">
 	<div class="select-city">
-		<SelectCity/>
+		<!-- <SelectCity/> -->
 	</div>
 	{#await poolId}
 		<h1>loading...</h1>
