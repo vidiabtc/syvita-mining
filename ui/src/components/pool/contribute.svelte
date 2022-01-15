@@ -1,12 +1,14 @@
 <script>
 	import Info from '$components/info.svelte';
-	import { contribute } from '$lib/contractCalls.js';
+	import PoolModal from './poolModal.svelte';
 	import { t } from '$lib/stores.js';
 	import { city } from '$lib/stores.js';
+	let isModalOpen = false;
 // import SelectCity from '$components/selectCity.svelte';
-
 	export let poolId;
-
+	const toggleModal = () => {
+    isModalOpen = !isModalOpen
+  }
 	let amount = 0;
 </script>
 
@@ -20,9 +22,12 @@
 			<div class="input-field">
 				<input bind:value={amount} placeholder="40 STX Minimum" type="number" />
 			</div>
-			<button on:click={contribute($city, poolId, amount * 1000000)}>{$t.pool.contribute}</button>
+			<button on:click={toggleModal}>{$t.pool.contribute}</button>
 		</div>
 	</div>
+	{#if isModalOpen}
+  <PoolModal on:close={toggleModal} {poolId} {amount}/>
+  {/if}
 </div>
 
 <style>
@@ -33,7 +38,6 @@
     margin-top: 50px;
 		padding: 0 20px;
 	}
-
 	.title {
 		font-size: 1.5rem;
 		display: flex;
@@ -42,7 +46,6 @@
 	
 		padding-bottom: 15px;
 	}
-
 	.contributions {
 		max-width: 770px;
 		height: 110px;
@@ -51,7 +54,6 @@
 		border: 1px solid blue;
 		padding: 10px;
 	}
-
 	.add-contributions {
 		padding: 20px;
 		position: relative;
@@ -59,13 +61,11 @@
 		justify-content: space-between;
 		gap: 30px;
 	}
-
 	.input-field {
 		max-width: 500px;
 		min-width: 45px;
 		width: 100%;
 	}
-
 	input {
 		color: white;
 		width: 100%;
@@ -76,29 +76,23 @@
 		color: white;
 		font-size: 1rem;
 	}
-
 	button {
 		width: 180px;
 		height: 50px;
-
 		background: #384cff;
 		border-radius: 4px;
 	}
-
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
-
 	/* Firefox */
 	input[type='number'] {
 		-moz-appearance: textfield;
 	}
-
 	@media(max-width: 400px) {
 	.add-contributions {	gap: 10px; }
-
 	.title {
 		font-size: 1.25rem;
 	}
