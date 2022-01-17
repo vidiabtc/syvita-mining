@@ -6,7 +6,7 @@ import { IS_MAINNET } from './constants.js';
 const authOptions = {
 	appDetails: {
 		name: 'Syvita Mining',
-		icon: '/'
+		icon: 'https://syvitamining.com/syvitamining.jpg'
 	}
 };
 
