@@ -12,11 +12,12 @@
 
 	export let userId;
 	export let cycles;
+  export let blockHeight;
 </script>
 
 <div class="stack-history-wrapper">
 	{#each Object.keys(cycles).reverse() as cycle}
-			{#if cycle <= Object.keys(cycles)[Object.keys(cycles).length - 1] && cycle > Object.keys(cycles)[Object.keys(cycles).length - 1] - 5}
+			{#if cycle > Object.keys(cycles)[Object.keys(cycles).length - 1] - 5}
 				{#await getStackingReward($city, userId, cycle) then reward}
 					{#if reward.amountStacked > 0}
 					<div class="cycle">
@@ -39,7 +40,8 @@
 						</div>
 						<div>
 							<p>{$t.stack.claimRewards}</p>
-							<p class="claim">{#if cycle < Object.keys(cycles)[Object.keys(cycles).length - 2]}
+							<p class="claim">{#if blockHeight >= parseInt($city.activationBlock) +
+                (parseInt(cycle) + 1) * 2100}
 								<!-- content here -->
 								<button
 									on:click={claimStackingReward(
