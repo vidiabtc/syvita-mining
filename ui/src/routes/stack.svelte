@@ -17,7 +17,7 @@
 
 	$: stxAddress = getStxAddress($user);
 	$: userId = stxAddress ? getUserId($city, stxAddress) : null;
-	// $: userId = 50;
+	// $: userId = 10;
 
 	$: innerWidth = 0;
 	$: stackingCycleStats = getStackingCycleStats($city);
@@ -47,13 +47,16 @@
 		{/if}
 		{/await}
 		{#if stxAddress}
+      {#await blockHeight}
+      {:then blockHeight}
 			{#await userId then userId}
 			{#if innerWidth > 800}
-				<StackingCycleTool {userId} {cycles} />
+				<StackingCycleTool {blockHeight} {userId} {cycles} />
 			{:else}
-				<MobileStackTool {userId} {cycles}/>
+				<MobileStackTool {blockHeight} {userId} {cycles}/>
 			{/if}
 			{/await}
+      {/await}
 		{/if}
 	{/await}
 
