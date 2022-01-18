@@ -50,7 +50,7 @@
 	$: stxAddress = getStxAddress($user);
 	// $: stxAddress = 'SP3YXDXXHX1KQWG7N7G9WJQR69QGYN6DR1NK5H8XK';
 	$: blockHeight = getBlockHeight($city);
-  $: latestPoolId = getLatestPoolId($city);
+	$: latestPoolId = getLatestPoolId($city);
 </script>
 
 <div class="pool-wrapper">
@@ -60,19 +60,18 @@
 	{#await poolId}
 		<h1>loading...</h1>
 	{:then poolId}
-  {#await latestPoolId}
-  <h1>loading...</h1>
-  {:then latestPoolId}
-    <PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
-    <PoolHistory city={$city} poolId={latestPoolId} />
-  {/await}
-	
+		{#await latestPoolId}
+			<h1>loading...</h1>
+		{:then latestPoolId}
+			<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
+			<PoolHistory city={$city} poolId={latestPoolId} />
+		{/await}
+
 		<!-- <PoolActivity city={$city} /> -->
 	{/await}
 </div>
 
 <style>
-	
 	.pool-wrapper {
 		max-width: 1170px;
 		margin: auto;

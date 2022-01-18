@@ -160,12 +160,12 @@
 	}
 
 	.mine-button:hover {
-	background-color: rgba(56, 76, 255, 0.9);	
-	cursor: pointer;
+		background-color: rgba(56, 76, 255, 0.9);
+		cursor: pointer;
 	}
 
 	.mine-button:active {
-	background-color: rgba(56, 76, 255, 0.8);	
+		background-color: rgba(56, 76, 255, 0.8);
 	}
 
 	input::-webkit-outer-spin-button,

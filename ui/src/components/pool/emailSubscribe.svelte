@@ -1,35 +1,99 @@
 <script>
-	let email;
+	let email = '';
 
 	const submitEmail = async (email) => {
-		let url = `https://campaigns.zoho.com/api/v1.1/addlistsubscribersinbulk?listkey=3z12320c6e15396486ff571cefc8a17dcaf67687a536e02bbd63cbb654293a2260&resfmt=JSON&emailids=${email}`;
+		let url = `https://cors.sjoerd.dev/https://api.getresponse.com/v3/contacts/`;
 
 		let res = await fetch(url, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				Authorization:
-					'Zoho-oauthtoken 1000.6966def5d0dd2b4e74ba49b2aadcd4d4.d1af1919199ebd76581433850c979585'
-			}
+				'Content-Type': 'application/json',
+				'X-Auth-Token': `api-key 7jpnd23yszmiz2hdxa69jm2qww45ade8`
+			},
+			body: JSON.stringify({
+				campaign: {
+					campaignId: 'rmxgr'
+				},
+				email: email
+			})
 		});
-		let data = await res.json();
-		console.log('data', data);
+
+		alert('Email Submitted Succesfully');
 	};
 </script>
 
 <div class="email-wrapper">
-	<h3>Email</h3>
+	<div class="title">
+		<h3>Subscribe to our email newsletter!</h3>
+		<p>Get updates on when pools are opening and other mining news.</p>
+	</div>
 	<form on:submit|preventDefault={() => submitEmail(email)}>
-		<input bind:value={email} type="email" />
-		<input type="submit" />
+		<div class="input">
+			<input class="email" placeholder="Insert Email" bind:value={email} type="email" />
+			<div class="submit">
+				{#if email == ''}
+					<button class="submit-button">Submit</button>
+				{:else}
+					<input class="submit-button" type="submit" />
+				{/if}
+			</div>
+		</div>
 	</form>
 </div>
 
 <style>
 	.email-wrapper {
-		margin-top: 300px;
 		margin-right: auto;
 		margin-left: auto;
-		width: 400px;
+		max-width: 400px;
+		padding: 40px 20px;
+		text-align: left;
+	}
+
+	.title {
+		text-align: left;
+	}
+
+	h3 {
+		font-size: 1.75rem;
+	}
+
+	p {
+		padding: 10px 0px;
+	}
+
+	input {
+		height: 50px;
+	}
+
+	.input {
+		max-width: 400px;
+		width: 100%;
+	}
+
+	.submit-button {
+		transition: 0.4s;
+	}
+
+	.email {
+		padding-left: 10px;
+	}
+
+	.submit-button:hover {
+		background-color: #384cff;
+		cursor: pointer;
+	}
+
+	.submit-button:active {
+		background-color: rgba(56, 76, 255, 0.8);
+	}
+
+	button {
+		height: 50px;
+		border: 1px solid #444d66;
+	}
+
+	.submit {
+		padding-top: 10px;
 	}
 </style>

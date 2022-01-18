@@ -21,9 +21,9 @@
 				<div class="pool">
 					<div class="pool-info">
 						<p>{$t.pool.pool} {poolId + parseInt($city.startingPoolId)}</p>
-            {#if poolId == poolIdList[0]}
-            <p>{$t.pool.current}</p>
-            {/if}
+						{#if poolId == poolIdList[0]}
+							<p>{$t.pool.current}</p>
+						{/if}
 					</div>
 					<div class="block-dates">
 						<div>

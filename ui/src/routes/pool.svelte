@@ -4,7 +4,7 @@
 	import PoolHistory from '$components/pool/poolHistory.svelte';
 	import SelectCity from '$components/selectCity.svelte';
 	import MineManyHistory from '$components/pool/MineManyHistory.svelte';
-
+	import EmailSubscribe from '$components/pool/emailSubscribe.svelte';
 	import { user, city, t } from '$lib/stores.js';
 	import { getLatestPoolId, getPool, getBlockHeight } from '$lib/apiCalls';
 	import { getStxAddress } from '$lib/auth';
@@ -70,7 +70,10 @@
 			<h1>loading...</h1>
 		{:then poolId}
 			<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
+
 			<PoolHistory city={$city} {poolId} />
+			<EmailSubscribe />
+
 			<!-- <PoolActivity city={$city} /> -->
 		{/await}
 	{:else}
@@ -92,7 +95,7 @@
 				{/if}
 			</div>
 		</div>
-
+		<EmailSubscribe />
 		{#if isModalOpen}
 			<Modal on:close={toggleModal} coin="nyc" {contributeAmount} />
 		{/if}
