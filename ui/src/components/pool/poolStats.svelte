@@ -126,6 +126,10 @@
 		overflow-y: auto;
 	}
 
+	.contribution-activity {
+		padding: 80px 0;
+	}
+
 	.contribution-activity h3 {
 		font-size: 2rem;
 	}
