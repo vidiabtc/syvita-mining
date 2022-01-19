@@ -33,9 +33,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)} class="submit-button"
-				>Start Next Pool</button
-			>
+			<button class="submit-button">Start Next Pool</button>
 		</div>
 	</div>
 </div>

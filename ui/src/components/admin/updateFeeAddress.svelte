@@ -21,9 +21,7 @@
 				}}
 				class="reset-button">Rest</button
 			>
-			<button on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)} class="submit-button"
-				>Update Fee Address</button
-			>
+			<button class="submit-button">Update Fee Address</button>
 		</div>
 	</div>
 </div>

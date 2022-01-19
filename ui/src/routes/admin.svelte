@@ -1,5 +1,5 @@
 <script>
-	import SelectCity from '$components/selectCity.svelte';
+	import SelectCity from '$components/admin/selectCity.svelte';
 	import MineMany from '$components/admin/mineMany.svelte';
 	import EnableClaiming from '$components/admin/enableClaiming.svelte';
 	import SetPool from '$components/admin/setPool.svelte';

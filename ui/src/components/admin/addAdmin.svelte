@@ -21,9 +21,7 @@
 				}}
 				class="reset-button">Rest</button
 			>
-			<button on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)} class="submit-button"
-				>Add Admin</button
-			>
+			<button class="submit-button">Add Admin</button>
 		</div>
 	</div>
 </div>
