@@ -41,7 +41,14 @@
 		</div>
 		<div class="coin-balance">
 			{#await coinBalance}
-				<p><img width="20px" height="20px" src={`/citycoins/${$city.coin.toUpperCase()}.svg`} alt={`${$city}`} />0</p>
+				<p>
+					<img
+						width="20px"
+						height="20px"
+						src={`/citycoins/${$city.coin.toUpperCase()}.svg`}
+						alt={`${$city}`}
+					/>0
+				</p>
 			{:then balance}
 				<p>
 					<img
@@ -78,15 +85,14 @@
 			<p>{$t.mine.currentBlock}</p>
 		</div>
 	</div>
-	<MineMany />
 	<div class="join">
 		<a href="/pool">
 			<button>+ {$t.mine.joinMiningPool}</button>
 		</a>
 	</div>
+	<MineMany />
+
 	<ClaimMiningReward />
-
-
 
 	<!-- <MinedBlocks /> -->
 </div>
@@ -114,7 +120,7 @@
 	}
 
 	.join button:active {
-	background-color: rgba(56, 76, 255, 0.8);	
+		background-color: rgba(56, 76, 255, 0.8);
 	}
 
 	.stats {
@@ -145,7 +151,8 @@
 	.join {
 		margin: auto;
 		width: 200px;
-		padding-top: 50px;
+
+		padding-bottom: 60px;
 	}
 	.join button {
 		width: 200px;

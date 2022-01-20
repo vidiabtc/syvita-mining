@@ -1,10 +1,18 @@
 <script>
 	import { mineMany } from '$lib/contractCalls.js';
+
 	import { t } from '$lib/stores.js';
 	import SelectCity from '$components/selectCity.svelte';
-
 	let numOfBlocks = 0;
 	let stxPerBlock = 0;
+
+	//modal
+	import MineModal from './mineModal.svelte';
+
+	let isModalOpen = false;
+	const toggleModal = () => {
+		isModalOpen = !isModalOpen;
+	};
 </script>
 
 <div class="mine-many-parent-wrapper">
@@ -44,11 +52,17 @@
 				}}
 				class="reset-button">{$t.mine.reset}</button
 			>
-			<button on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)} class="mine-button"
-				>{$t.header.mine}</button
-			>
+			{#if numOfBlocks > 0 && stxPerBlock > 0}
+				<button on:click={toggleModal} class="mine-button">{$t.header.mine}</button>
+			{:else}
+				<button disabled="true" class="mine-button">{$t.header.mine}</button>
+			{/if}
 		</div>
 	</div>
+
+	{#if isModalOpen}
+		<MineModal {numOfBlocks} {stxPerBlock} on:close={toggleModal} />
+	{/if}
 </div>
 
 <style>
