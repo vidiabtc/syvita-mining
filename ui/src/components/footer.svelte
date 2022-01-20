@@ -4,9 +4,7 @@
 
 <footer>
 	<p>{$t.footer.syvita}</p>
-	<a target="_blank"
-	rel="noopener noreferrer"
-	href="https://twitter.com/syvitamining">
+	<a target="_blank" rel="external noopener noreferrer" href="https://twitter.com/syvitamining">
 		<p class="twitter">{$t.footer.follow}<img src="/twitter.svg" alt="Twitter Logo" /></p>
 	</a>
 </footer>
@@ -36,11 +34,10 @@
 			contrast(105%);
 	}
 
-	@media(max-width: 530px) {
+	@media (max-width: 530px) {
 		footer {
 			flex-direction: column;
 			gap: 10px;
 		}
 	}
-
 </style>

@@ -21,6 +21,7 @@
 				</p>
 				<a
 					target="_blank"
+					rel="external noopener noreferrer"
 					href="https://markets.businessinsider.com/news/currencies/nyc-city-coin-stacks-adams-bitcoin-miami-cryptocurrency-new-york-2021-11"
 					>View More</a
 				>
@@ -41,8 +42,10 @@
 					A friendly competition is emerging between Miami Mayor Francis Suarez and New York
 					Mayor-Elect Eric Adams to position their cities as hubs for cryptocurrency...
 				</p>
-				<a target="_blank" href="https://www.miamiherald.com/opinion/op-ed/article256597301.html"
-					>View More</a
+				<a
+					target="_blank"
+					rel="external noopener noreferrer"
+					href="https://www.miamiherald.com/opinion/op-ed/article256597301.html">View More</a
 				>
 			</div>
 		</div>
@@ -63,6 +66,7 @@
 				</p>
 				<a
 					target="_blank"
+					rel="external noopener noreferrer"
 					href="https://www.foxbusiness.com/money/miami-crypto-capital-race-creates-first-citycoin"
 					>View More</a
 				>
@@ -131,7 +135,7 @@
 	}
 
 	a:hover {
-		color: rgba(56, 76, 255, 0.5);	
+		color: rgba(56, 76, 255, 0.5);
 	}
 
 	@media (max-width: 775px) {

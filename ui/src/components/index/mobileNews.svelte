@@ -15,6 +15,7 @@
 				</p>
 				<a
 					target="_blank"
+					rel="external noopener noreferrer"
 					href="https://markets.businessinsider.com/news/currencies/nyc-city-coin-stacks-adams-bitcoin-miami-cryptocurrency-new-york-2021-11"
 					>View More</a
 				>
@@ -35,6 +36,7 @@
 				</p>
 				<a
 					target="_blank"
+					rel="external noopener noreferrer"
 					href="https://markets.businessinsider.com/news/currencies/nyc-city-coin-stacks-adams-bitcoin-miami-cryptocurrency-new-york-2021-11"
 					>View More</a
 				>
@@ -55,6 +57,7 @@
 				</p>
 				<a
 					target="_blank"
+					rel="external noopener noreferrer"
 					href="https://www.foxbusiness.com/money/miami-crypto-capital-race-creates-first-citycoin"
 					>View More</a
 				>
@@ -127,9 +130,8 @@
 	}
 
 	a:hover {
-		color: rgba(56, 76, 255, 0.5);	
+		color: rgba(56, 76, 255, 0.5);
 	}
-
 
 	@media (min-width: 775px) {
 		.news-stories-wrapper {
