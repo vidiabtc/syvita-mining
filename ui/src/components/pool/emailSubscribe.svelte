@@ -1,4 +1,7 @@
 <script>
+
+
+
 	let email = '';
 
 	const submitEmail = async (email) => {
@@ -8,7 +11,7 @@
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Auth-Token': `api-key 7jpnd23yszmiz2hdxa69jm2qww45ade8`
+				'X-Auth-Token': `api-key ${import.meta.env.VITE_EMAIL_API_KEY}`
 			},
 			body: JSON.stringify({
 				campaign: {
