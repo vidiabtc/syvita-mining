@@ -87,9 +87,9 @@
 			<h4>Cap: 1,000,000 STX</h4>
 
 			<div class="contribute-input">
-				<input placeholder="40 STX Minimum" bind:value={contributeAmount} type="number" />
+				<input placeholder="Pool Closed" bind:value={contributeAmount} type="number" />
 				{#if contributeAmount >= 40 && totalContributed < 1000000}
-					<button on:click={toggleModal}>Add Funds</button>
+					<button disabled=true >Add Funds</button>
 				{:else}
 					<button>Add Funds</button>
 				{/if}

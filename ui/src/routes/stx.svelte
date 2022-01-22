@@ -1,10 +1,10 @@
-<!-- <script>
-  // import btcpay from 'btcpay';
+<script>
+// const btcpay = require('btcpay');
   // const btcpay = import('btcpay')
   // const btcpay = require('btcpay')
 
 
-  // const keypair = btcpay.crypto.load_keypair(new Buffer.from(import.meta.env.VITE_BTCPAYSERVER_KEY, 'hex'))
+  //  const keypair = btcpay.crypto.load_keypair(new Buffer.from(import.meta.env.VITE_BTCPAYSERVER_KEY, 'hex'))
 
   // https://mainnet.demo.btcpayserver.org
 
@@ -12,7 +12,7 @@
 
   //VITE_BTCPAYSERVER_MERCHANT
 
-//   const getStore = async () => {
+// const getStore = async () => {
 //     let url = 'https://demo.btcpayserver.org/api/v1/stores/GMRWXB7xAZBrWkgnBxoqVrQrCC2HGzgT9zyBD5jeT8XX'
 //     let res = await fetch(url, {
 // 		method: 'GET',
@@ -22,11 +22,14 @@
 //     console.log('Data ', data)
 //   }
 
-// </script> -->
+ </script>
 
 
-// <h1>STX Mining</h1>
-// <button on:click={getStore}>Get Store</button>
+ <h1>STX Mining</h1>
+<!-- <button on:click={getStore}>Get Store</button>
 
 
-// <!-- <h1>{JSON.stringify(keypair)}</h1> -->
+<h1>{JSON.stringify(keypair)}</h1> -->
+
+
+
