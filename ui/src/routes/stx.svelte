@@ -1,4 +1,5 @@
 <script>
+  // import btcpay from 'btcpay'
 // const btcpay = require('btcpay');
   // const btcpay = import('btcpay')
   // const btcpay = require('btcpay')

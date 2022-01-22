@@ -27,6 +27,9 @@
 	"dependencies": {
 		"@fontsource/inter": "^4.5.1",
 		"btcpay": "^0.2.5",
-		"micro-stacks": "^0.1.7"
+		"buffer": "^6.0.3",
+		"micro-stacks": "^0.1.7",
+		"request": "^2.88.2",
+		"util": "^0.12.4"
 	}
 }
