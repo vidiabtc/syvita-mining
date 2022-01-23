@@ -60,7 +60,7 @@ export const getUserId = async (city, stxAddress) => {
 			arguments: [cvToHex(standardPrincipalCV(stxAddress))]
 		})
 	});
-	
+
 	let data = await res.json();
 	let userId = data.result.substring(4);
 	userId = hexToValue(userId);

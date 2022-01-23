@@ -27,15 +27,16 @@ export const getInvoices = async (storeId) => {
   console.log('Invoices: ', data)
 }
 
-export const createInvoice = async (storeId) => {
+export const createInvoice = async (storeId, stxAddress, btcContribute, poolId) => {
   let url = `${BTC_API_URL}/stores/${storeId}/invoices`
   console.log('HEADERS ', headers)
   let res = await fetch(url, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify({
-      metadata: {'stxAddress': 'SP1FKRSMJADD20VRAZ0FC8EMFZ128GZSF08BEYV86'},
-      amount: '0.1',
+      metadata: {'stxAddress': stxAddress,
+    'poolId': poolId},
+      amount: btcContribute,
       checkout: {
         redirectAutomatically: 'true',
       }
