@@ -40,6 +40,7 @@
 		max-width: 600px;
     margin: auto;
     padding-bottom: 30px;
+    padding-top: 50px;
 	}
 
 	h2 {

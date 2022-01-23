@@ -55,7 +55,7 @@
 		margin: auto;
 		padding-right: 20px;
 		padding-left: 20px;
-		padding-bottom: 160px;
+    
 	}
 
 	.stats-wrapper {

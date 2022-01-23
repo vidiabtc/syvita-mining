@@ -1,0 +1,76 @@
+.modal {
+	background: #050810;
+}
+
+.page {
+	background: #050810;
+}
+
+.modal-content {
+	background: #050810;
+	border: 1px solid white;
+}
+
+.top-header {
+	background: #050810;
+}
+
+.timer-row {
+	background: #384cff;
+}
+
+.currency-selection {
+	background: #050810;
+	color: white;
+}
+
+.single-item-order {
+	background: #050810;
+	color: white;
+}
+
+.buyerTotalLine {
+	background: #050810;
+	color: white;
+}
+
+.payment-tabs_tab {
+	background: #050810;
+	color: white;
+}
+
+.payment-tabs_tab active {
+	background: #050810;
+	color: white;
+	border-bottom: 1px solid #384cff;
+}
+
+.payment__details__instruction__open-wallet__btn {
+	background: #384cff;
+	border: none;
+}
+
+.recommended-fee {
+	color: white;
+}
+
+.prettydropdwon ul {
+	background-color: black;
+	color: white;
+}
+
+.prettydropdown:not(.disabled) > ul.active {
+	border-color: #384cff;
+}
+
+.prettydropdown > ul.active > li.hover:not(.label) {
+	background: #384cff;
+}
+
+.powered__by__btcpayserver {
+	color: white;
+}
+
+.powered__by__btcpayserver a {
+	color: white;
+}

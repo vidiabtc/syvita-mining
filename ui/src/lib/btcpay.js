@@ -1,5 +1,5 @@
+import { goto } from "$app/navigation"
 import { BTC_API_URL } from "./constants.js"
-
 
 let headers = { 'Content-Type': 'application/json', 'Authorization': `token 798750388e2b374185933730575ed3c2e3b6ca2b` }
 
@@ -36,13 +36,18 @@ export const createInvoice = async (storeId, stxAddress, btcContribute, poolId) 
     body: JSON.stringify({
       metadata: {'stxAddress': stxAddress,
     'poolId': poolId},
+    'orderId': JSON.stringify(`pool${poolId}/${stxAddress}`),
       amount: btcContribute,
       checkout: {
         redirectAutomatically: 'true',
       }
+     
     })
   });
   console.log('Invoice created')
   let data = await res.json();
   console.log('created: ', data)
+  let checkoutLink = data.checkoutLink
+  console.log(checkoutLink)
+  goto(checkoutLink)
 }
