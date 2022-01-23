@@ -1,5 +1,5 @@
 <script>
-  import SelectCity from "$components/selectCity.svelte";
+  import SelectCity from "$components/stx/selectCity.svelte";
 </script>
 
 
