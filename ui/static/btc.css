@@ -104,3 +104,10 @@ input {
 	background: #050810;
 	color: white;
 }
+
+img {
+	width: 330px;
+	height: 35px;
+	margin: auto;
+	padding-left: 10px;
+}
