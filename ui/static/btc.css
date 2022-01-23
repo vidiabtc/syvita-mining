@@ -15,7 +15,7 @@
 	background: #050810;
 }
 
-.timer-row {
+.top-header .timer-row {
 	background: #384cff;
 }
 
@@ -34,12 +34,17 @@
 	color: white;
 }
 
-.payment-tabs_tab {
+.payment-tabs {
 	background: #050810;
 	color: white;
+	border-bottom: 1px solid white;
 }
 
-.payment-tabs_tab active {
+.payment-tabs__tab {
+	border-bottom: 1px solid white;
+}
+
+.payment-tabs_tab.active {
 	background: #050810;
 	color: white;
 	border-bottom: 1px solid #384cff;
@@ -72,5 +77,30 @@
 }
 
 .powered__by__btcpayserver a {
+	color: white;
+}
+
+.manual__step-two__instructions {
+	color: white;
+}
+
+.copyBox {
+	background: #050810;
+}
+
+.copySectionBox label {
+	color: white;
+}
+
+.copyAmountText {
+	color: white;
+}
+
+.separatorGem {
+	background: #384cff;
+}
+
+input {
+	background: #050810;
 	color: white;
 }
