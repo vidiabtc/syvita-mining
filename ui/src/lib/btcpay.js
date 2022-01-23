@@ -36,7 +36,7 @@ export const createInvoice = async (storeId) => {
     body: JSON.stringify({
       metadata: {'stxAddress': 'SP1FKRSMJADD20VRAZ0FC8EMFZ128GZSF08BEYV86'},
       amount: '0.1',
-      checkOut: {
+      checkout: {
         redirectAutomatically: 'true',
       }
     })
