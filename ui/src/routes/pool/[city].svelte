@@ -20,10 +20,8 @@
 
 <script>
 	import PoolStats from '$components/pool/poolStats.svelte';
-	import PoolActivity from '$components/pool/poolActivity.svelte';
 	import PoolHistory from '$components/pool/poolHistory.svelte';
-	import SelectCity from '$components/pool/selectCity.svelte';
-	import MineManyHistory from '$components/pool/MineManyHistory.svelte';
+	import PoolSelectCity from '$components/pool/PoolSelectCity.svelte';
 	import EmailSubscribe from '$components/pool/emailSubscribe.svelte';
 	import { user, t } from '$lib/stores.js';
 	import { getLatestPoolId, getPool, getBlockHeight } from '$lib/apiCalls';
@@ -40,7 +38,8 @@
 
 	import { onMount } from 'svelte';
 	import Modal from '$components/modal.svelte';
-	let poolAddress = 'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW';
+
+  let poolAddress = 'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW';
 	let isModalOpen = false;
 	let contributeAmount;
 	let totalContributed = -1;
@@ -85,7 +84,7 @@
 
 <div class="pool-wrapper">
 	<div class="select-city">
-		<SelectCity selectedCity={city.coin}/>
+		<PoolSelectCity selectedCity={city.coin}/>
 	</div>
 	{#if city.coin == 'mia'}
 		{#await poolId}

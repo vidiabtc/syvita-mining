@@ -1,6 +1,5 @@
 <script>
 	import { CITIES } from '$lib/constants.js';
-	import { city, t } from '$lib/stores.js';
 
   export let selectedCity;
 
