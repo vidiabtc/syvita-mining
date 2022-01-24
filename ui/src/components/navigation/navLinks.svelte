@@ -7,7 +7,7 @@
 	<SelectLanguage />
 </div>
 <nav>
-	<a href="/pool"><p>{$t.header.pool}</p></a>
+	<a href="/pool/mia"><p>{$t.header.pool}</p></a>
 	<a href="/stack"><p>{$t.header.stack}</p></a>
 	<a href="/mine"><p>{$t.header.mine}</p></a>
 

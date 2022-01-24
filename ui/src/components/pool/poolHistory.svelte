@@ -51,13 +51,13 @@
 							<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
 						</div>
 					</div>
-					<div>
-						<button>
-							<a href={`/pool/${$city.coin}/${poolId + parseInt($city.startingPoolId)}`}>
-								{$t.pool.viewPoolDetails}
-							</a>
-						</button>
-					</div>
+          <a href={`/pool/${$city.coin}/${poolId + parseInt($city.startingPoolId)}`}>
+            <div>
+              <button>
+                  {$t.pool.viewPoolDetails}
+              </button>
+            </div>
+         </a>
 				</div>
 			{/await}
 		{/each}

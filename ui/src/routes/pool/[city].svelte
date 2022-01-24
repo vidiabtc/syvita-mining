@@ -1,18 +1,40 @@
+<script context="module">
+	import { CITIES } from '$lib/constants';
+
+	export async function load({ page, fetch }) {
+		let city = CITIES[page.params.city];
+		if (!city) {
+			return {
+				status: 303,
+				redirect: '/pool'
+			};
+		} else {
+			return {
+				props: {
+					city,
+				}
+			};
+		}
+	}
+</script>
+
 <script>
 	import PoolStats from '$components/pool/poolStats.svelte';
 	import PoolActivity from '$components/pool/poolActivity.svelte';
 	import PoolHistory from '$components/pool/poolHistory.svelte';
-	import SelectCity from '$components/selectCity.svelte';
+	import SelectCity from '$components/pool/selectCity.svelte';
 	import MineManyHistory from '$components/pool/MineManyHistory.svelte';
 	import EmailSubscribe from '$components/pool/emailSubscribe.svelte';
-	import { user, city, t } from '$lib/stores.js';
+	import { user, t } from '$lib/stores.js';
 	import { getLatestPoolId, getPool, getBlockHeight } from '$lib/apiCalls';
 	import { getStxAddress } from '$lib/auth';
 
+  export let city;
+
 	$: stxAddress = getStxAddress($user);
 	// $: stxAddress = 'SP3YXDXXHX1KQWG7N7G9WJQR69QGYN6DR1NK5H8XK';
-	$: poolId = getLatestPoolId($city);
-	$: blockHeight = getBlockHeight($city);
+	$: poolId = getLatestPoolId(city);
+	$: blockHeight = getBlockHeight(city);
 
 	// TEMPORARY FOR MANUAL POOL
 
@@ -63,18 +85,18 @@
 
 <div class="pool-wrapper">
 	<div class="select-city">
-		<SelectCity />
+		<SelectCity selectedCity={city.coin}/>
 	</div>
-	{#if $city.coin == 'mia'}
+	{#if city.coin == 'mia'}
 		{#await poolId}
 			<h1>loading...</h1>
 		{:then poolId}
-			<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
+			<PoolStats city={city} {poolId} {blockHeight} {stxAddress} />
 
-			<PoolHistory city={$city} {poolId} />
+			<PoolHistory city={city} {poolId} />
 			<EmailSubscribe />
 
-			<!-- <PoolActivity city={$city} /> -->
+			<!-- <PoolActivity city={city} /> -->
 		{/await}
 	{:else}
 		<div class="toggle-wrapper">
