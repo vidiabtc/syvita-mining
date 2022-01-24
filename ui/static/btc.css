@@ -44,7 +44,7 @@
 	border-bottom: 1px solid white;
 }
 
-.payment-tabs_tab.active {
+.payment-tabs__tab.active {
 	background: #050810;
 	color: white;
 	border-bottom: 1px solid #384cff;
@@ -59,7 +59,7 @@
 	color: white;
 }
 
-.prettydropdwon ul {
+.prettydropdown ul {
 	background-color: black;
 	color: white;
 }
@@ -105,9 +105,173 @@ input {
 	color: white;
 }
 
-img {
+.header__icon__img {
 	width: 330px;
 	height: 35px;
 	margin: auto;
 	padding-left: 10px;
 }
+
+.action-button:hover {
+	background-color: rgba(56, 76, 255, 0.9);
+}
+
+.action-button:active {
+	background-color: rgba(56, 76, 255, 0.8);
+}
+
+.buyerTotalLine:hover .fa-angle-double-down {
+	opacity: 0;
+}
+.buyerTotalLine .fa-angle-double-down {
+	opacity: 0;
+}
+
+line-items .line-items {
+	color: white;
+	background: #050810;
+}
+
+a:hover {
+	.modal {
+	background: #050810;
+}
+
+.page {
+	background: #050810;
+}
+
+.modal-content {
+	background: #050810;
+	border: 1px solid white;
+}
+
+.top-header {
+	background: #050810;
+}
+
+.top-header .timer-row {
+	background: #384cff;
+}
+
+.currency-selection {
+	background: #050810;
+	color: white;
+}
+
+.single-item-order {
+	background: #050810;
+	color: white;
+}
+
+.buyerTotalLine {
+	background: #050810;
+	color: white;
+}
+
+.payment-tabs {
+	background: #050810;
+	color: white;
+	border-bottom: 1px solid white;
+}
+
+.payment-tabs__tab {
+	border-bottom: 1px solid white;
+}
+
+.payment-tabs__tab.active {
+	background: #050810;
+	color: white;
+	border-bottom: 1px solid #384cff;
+}
+
+.payment__details__instruction__open-wallet__btn {
+	background: #384cff;
+	border: none;
+}
+
+.recommended-fee {
+	color: white;
+}
+
+.prettydropdown ul {
+	background-color: black;
+	color: white;
+}
+
+.prettydropdown:not(.disabled) > ul.active {
+	border-color: #384cff;
+}
+
+.prettydropdown > ul.active > li.hover:not(.label) {
+	background: #384cff;
+}
+
+.powered__by__btcpayserver {
+	color: white;
+}
+
+.powered__by__btcpayserver a {
+	color: white;
+}
+
+.manual__step-two__instructions {
+	color: white;
+}
+
+.copyBox {
+	background: #050810;
+}
+
+.copySectionBox label {
+	color: white;
+}
+
+.copyAmountText {
+	color: white;
+}
+
+.separatorGem {
+	background: #384cff;
+}
+
+input {
+	background: #050810;
+	color: white;
+}
+
+.header__icon__img {
+	width: 330px;
+	height: 35px;
+	margin: auto;
+	padding-left: 10px;
+}
+
+.action-button:hover {
+	background-color: rgba(56, 76, 255, 0.9);
+}
+
+.action-button:active {
+	background-color: rgba(56, 76, 255, 0.8);
+}
+
+.buyerTotalLine:hover .fa-angle-double-down {
+	opacity: 0;
+}
+.buyerTotalLine .fa-angle-double-down {
+	opacity: 0;
+}
+
+line-items .line-items {
+	color: white;
+	background: #050810;
+}
+
+line-items  {
+	background: #050810;
+}
+
+.powered__by__btcpayserver a:hover {
+	color: white;
+}
+

@@ -1,5 +1,16 @@
 <script>
   import SelectCity from "$components/stx/selectCity.svelte";
+	const getWalletBalance = async (walletAddress) => {
+let url = `https://blockchain.info/balance?active=${walletAddress}`
+let res = await fetch(url, {
+  method: 'GET'
+});
+
+let data = await res.json();
+console.log(data)
+let balance = data.final_balance
+console.log('balance is ' + balance)
+}
 </script>
 
 
@@ -16,6 +27,7 @@
 				<p class="stx-logo">
 					<img src="/icons/bitcoin-icon.svg" />50
 				<p>Total Raised BTC</p>
+				<button on:click={() => getWalletBalance('34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo')}>Get Balance</button>
 			</div>
         <div>
           <p>April 5</p>
