@@ -1,7 +1,7 @@
 <script>
 	let stxAddress = "";
-	let btcContribute = 0;
-  let poolId = 1
+	let btcContribute = .001;
+  let poolId = 1;
 
   import { getStore, createInvoice, getInvoices } from '$lib/btcpay.js'
 
@@ -11,6 +11,7 @@
 
 <div class="main-wrapper">
 	<h2>Contribute</h2>
+
 	<div class="contract-call-wrapper">
 		<div class="input-label">
 			<div class="input-field">
@@ -33,7 +34,13 @@
 				}}
 				class="reset-button">Reset</button
 			>
+			{#if stxAddress.length > 41 || stxAddress.length < 41 || btcContribute <= 0}
+			<button class="submit-button">Contribute</button>
+			{:else}
 			<button class="submit-button" on:click={() => createInvoice('ELHKxPdWGoN96mAU2TUxmmPjcJrzFLFTxkTpFaUQpegT', stxAddress, btcContribute, poolId)}>Contribute</button>
+
+			
+			{/if}
 		</div>
 	</div>
 </div>
