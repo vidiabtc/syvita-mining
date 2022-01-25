@@ -8,7 +8,8 @@ let res = await fetch(url, {
 
 let data = await res.json();
 console.log(data)
-let balance = data.final_balance
+let balance = data[Object.keys(data)[0]].final_balance
+
 console.log('balance is ' + balance)
 }
 </script>
