@@ -22,6 +22,7 @@
 	import PoolStats from '$components/pool/poolStats.svelte';
 	import PoolHistory from '$components/pool/poolHistory.svelte';
 	import PoolSelectCity from '$components/pool/PoolSelectCity.svelte';
+  import SelectCity from '$components/selectCity.svelte';
 	import EmailSubscribe from '$components/pool/emailSubscribe.svelte';
 	import { user, t } from '$lib/stores.js';
 	import { getLatestPoolId, getPool, getBlockHeight } from '$lib/apiCalls';
