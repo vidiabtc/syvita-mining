@@ -1,5 +1,6 @@
 <script>
   import PoolSelectCity from "$components/pool/poolSelectCity.svelte";
+  import SelectCity from '$components/selectCity.svelte'
 
 	const getWalletBalance = async (walletAddress) => {
 let url = `https://blockchain.info/balance?active=${walletAddress}`
