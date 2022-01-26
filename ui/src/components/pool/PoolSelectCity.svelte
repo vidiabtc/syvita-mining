@@ -8,11 +8,18 @@
 
 <div class="selector-wrapper" on:click={() => (toggle = !toggle)}>
 	<div class="city-selector">
-		<p>
+    {#if selectedCity == 'stx'}
+    <p>
+			<img class="coin" src={`/icons/stx.svg`} alt={'stx'} />
+			{'Stacks'}
+		</p>
+    {:else}
+    <p>
 			<img class="coin" src={`/citycoins/${selectedCity.toUpperCase()}.svg`} alt={`${selectedCity.toUpperCase()}`} />
 			{CITIES[selectedCity].name}
 		</p>
-		<img class={toggle ? 'chevron' : 'chevron-up'} src="/icons/arrow-down.svg" alt="arrow down" />
+    {/if}
+    <img class={toggle ? 'chevron' : 'chevron-up'} src="/icons/arrow-down.svg" alt="arrow down" />
 	</div>
 	{#if toggle}
 		<div class="dropdown">
@@ -28,6 +35,16 @@
 					</div>
 				{/if}
 			{/each}
+      {#if selectedCity != 'stx'}
+        <div>
+          <a href={`/pool/stx`}>
+            <p>
+              <img class="coin" src={`/icons/stx.svg`} alt={`stx`} />
+              {'Stacks'}
+            </p>
+          </a>
+        </div>
+     {/if}
 		</div>
 	{/if}
 </div>

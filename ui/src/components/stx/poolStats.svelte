@@ -1,7 +1,5 @@
 <script>
-  import SelectCity from "$components/stx/selectCity.svelte";
-
-
+  import PoolSelectCity from "$components/pool/poolSelectCity.svelte";
 
 	const getWalletBalance = async (walletAddress) => {
 let url = `https://blockchain.info/balance?active=${walletAddress}`
@@ -29,9 +27,10 @@ let btcBalance = getWalletBalance('3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r')
 
 <div class="pool-wrapper">
 	<div class="select-city">
-		<SelectCity />
+		<PoolSelectCity selectedCity={'stx'}/>
 	</div>
-  <div class="pool-stats-wrapper">
+  <h2>Coming this week...</h2>
+  <!-- <div class="pool-stats-wrapper">
 		<div class="stats-wrapper">
 			<div>
 				<p>Pool 1</p>
@@ -56,7 +55,7 @@ let btcBalance = getWalletBalance('3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r')
 				</p>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>
 
 

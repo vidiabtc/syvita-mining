@@ -2,11 +2,14 @@
 	import { CITIES } from '$lib/constants';
 
 	export async function load({ page, fetch }) {
-		let city = CITIES[page.params.city];
+		let city = page.params.city;
+    if (city != 'stx') {
+      city = CITIES[city]
+    }
 		if (!city) {
 			return {
 				status: 303,
-				redirect: '/pool'
+				redirect: '/pool/mia'
 			};
 		} else {
 			return {
@@ -26,6 +29,9 @@
 	import EmailSubscribe from '$components/pool/emailSubscribe.svelte';
 	import { user, t } from '$lib/stores.js';
 	import { getLatestPoolId, getPool, getBlockHeight } from '$lib/apiCalls';
+  import StxPoolStats from '$components/stx/poolStats.svelte';
+  import Contribute from '$components/stx/contribute.svelte';
+  import { getStore, createInvoice, getInvoices } from '$lib/btcpay.js'
 	import { getStxAddress } from '$lib/auth';
 
   export let city;
@@ -45,33 +51,32 @@
 	let contributeAmount;
 	let totalContributed = -1;
 	const toggleModal = () => (isModalOpen = !isModalOpen);
-	onMount(async () => {
-		let url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/balances?unanchored=true`;
-		let res = await fetch(url);
-		let balance = await res.json();
-		url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/balances`;
-		res = await fetch(url);
-		let test = await res.json();
-		url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/mempool`;
-		res = await fetch(url);
-		let data = await res.json();
-		let mempool = data.results;
-		let pendingBalance = 0;
-		for (let i = 0; i < mempool.length; i++) {
-			if (
-				mempool[i].sender_address != poolAddress &&
-				mempool[i].tx_status == 'pending' &&
-				mempool[i].tx_type == 'token_transfer'
-			) {
-				pendingBalance += Math.floor(parseInt(mempool[i].token_transfer.amount) / 1000000);
-			}
-		}
-		console.log(balance.stx.total_received - test.stx.total_received / 1000000);
-		console.log(pendingBalance);
-		// console.log(pendingBalance)
-		totalContributed = Math.floor(balance.stx.total_received / 1000000) + pendingBalance;
-	});
-
+  onMount(async () => {
+    let url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/balances?unanchored=true`;
+    let res = await fetch(url);
+    let balance = await res.json();
+    url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/balances`;
+    res = await fetch(url);
+    let test = await res.json();
+    url = `https://mainnet.syvita.org/extended/v1/address/${poolAddress}/mempool`;
+    res = await fetch(url);
+    let data = await res.json();
+    let mempool = data.results;
+    let pendingBalance = 0;
+    for (let i = 0; i < mempool.length; i++) {
+      if (
+        mempool[i].sender_address != poolAddress &&
+        mempool[i].tx_status == 'pending' &&
+        mempool[i].tx_type == 'token_transfer'
+      ) {
+        pendingBalance += Math.floor(parseInt(mempool[i].token_transfer.amount) / 1000000);
+      }
+    }
+    console.log(balance.stx.total_received - test.stx.total_received / 1000000);
+    console.log(pendingBalance);
+    // console.log(pendingBalance)
+    totalContributed = Math.floor(balance.stx.total_received / 1000000) + pendingBalance;
+  });
 	/////////////////
 </script>
 
@@ -83,6 +88,14 @@
 	/>
 </svelte:head>
 
+{#if city == 'stx'}
+  <StxPoolStats/>
+  <!-- <Contribute/>
+  <button on:click={() => getStore('ELHKxPdWGoN96mAU2TUxmmPjcJrzFLFTxkTpFaUQpegT')}>Get Store</button>
+  <button on:click={() => createInvoice('ELHKxPdWGoN96mAU2TUxmmPjcJrzFLFTxkTpFaUQpegT')}>Create Invoice</button>
+  <button on:click={() => getInvoices('ELHKxPdWGoN96mAU2TUxmmPjcJrzFLFTxkTpFaUQpegT')}>Get Invoices</button> -->
+{:else}
+   
 <div class="pool-wrapper">
 	<div class="select-city">
 		<PoolSelectCity selectedCity={city.coin}/>
@@ -92,11 +105,8 @@
 			<h1>loading...</h1>
 		{:then poolId}
 			<PoolStats city={city} {poolId} {blockHeight} {stxAddress} />
-
 			<PoolHistory city={city} {poolId} />
 			<EmailSubscribe />
-
-			<!-- <PoolActivity city={city} /> -->
 		{/await}
 	{:else}
 		<div class="toggle-wrapper">
@@ -123,6 +133,7 @@
 		{/if}
 	{/if}
 </div>
+{/if}
 
 <style>
 	.pool-wrapper {
