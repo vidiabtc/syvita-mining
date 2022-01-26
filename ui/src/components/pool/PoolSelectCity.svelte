@@ -10,7 +10,7 @@
 	<div class="city-selector">
     {#if selectedCity == 'stx'}
     <p>
-			<img class="coin" src={`/icons/stx.svg`} alt={'stx'} />
+			<img class="coin" src={`/citycoins/STX.png`} alt={'stx'} />
 			{'Stacks'}
 		</p>
     {:else}
@@ -39,7 +39,7 @@
         <div>
           <a href={`/pool/stx`}>
             <p>
-              <img class="coin" src={`/icons/stx.svg`} alt={`stx`} />
+              <img class="coin" src={`/citycoins/STX.png`} alt={`stx`} />
               {'Stacks'}
             </p>
           </a>
