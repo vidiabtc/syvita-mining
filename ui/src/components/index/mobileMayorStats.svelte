@@ -12,7 +12,7 @@
 			<div class="mayor-box-info">
 				<p class="mayor">
 					<img
-						src="https://images2.miaminewtimes.com/imager/u/magnum/11700127/feature33_francis_suarez_by_michael_campina_cover-web.jpg?cb=1631049577"
+						src="/mayors/francis-suarez.jpg"
 					/>Francis Suarez
 				</p>
 				<p><span>{$t.home.active}</span></p>
@@ -33,7 +33,7 @@
 			<div class="mayor-box-info">
 				<p>
 					<img
-						src="https://pbs.twimg.com/profile_images/1310062565750341633/bwInZ7l2_400x400.jpg"
+					src="/mayors/eric-adams.jpg"
 					/>Eric Adams
 				</p>
 				<p><span class="status-active">{$t.home.active}</span></p>
@@ -54,7 +54,7 @@
 			<div class="mayor-box-info">
 				<p>
 					<img
-						src="https://pbs.twimg.com/profile_images/955460391051526144/aXXYow0D_400x400.jpg"
+					src="/mayors/steve-adler.jpg"
 					/>Steve Adler
 				</p>
 				<p><span class="status-inactive">{$t.home.inactive}</span></p>

@@ -133,8 +133,7 @@ line-items .line-items {
 }
 
 a:hover {
-	.modal {
-	background: #050810;
+	color: #384cff;
 }
 
 .page {
@@ -267,7 +266,7 @@ line-items .line-items {
 	background: #050810;
 }
 
-line-items  {
+line-items {
 	background: #050810;
 }
 
@@ -275,3 +274,11 @@ line-items  {
 	color: white;
 }
 
+.action-button {
+	background: #384cff;
+	border-color: none;
+}
+
+.action-button:hover {
+	background-color: rgba(56, 76, 255, 0.9);
+}

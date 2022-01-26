@@ -1,6 +1,6 @@
 <script>
   import PoolSelectCity from "$components/stx/PoolSelectCity.svelte";
-
+import Contribute from "$components/stx/contribute.svelte";
 	const getWalletBalance = async (walletAddress) => {
 let url = `https://blockchain.info/balance?active=${walletAddress}`
 
@@ -56,6 +56,7 @@ let btcBalance = getWalletBalance('3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r')
 			</div>
 		</div>
 	</div> -->
+	<!-- <Contribute/> -->
 </div>
 
 

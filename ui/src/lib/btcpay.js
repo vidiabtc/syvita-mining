@@ -1,7 +1,7 @@
 import { goto } from "$app/navigation"
 
 import { BTC_API_URL } from "./constants.js"
-let headers = { 'Content-Type': 'application/json', 'Authorization': `token 798750388e2b374185933730575ed3c2e3b6ca2b` }
+let headers = { 'Content-Type': 'application/json', 'Authorization': `token ${import.meta.env.VITE_BTCPAYSERVER_API_KEY}` }
 
 
 
