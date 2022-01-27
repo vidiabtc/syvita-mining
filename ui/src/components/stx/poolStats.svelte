@@ -1,24 +1,7 @@
 <script>
   import PoolSelectCity from "$components/stx/PoolSelectCity.svelte";
 import Contribute from "$components/stx/contribute.svelte";
-	const getWalletBalance = async (walletAddress) => {
-let url = `https://blockchain.info/balance?active=${walletAddress}`
-
-
-let res = await fetch(url, {
-  method: 'GET',
-	
-});
-let data = await res.json();
-console.log(data)
- let balance = data[Object.keys(data)[0]].final_balance / 100000000
-
-console.log('balance is ' + balance.toLocaleString())
-
-return balance;
-}
-
-let btcBalance = getWalletBalance('3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r')
+import {getWalletBalance} from "$lib/btcpay.js" 
 
 
 
@@ -29,7 +12,7 @@ let btcBalance = getWalletBalance('3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r')
 	<div class="select-city">
 		<PoolSelectCity selectedCity={'stx'}/>
 	</div>
-  <h2>Coming this week...</h2>
+  <h2>Coming this wek...</h2>
   <!-- <div class="pool-stats-wrapper">
 		<div class="stats-wrapper">
 			<div>
@@ -39,7 +22,7 @@ let btcBalance = getWalletBalance('3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r')
 				<p class="stx-logo">
 					<img src="/icons/bitcoin-icon.svg" />5</p>
 				<p>Total Raised BTC</p>
-				<button on:click={() => getWalletBalance('34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo')}>Get Balance</button>
+				<button on:click={() => getWalletBalance('ELHKxPdWGoN96mAU2TUxmmPjcJrzFLFTxkTpFaUQpegT')}>Get Balance</button>
 			</div>
         <div>
           <p>April 5</p>

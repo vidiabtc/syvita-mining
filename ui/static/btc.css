@@ -282,3 +282,7 @@ line-items {
 .action-button:hover {
 	background-color: rgba(56, 76, 255, 0.9);
 }
+
+.fa-angle-double-up::before {
+	color: white;
+}
