@@ -13,7 +13,7 @@ export const getStore = async (storeId) => {
     headers: headers,
   });
   let data = await res.json();
-  console.log('STORE: ', data)
+  
 }
 
 export const getInvoices = async (storeId) => {
@@ -29,7 +29,7 @@ export const getInvoices = async (storeId) => {
 
 export const createInvoice = async (storeId, stxAddress, btcContribute, poolId) => {
   let url = `${BTC_API_URL}/stores/${storeId}/invoices`
-  console.log('HEADERS ', headers)
+
   let res = await fetch(url, {
     method: 'POST',
     headers: headers,
@@ -45,11 +45,11 @@ export const createInvoice = async (storeId, stxAddress, btcContribute, poolId) 
      
     })
   });
-  console.log('Invoice created')
+
   let data = await res.json();
-  console.log('created: ', data)
+
   let checkoutLink = data.checkoutLink
-  console.log(checkoutLink)
+
   goto(checkoutLink)
 }
 
@@ -62,6 +62,6 @@ export const getWalletBalance = async (storeId) => {
   })
   let data = await res.json()
   let balance = data.confirmedBalance
-  console.log('wallet balance: ', balance)
+
   return balance;
 }
