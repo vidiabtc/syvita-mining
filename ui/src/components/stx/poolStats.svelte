@@ -31,7 +31,7 @@ import {BTCPAY_STORE} from "$lib/constants.js";
 				
 			</div>
         <div>
-          <p>February 1</p>
+          <p>February 2</p>
       <p>Contributions Close</p> 
     
 
