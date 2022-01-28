@@ -12,7 +12,7 @@ import {getWalletBalance} from "$lib/btcpay.js"
 	<div class="select-city">
 		<PoolSelectCity selectedCity={'stx'}/>
 	</div>
-  <h2>Coming this wek...</h2>
+  <h2>Coming this week...</h2>
   <!-- <div class="pool-stats-wrapper">
 		<div class="stats-wrapper">
 			<div>
