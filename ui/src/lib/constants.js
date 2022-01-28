@@ -6,6 +6,8 @@ export const API_URL = 'https://syvita-mining.ocelo.workers.dev/api';
 export const CYCLE_LENGTH = 2100;
 export const POOL_API_URL = 'https://api.ocelo.workers.dev/api'
 
+export const BTCPAY_STORE = 'BvwHJpw7KTHDVC5ZDpGzsBzuy34NomFHBsh5t3f1zKNw'
+
 export const STATS = {
 	totalSTXRaised: '3,731,735',
 	totalCityCoinsWon: '316,900,000'

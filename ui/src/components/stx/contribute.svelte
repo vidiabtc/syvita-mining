@@ -1,22 +1,23 @@
 <script>
-	let stxAddress = "SP3XJTH5TJ3PEE67T02AA4DSBC89A80S028SQS769";
-	let btcContribute = .001;
+	let stxAddress = "";
+	let btcContribute = 0.002;
   let poolId = 1;
 
-  import { getStore, createInvoice, getInvoices } from '$lib/btcpay.js'
-
+  import { getStore, createInvoice, getInvoices } from '$lib/btcpay.js';
+	import {BTCPAY_STORE} from "$lib/constants.js";
 
 
 </script>
 
 <div class="main-wrapper">
 	<h2>Contribute</h2>
-
+	<h3>If we don’t reach a minimum of 5 BTC before Wednesday 2nd February, all pool contributions will be refunded. </h3>
 	<div class="contract-call-wrapper">
+		
 		<div class="input-label">
 			<div class="input-field">
 				<p>STX address</p>
-				<input bind:value={stxAddress} type="text"  placeholder="Insert stx address"/>
+				<input bind:value={stxAddress} type="text"  placeholder="Insert stx address for receiving STX mining rewards"/>
 			</div>
 		</div>
 		<div class="input-label">
@@ -30,14 +31,14 @@
 			<button
 				on:click={() => {
 					stxAddress = "";
-					btcContribute = 0;
+					btcContribute = 0.002;
 				}}
 				class="reset-button">Reset</button
 			>
-			{#if stxAddress.length > 41 || stxAddress.length < 41 || btcContribute <= 0}
+			{#if stxAddress.length <= 0 || btcContribute <= 0}
 			<button class="submit-button">Contribute</button>
 			{:else}
-			<button class="submit-button" on:click={() => createInvoice('ELHKxPdWGoN96mAU2TUxmmPjcJrzFLFTxkTpFaUQpegT', stxAddress, btcContribute, poolId)}>Contribute</button>
+			<button class="submit-button" on:click={() => createInvoice(BTCPAY_STORE, stxAddress, btcContribute, poolId)}>Contribute</button>
 
 			
 			{/if}
@@ -51,6 +52,9 @@
     margin: auto;
     padding-bottom: 30px;
     padding-top: 50px;
+		padding-right: 10px;
+    padding-left: 10px;
+
 	}
 
 	h2 {
@@ -58,6 +62,11 @@
 		padding-bottom: 20px;
 	}
 
+	h3 {
+		padding-bottom: 20px;
+		font-size: 1rem;
+
+	}
 	.contract-call-wrapper {
 		height: max-content;
 		border: 2px solid transparent;

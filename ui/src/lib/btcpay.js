@@ -35,12 +35,12 @@ export const createInvoice = async (storeId, stxAddress, btcContribute, poolId) 
     headers: headers,
     body: JSON.stringify({
       metadata: {'stxAddress': stxAddress,
-    'poolId': poolId, 'orderId': `Pool ${poolId} - ${stxAddress}`},
+    'poolId': poolId, 'orderId': `pool-${poolId}-${stxAddress}`},
     'orderId': JSON.stringify(`pool${poolId}/${stxAddress}`),
       amount: btcContribute,
       checkout: {
-        'redirectAutomatically': 'https://syvitamining.com/success',
-        'redirectAutomatically': 'true',
+        'redirectURL': 'https://syvitamining.com/pool/stx',
+       
       }
      
     })
@@ -55,12 +55,13 @@ export const createInvoice = async (storeId, stxAddress, btcContribute, poolId) 
 
 
 export const getWalletBalance = async (storeId) => {
-  let url =  `${BTC_API_URL}/api/v1/stores/${storeId}/payment-methods/OnChain/BTC/wallet`
+  let url =  `${BTC_API_URL}/stores/${storeId}/payment-methods/OnChain/BTC/wallet`
   let res = await fetch(url, {
     method: 'GET',
     headers: headers
   })
-  let data = res.json()
+  let data = await res.json()
   let balance = data.confirmedBalance
   console.log('wallet balance: ', balance)
+  return balance;
 }

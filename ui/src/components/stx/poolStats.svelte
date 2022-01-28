@@ -1,8 +1,8 @@
 <script>
   import PoolSelectCity from "$components/stx/PoolSelectCity.svelte";
 import Contribute from "$components/stx/contribute.svelte";
-import {getWalletBalance} from "$lib/btcpay.js" 
-
+import {getWalletBalance} from "$lib/btcpay.js"; 
+import {BTCPAY_STORE} from "$lib/constants.js";
 
 
 </script>
@@ -12,34 +12,40 @@ import {getWalletBalance} from "$lib/btcpay.js"
 	<div class="select-city">
 		<PoolSelectCity selectedCity={'stx'}/>
 	</div>
-  <h2>Coming this wek...</h2>
-  <!-- <div class="pool-stats-wrapper">
+  <div class="pool-stats-wrapper">
 		<div class="stats-wrapper">
 			<div>
 				<p>Pool 1</p>
 			</div>
 			<div>
 				<p class="stx-logo">
-					<img src="/icons/bitcoin-icon.svg" />5</p>
+					<img src="/icons/bitcoin-icon.svg" /> 
+					
+					{#await getWalletBalance(BTCPAY_STORE)}
+					0
+					{:then balance}
+					{Math.floor(balance * 1000) / 1000}
+					{/await} </p>
+
 				<p>Total Raised BTC</p>
-				<button on:click={() => getWalletBalance('ELHKxPdWGoN96mAU2TUxmmPjcJrzFLFTxkTpFaUQpegT')}>Get Balance</button>
+				
 			</div>
         <div>
-          <p>April 5</p>
+          <p>February 1</p>
       <p>Contributions Close</p> 
     
 
 			</div>
 
 			<div>
-				<p>500,000,000</p>
+				<p>0</p>
 				<p class="coin-logo">
 			 STX WON
 				</p>
 			</div>
 		</div>
-	</div> -->
-	<!-- <Contribute/> -->
+	</div>
+	<Contribute/>
 </div>
 
 
