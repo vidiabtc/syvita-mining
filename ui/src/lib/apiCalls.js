@@ -1,9 +1,11 @@
 import { BASE_URL, API_URL, CYCLE_LENGTH, POOL_API_URL } from './constants.js';
-import { getReadOnlyTxOptions, claimMiningReward } from './contractCalls.js';
+import { getReadOnlyTxOptions, claimMiningReward, parseClarityList } from './contractCalls.js';
 import { callReadOnlyFunction } from 'micro-stacks/transactions';
 
-import { cvToHex, hexToCV, hexToValue, standardPrincipalCV, uintCV } from 'micro-stacks/clarity';
+import { cvToHex, hexToCV, hexToValue, standardPrincipalCV, uintCV, listCV } from 'micro-stacks/clarity';
 import { hexStringToInt, hexToBigInt, intToHex } from 'micro-stacks/common';
+import { StacksTestnet, StacksMainnet } from 'micro-stacks/network';
+
 
 export const getStxBalance = async (stxAddress) => {
 	let url = `${BASE_URL}/address/${stxAddress}/balances`;
@@ -262,3 +264,50 @@ export const getUserContributions = (stxAddress, pool) => {
 	}
 	return contributions;
 };
+
+export const getManyRounds = async () => {
+	let allParticipants = {}
+	let lastContributorId = 0;
+	let id = 1;
+
+	for (let i = 1; i <= 3; i++) {
+		let functionArgs;
+		if (i == 1) {
+			functionArgs = [listCV([uintCV(1),uintCV(2),uintCV(3),uintCV(4),uintCV(5),uintCV(6),uintCV(7),uintCV(8),uintCV(9),uintCV(10)])]
+		} else if (i == 2) {
+			functionArgs = [listCV([uintCV(11),uintCV(12),uintCV(13),uintCV(14),uintCV(15),uintCV(16),uintCV(17),uintCV(18),uintCV(19),uintCV(20)])]
+		} else if (i == 3) {
+			functionArgs = [listCV([uintCV(21),uintCV(22),uintCV(23),uintCV(24),uintCV(25),uintCV(26),uintCV(27),uintCV(28),uintCV(29)])]
+		}
+
+		let rounds = await callReadOnlyFunction({
+			contractAddress: 'SP343J7DNE122AVCSC4HEK4MF871PW470ZSXJ5K66',
+			contractName: 'miamipool-v1',
+			functionName: "get-many-rounds",
+			functionArgs: functionArgs,
+			network: new StacksMainnet(),
+			senderAddress: 'SP343J7DNE122AVCSC4HEK4MF871PW470ZSXJ5K66',
+		});
+
+		rounds = rounds.value.list;
+
+
+		rounds = rounds.map(round => {
+			let numOfUniqueIds = 0;
+
+			parseClarityList(round.data.round.data.participantIds).map(contributorId => {
+				if (contributorId > lastContributorId) {
+					numOfUniqueIds += 1;
+					lastContributorId += 1;
+				}
+			})
+
+			allParticipants[id] = {
+				totalParticipants: parseClarityList(round.data.round.data.participantIds).length,
+				newParticipants: numOfUniqueIds
+			}
+			id += 1
+		})
+	}
+	console.log('Participants: ', allParticipants)
+}
