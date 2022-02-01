@@ -14,7 +14,7 @@
 	export let poolId;
 	export let blockHeight;
 	export let stxAddress;
-  export let city;
+	export let city;
 </script>
 
 {#await getPool(city, poolId) then pool}
@@ -76,7 +76,7 @@
 		<div class="contribute">
 			{#await blockHeight then currentBlock}
 				{#if currentBlock >= pool.stats.contributionsStartBlock && currentBlock < pool.stats.contributionsEndBlock}
-					<Contribute {city} {poolId} />
+					<Contribute {city} {poolId} {pool} />
 				{/if}
 			{/await}
 		</div>

@@ -7,6 +7,7 @@
 export let poolId;
 export let amount;
 export let city;
+export let pool;
 </script>
 
 <div class="modal-bg">
@@ -40,7 +41,7 @@ export let city;
 
 						<li>Past performance is not necessarily indicative of future performance.</li>
 						<li>
-							The pool will keep 4% of {city.coin.toUpperCase()} won to support further development of this
+							The pool will keep {pool.stats.feePercentage}% of {city.coin.toUpperCase()} won to support further development of this
 							site and for transaction fees.
 						</li>
 						<li>

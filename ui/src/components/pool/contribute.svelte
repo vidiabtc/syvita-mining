@@ -3,6 +3,7 @@
 	import PoolModal from './poolModal.svelte';
 	import { t } from '$lib/stores.js';
 	export let city;
+	export let pool;
 	let isModalOpen = false;
 // import SelectCity from '$components/selectCity.svelte';
 	export let poolId;
@@ -26,7 +27,7 @@
 		</div>
 	</div>
 	{#if isModalOpen}
-  <PoolModal on:close={toggleModal} {city} {poolId} {amount}/>
+  <PoolModal on:close={toggleModal} {pool} {city} {poolId} {amount}/>
   {/if}
 </div>
 
