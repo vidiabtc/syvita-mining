@@ -9,14 +9,27 @@
 	import UpdateFeeAddress from '$components/admin/updateFeeAddress.svelte';
 	import ClaimSingle from '$components/admin/claimSingle.svelte';
 	import ClaimMany from '$components/admin/claimMany.svelte';
+import { onMount } from 'svelte';
+
+	let latestBlockHeight = 0;
+
+	onMount(async () => {
+		let res = await fetch('https://api.ocelo.workers.dev/api/blockheight');
+		latestBlockHeight = await res.json();
+	});
 </script>
+
+<svelte:head>
+	<title>Admin Page</title>
+	<meta name="robots" content="noindex nofollow" />
+</svelte:head>
 
 <div class="contract-calls-wrapper">
 	<div class="title">
 		<h1>Welcome Admin</h1>
 		<p>
 			Below you will find contract calls for the different mining contracts. Please select the
-			contract below you would like to interact with.
+			contract below you would like to interact with. The current block height is #{latestBlockHeight}.
 		</p>
 	</div>
 	<div class="select-city-wrapper">
