@@ -2,11 +2,11 @@
 	import { contribute } from '$lib/contractCalls.js';
 
 	import { createEventDispatcher } from 'svelte';
-  import { city } from '$lib/stores.js';
 
 	const dispatch = createEventDispatcher();
 export let poolId;
 export let amount;
+export let city;
 </script>
 
 <div class="modal-bg">
@@ -19,10 +19,10 @@ export let amount;
 					<ul>
 						<li>
 							Participation does not guarantee that you will receive
-							{$city.coin.toUpperCase()}.
+							{city.coin.toUpperCase()}.
 						</li>
 						<li>
-							Once STX are used to mine {$city.coin.toUpperCase()} they are gone forever.
+							Once STX are used to mine {city.coin.toUpperCase()} they are gone forever.
 						</li>
 						<li>
 							By participating in this pool you acknowledge the there is a risk of complete loss of
@@ -33,18 +33,18 @@ export let amount;
 							loss.
 						</li>
 						<li>
-							There is currently no liquid market for {$city.coin.toUpperCase()} city, so mining {$city.coin.toUpperCase()}
+							There is currently no liquid market for {city.coin.toUpperCase()} city, so mining {city.coin.toUpperCase()}
 							may mean you're stuck holding an illiquid asset until such time as it is listed on a liquid
 							exchange.
 						</li>
 
 						<li>Past performance is not necessarily indicative of future performance.</li>
 						<li>
-							The pool will keep 4% of {$city.coin.toUpperCase()} won to support further development of this
+							The pool will keep 4% of {city.coin.toUpperCase()} won to support further development of this
 							site and for transaction fees.
 						</li>
 						<li>
-							Because there is no liquid market for {$city.coin.toUpperCase()} coin, we cannot know what its
+							Because there is no liquid market for {city.coin.toUpperCase()} coin, we cannot know what its
 							true value is or if it has any value at all.
 						</li>
 						<li>
@@ -54,10 +54,10 @@ export let amount;
 					</ul>
 				</div>
         <div class="confirm-terms">
-          <input on:click={contribute($city, poolId, amount * 1000000)} type="checkbox" />
+          <input on:click={contribute(city, poolId, amount * 1000000)} type="checkbox" />
 				<p>
 				
-					I attest that I have read through the CityCoin docs and understand how {$city.coin.toUpperCase()}
+					I attest that I have read through the CityCoin docs and understand how {city.coin.toUpperCase()}
 					coin works.
 				</p>
       </div>

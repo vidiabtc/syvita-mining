@@ -76,7 +76,7 @@
 		<div class="contribute">
 			{#await blockHeight then currentBlock}
 				{#if currentBlock >= pool.stats.contributionsStartBlock && currentBlock < pool.stats.contributionsEndBlock}
-					<Contribute {poolId} />
+					<Contribute {city} {poolId} />
 				{/if}
 			{/await}
 		</div>
