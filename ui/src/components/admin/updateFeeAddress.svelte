@@ -1,5 +1,9 @@
 <script>
+
 	let stxAddress = '';
+
+	import { adminUpdateFeeAddress } from "$lib/contractCalls";
+	import { city } from "$lib/stores";
 </script>
 
 <div class="main-wrapper">
@@ -19,7 +23,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Update Fee Address</button>
+			<button on:click={()=> {adminUpdateFeeAddress($city, stxAddress)}} class="submit-button">Update Fee Address</button>
 		</div>
 	</div>
 </div>

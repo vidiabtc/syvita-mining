@@ -1,5 +1,9 @@
 <script>
 	let mineManyId = 0;
+
+	import { adminEnableClaiming } from "$lib/contractCalls";
+
+	import { city } from "$lib/stores";
 </script>
 
 <div class="main-wrapper">
@@ -19,7 +23,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Enable Claiming</button>
+			<button on:click={() => {adminEnableClaiming($city, mineManyId)}} class="submit-button">Enable Claiming</button>
 		</div>
 	</div>
 </div>

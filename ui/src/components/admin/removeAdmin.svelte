@@ -1,5 +1,10 @@
 <script>
 	let stxAddress = '';
+
+	import { adminRemoveAdminAddress } from "$lib/contractCalls";
+
+	import { city } from "$lib/stores";
+
 </script>
 
 <div class="main-wrapper">
@@ -20,7 +25,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Remove Admin</button>
+			<button on:click={() => {adminRemoveAdminAddress($city, stxAddress)}} class="submit-button">Remove Admin</button>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,9 @@
 <script>
 	let mineManyId = 0;
 	let blockNumber = 0;
+
+	import { adminClaimSingle } from "$lib/contractCalls";
+	import { city } from "$lib/stores";
 </script>
 
 <div class="main-wrapper">
@@ -27,7 +30,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Claim Single</button>
+			<button on:click={() => {adminClaimSingle($city, mineManyId, blockNumber)}} class="submit-button">Claim Single</button>
 		</div>
 	</div>
 </div>

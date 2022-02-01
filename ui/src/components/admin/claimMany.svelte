@@ -1,6 +1,20 @@
 <script>
 	let mineManyId = 0;
-	let blockNumbers = 0;
+let blockList;
+import { adminClaimMany } from "$lib/contractCalls";
+import { city } from "$lib/stores";
+
+import { uintCV } from "micro-stacks/clarity";
+
+const createBlockList = () => {
+		let newBlockList = blockList.split(',');
+		newBlockList = newBlockList.map((block) => {
+			return uintCV(parseInt(block));
+		});
+		console.log('TEST');
+		return newBlockList;
+	};
+
 </script>
 
 <div class="main-wrapper">
@@ -15,7 +29,7 @@
 		<div class="input-label">
 			<div class="input-field">
 				<p>Block number(seperate blocks with commas)</p>
-				<input bind:value={blockNumbers} type="number" />
+				<input bind:value={blockList}  />
 			</div>
 		</div>
 
@@ -23,11 +37,11 @@
 			<button
 				on:click={() => {
 					mineManyId = 0;
-					blockNumbers = 0;
+					blockList = 0;
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Claim Many</button>
+			<button on:click={() => {adminClaimMany($city, mineManyId, createBlockList())}} class="submit-button">Claim Many</button>
 		</div>
 	</div>
 </div>

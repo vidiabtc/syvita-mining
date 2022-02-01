@@ -1,5 +1,8 @@
 <script>
-	let addAdminAddress = '';
+	let stxAddress = '';
+
+	import { adminAddAdminAddress } from "$lib/contractCalls";
+	import { city } from "$lib/stores";
 </script>
 
 <div class="main-wrapper">
@@ -8,18 +11,18 @@
 		<div class="input-label">
 			<div class="input-field">
 				<p>STX Address</p>
-				<input bind:value={addAdminAddress} type="text" />
+				<input bind:value={stxAddress} type="text" />
 			</div>
 		</div>
 
 		<div class="submit">
 			<button
 				on:click={() => {
-					addAdminAddress = '';
+					stxAddress = '';
 				}}
-				class="reset-button">Rest</button
+				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Add Admin</button>
+			<button on:click={()=> {adminAddAdminAddress($city, stxAddress)}} class="submit-button">Add Admin</button>
 		</div>
 	</div>
 </div>

@@ -2,6 +2,20 @@
 	let poolId = 0;
 	let numOfBlocks = 0;
 	let stxPerBlock = 0;
+	import { city } from "$lib/stores";
+
+	import { adminMineMany } from "$lib/contractCalls";
+import { uintCV } from "micro-stacks/clarity";
+
+const createMineManyAmounts = () => {
+		let mineManyAmounts = [];
+		for (let i = 1; i <= numOfBlocks; i++) {
+			mineManyAmounts.push(uintCV(stxPerBlock));
+		}
+		console.log(mineManyAmounts);
+		return mineManyAmounts;
+	};
+
 </script>
 
 <div class="main-wrapper">
@@ -40,7 +54,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Submit</button>
+			<button on:click={() => adminMineMany($city, poolId, createMineManyAmounts()) } class="submit-button">Submit</button>
 		</div>
 	</div>
 </div>

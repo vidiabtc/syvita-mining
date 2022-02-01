@@ -239,3 +239,59 @@ export const addFunds = async (city, amount) => {
 		onCancel: () => {}
 	});
 };
+
+
+export const adminMineMany = async (city, poolId, amounts) => {
+	console.log(poolId);
+	console.log(amounts);
+	await callPoolContract(city, 'contract-mine-many', [uintCV(poolId), listCV(amounts)], []);
+};
+
+export const adminEnableClaiming = async (city, mineManyId) => {
+	await callPoolContract(city, 'contract-enable-contributor-claiming', [uintCV(mineManyId)], []);
+};
+
+export const adminStartNextPool = async (city, contributionsStartBlock, fee, minContribution) => {
+	console.log('fee', fee);
+	console.log('min contribution', minContribution);
+	console.log('contributionsStartBlock ', contributionsStartBlock);
+	await callPoolContract(
+		city,
+		'start-next-pool',
+		[uintCV(contributionsStartBlock), uintCV(fee), uintCV(minContribution * 1000000)],
+		[]
+	);
+};
+
+export const adminSetEndBlock = async (city, poolId, contributionsEndBlock) => {
+	await callPoolContract(
+		city,
+		'set-end-block',
+		[uintCV(poolId), uintCV(contributionsEndBlock)],
+		[]
+	);
+};
+
+export const adminAddAdminAddress = async (city, address) => {
+	await callPoolContract(city, 'add-admin-address', [standardPrincipalCV(address)], []);
+};
+
+export const adminRemoveAdminAddress = async (city, address) => {
+	await callPoolContract(city, 'remove-admin-address', [standardPrincipalCV(address)], []);
+};
+
+export const adminUpdateFeeAddress = async (city, address) => {
+	await callPoolContract(city, 'update-fee-address', [standardPrincipalCV(address)], []);
+};
+
+export const adminClaimSingle = async (city, mineManyId, block) => {
+	await callPoolContract(city, 'contract-claim-single', [uintCV(mineManyId), uintCV(block)], []);
+};
+
+
+export const adminClaimMany = async (city, mineManyId, blocks) => {
+	console.log('CLAIMG MANY');
+	console.log(mineManyId);
+	// console.log(JSON.stringify(blocks))
+	await callPoolContract(city, 'contract-claim-many', [uintCV(mineManyId), listCV(blocks)], []);
+};

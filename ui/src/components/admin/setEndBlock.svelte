@@ -1,6 +1,9 @@
 <script>
-	let poolId = '';
-	let blockNumber = '';
+	let poolId = 0;
+	let blockNumber = 0;
+
+	import { adminSetEndBlock } from "$lib/contractCalls";
+	import { city } from "$lib/stores";
 </script>
 
 <div class="main-wrapper">
@@ -27,7 +30,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Enable Claiming</button>
+			<button on:click={() => {adminSetEndBlock($city, poolId, blockNumber)}} class="submit-button">Enable Claiming</button>
 		</div>
 	</div>
 </div>

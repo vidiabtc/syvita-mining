@@ -2,6 +2,9 @@
 	let contributionsStartBlock = 0;
 	let feePercentage = 0;
 	let minContribution = 0;
+
+	import { adminStartNextPool } from "$lib/contractCalls";
+	import { city } from "$lib/stores";
 </script>
 
 <div class="main-wrapper">
@@ -35,7 +38,7 @@
 				}}
 				class="reset-button">Reset</button
 			>
-			<button class="submit-button">Start Next Pool</button>
+			<button on:click={() => {adminStartNextPool($city, contributionsStartBlock, feePercentage, minContribution)}} class="submit-button">Start Next Pool</button>
 		</div>
 	</div>
 </div>
