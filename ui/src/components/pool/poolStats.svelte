@@ -6,7 +6,7 @@
 		getMineManyClaims
 	} from '$lib/apiCalls';
 	import Contribute from '$components/pool/contribute.svelte';
-	import { t, city } from '$lib/stores.js';
+	import { t } from '$lib/stores.js';
 
 	import { claimAllRewardsForPool } from '$lib/contractCalls.js';
 	import MineManyHistory from './MineManyHistory.svelte';
@@ -14,13 +14,14 @@
 	export let poolId;
 	export let blockHeight;
 	export let stxAddress;
+  export let city;
 </script>
 
-{#await getPool($city, poolId) then pool}
+{#await getPool(city, poolId) then pool}
 	<div class="pool-stats-wrapper">
 		<div class="stats-wrapper">
 			<div>
-				<p>{$t.pool.pool} {poolId + parseInt($city.startingPoolId)}</p>
+				<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
 			</div>
 			<div>
 				<p class="stx-logo">
@@ -67,7 +68,7 @@
 			<div>
 				<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
 				<p class="coin-logo">
-					<img src={`/citycoins/${$city.coin.toUpperCase()}.svg`} />{$t.pool[`${$city.coin}Won`]}
+					<img src={`/citycoins/${city.coin.toUpperCase()}.svg`} />{$t.pool[`${city.coin}Won`]}
 				</p>
 			</div>
 		</div>
@@ -104,7 +105,7 @@
 		{#if stxAddress}
 			<div class="mine-many-history">
 				<h3>{$t.stack.claimRewards}</h3>
-				{#await getMineManyClaims($city, poolId, stxAddress, pool)}
+				{#await getMineManyClaims(city, poolId, stxAddress, pool)}
 					<!-- promise is pending -->
 					<p>Checking for claimable MineManys...</p>
 				{:then mineManys}

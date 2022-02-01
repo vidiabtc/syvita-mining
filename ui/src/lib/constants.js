@@ -1,17 +1,17 @@
 export const IS_MAINNET = true;
 
-export const BTC_API_URL = 'https://btc.syvitamining.com/api/v1'
+export const BTC_API_URL = 'https://btc.syvitamining.com/api/v1';
 export const BASE_URL = 'https://mainnet.syvita.org/extended/v1';
 export const API_URL = 'https://syvita-mining.ocelo.workers.dev/api';
 export const CYCLE_LENGTH = 2100;
-export const POOL_API_URL = 'https://api.ocelo.workers.dev/api'
+export const POOL_API_URL = 'https://api.ocelo.workers.dev/api';
 
-export const BTCPAY_STORE = 'BvwHJpw7KTHDVC5ZDpGzsBzuy34NomFHBsh5t3f1zKNw'
+export const BTCPAY_STORE = 'BvwHJpw7KTHDVC5ZDpGzsBzuy34NomFHBsh5t3f1zKNw';
 
 export const STATS = {
 	totalSTXRaised: '3,731,735',
 	totalCityCoinsWon: '316,900,000'
-}
+};
 export const CITIES = {
 	mia: {
 		name: 'Miami',
@@ -27,7 +27,7 @@ export const CITIES = {
 		token: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token::miamicoin',
 		miningHistoryUrl: 'miamining.com',
 		activationBlock: '24497',
-		startingPoolId: '8',
+		startingPoolId: '8'
 	},
 	nyc: {
 		name: 'New York',
@@ -37,13 +37,13 @@ export const CITIES = {
 		contractAddress: 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5',
 		contractName: 'newyorkcitycoin-core-v1',
 		poolContractAddress: 'SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P',
-    poolContractName: 'syvita-mining-nyc-v1',
+		poolContractName: 'syvita-mining-nyc-v1',
 		token: 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-token::newyorkcitycoin',
 		tokenContractName: 'newyorkcitycoin-token',
 		tokenName: 'newyorkcitycoin',
 		miningHistoryUrl: 'mining.nyc',
 		activationBlock: '37449',
-		startingPoolId: '8',
+		startingPoolId: '5'
 	}
 };
 
@@ -54,7 +54,8 @@ export const LANGUAGES = {
 		img: '🇺🇸',
 		home: {
 			title: 'Mine City Coins',
-			subHeading: "The most effective way to mine CityCoins is as a team. With Syvita Mining your contributions are pooled with others to increase the pool's chance of winning blocks.",
+			subHeading:
+				"The most effective way to mine CityCoins is as a team. With Syvita Mining your contributions are pooled with others to increase the pool's chance of winning blocks.",
 			totalStx: 'Total STX raised for Pool',
 			totalCityCoins: 'Total CityCoins Won',
 			cities: 'Cities',
@@ -67,7 +68,7 @@ export const LANGUAGES = {
 			marketCap: 'Market Cap',
 			news: 'News',
 			active: 'Active',
-			inactive: 'Inactive'	
+			inactive: 'Inactive'
 		},
 		pool: {
 			currentBlock: 'Current Block',
@@ -80,7 +81,7 @@ export const LANGUAGES = {
 			contributionsClosed: 'Contributions closed at block',
 			contributionsUntil: 'Contributions open until block',
 			contributionsOpen: 'Contributions open at block',
-			miaWon: 'MIA Won', 
+			miaWon: 'MIA Won',
 			nycWon: 'NYC Won',
 			allPools: 'All Pools',
 			pool: 'Pool',
@@ -133,10 +134,10 @@ export const LANGUAGES = {
 			numOfCycles: 'Number of Cycles',
 			stackForCycles: 'Stack for 5 cycles',
 			claimStackingRewards: 'Claim Stacking Rewards',
-			subHeading: 'When a reward cycle is complete, Stackers can claim their portion of the STX committed by miners. When the last selected cycle is complete, Stackers can claim their CityCoins back in the same transaction.',
+			subHeading:
+				'When a reward cycle is complete, Stackers can claim their portion of the STX committed by miners. When the last selected cycle is complete, Stackers can claim their CityCoins back in the same transaction.',
 			claimNow: 'Claim Now',
 			claimAtBlock: 'Claim at block'
-
 		},
 		footer: {
 			syvita: 'Created and maintained by Syvita Guild',
@@ -149,7 +150,8 @@ export const LANGUAGES = {
 		img: '🇰🇷',
 		home: {
 			title: '시티 코인 채굴',
-			subHeading: "시티코인을 가장 효과적으로 채굴할 수 있는 방법은 팀으로 하는 것입니다. Syvita로 사용하면, 다른사람들과 함께 공동작업으로 블록을 획들할 확률을 높일 수 있습니다.",
+			subHeading:
+				'시티코인을 가장 효과적으로 채굴할 수 있는 방법은 팀으로 하는 것입니다. Syvita로 사용하면, 다른사람들과 함께 공동작업으로 블록을 획들할 확률을 높일 수 있습니다.',
 			totalStx: '공동작업을 위해 취합된 STX 합계',
 			totalCityCoins: '총시티코인',
 			cities: '도시들',
@@ -162,9 +164,9 @@ export const LANGUAGES = {
 			marketCap: '시가총액',
 			news: '새소식',
 			active: '활성',
-			inactive: '비활성'    
-	},
-	pool: {
+			inactive: '비활성'
+		},
+		pool: {
 			currentBlock: '현 블록',
 			totalRaisedStx: '총 취합된 STX',
 			yourContribution: '참여',
@@ -175,8 +177,8 @@ export const LANGUAGES = {
 			contributionsClosed: '블록 에서 참여 종료',
 			contributionsUntil: '블록 까지 참여 가능',
 			contributionsOpen: '블록 에서 참여 가능',
-			miaWon: '총 MIA', 
-			nycWon: '총 NYC', 
+			miaWon: '총 MIA',
+			nycWon: '총 NYC',
 			allPools: '모든 공동작업',
 			pool: '공동작업',
 			contributors: '참여자',
@@ -186,18 +188,17 @@ export const LANGUAGES = {
 			startBlock: '시작 블록',
 			endBlock: '끝 블록',
 			current: '현재',
-contribute: '참여하기'
-
-	},
-	header: {
+			contribute: '참여하기'
+		},
+		header: {
 			connect: '고객센터',
 			logOut: '로그아웃',
 			pool: '공동작업',
 			mine: '채굴',
 			stack: '스택',
 			discord: '디스코드'
-	},
-	mine: {
+		},
+		mine: {
 			blocksToMine: '채굴할 블록 수',
 			stxPerBlock: '블록당 STX',
 			max: '최고',
@@ -211,9 +212,8 @@ contribute: '참여하기'
 			currentBlock: '현블록',
 			joinMiningPool: '공동작업 가입하기',
 			block: '블록'
-			
-	},
-	stack: {
+		},
+		stack: {
 			stackingCycle: '스택킹 기간',
 			miaStacked: 'MIA 예치',
 			nycStacked: 'NYC 예치',
@@ -229,16 +229,16 @@ contribute: '참여하기'
 			numOfCycles: '주기수',
 			stackForCycles: '5주기동안 예치',
 			claimStackingRewards: '예치금 보상신청',
-			subHeading: '보상 주기가 완료되면 예치자는 채굴자가 취득한 STX의 일부를 청구할 수 있습니다. 마지막으로 선택한 주기가 완료되면 예치자는 동일한 트랜잭션에서 시티코인를 다시 청구할 수 있습니다',
+			subHeading:
+				'보상 주기가 완료되면 예치자는 채굴자가 취득한 STX의 일부를 청구할 수 있습니다. 마지막으로 선택한 주기가 완료되면 예치자는 동일한 트랜잭션에서 시티코인를 다시 청구할 수 있습니다',
 			claimNow: '지금 청구하기',
 			claimAtBlock: '블록 에서 청구'
-
-	},
-	footer: {
+		},
+		footer: {
 			syvita: 'Syvita Guild가 만들고 유지 관리',
 			follow: '트위터에서 팔로우하세요'
+		}
 	}
-},
 	// Japanese: {
 	// 	name: 'Japanese',
 	// 	translatedName: 'Japanese',
@@ -258,7 +258,7 @@ contribute: '참여하기'
 	// 		marketCap: 'Market Cap',
 	// 		news: 'News',
 	// 		active: 'Active',
-	// 		inactive: 'Inactive'	
+	// 		inactive: 'Inactive'
 	// 	},
 	// 	pool: {
 	// 		currentBlock: 'Current Block',
@@ -271,7 +271,7 @@ contribute: '참여하기'
 	// 		contributionsClosed: 'Contributions closed at block',
 	// 		contributionsUntil: 'Contributions open until block',
 	// 		contributionsOpen: 'Contributions open at block',
-	// 		miaWon: 'MIA Won', 
+	// 		miaWon: 'MIA Won',
 	// 		allPools: 'All Pools',
 	// 		pool: 'Pool',
 	// 		contributors: 'Contributors',
@@ -325,4 +325,4 @@ contribute: '참여하기'
 	// 		follow: 'Follow us on Twitter'
 	// 	}
 	// }
-}
+};

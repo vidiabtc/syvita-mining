@@ -1,7 +1,8 @@
 <script>
 	export let poolId;
+  export let city;
 
-	import { t, city } from '$lib/stores.js';
+	import { t } from '$lib/stores.js';
 	import { getPool } from '$lib/apiCalls';
 
 	const poolIdList = [];
@@ -15,12 +16,12 @@
 	<h3>{$t.pool.allPools}</h3>
 	<div class="pools">
 		{#each poolIdList as poolId}
-			{#await getPool($city, poolId)}
+			{#await getPool(city, poolId)}
 				<h1>loading...</h1>
 			{:then pool}
 				<div class="pool">
 					<div class="pool-info">
-						<p>{$t.pool.pool} {poolId + parseInt($city.startingPoolId)}</p>
+						<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
 						{#if poolId == poolIdList[0]}
 							<p>{$t.pool.current}</p>
 						{/if}
@@ -47,11 +48,11 @@
 							<p>{Math.floor(pool.stats.totalContributed / 1000000).toLocaleString()} STX</p>
 						</div>
 						<div>
-							<p>{$t.pool[`${$city.coin}Won`]}</p>
+							<p>{$t.pool[`${city.coin}Won`]}</p>
 							<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
 						</div>
 					</div>
-          <a href={`/pool/${$city.coin}/${poolId + parseInt($city.startingPoolId)}`}>
+          <a href={`/pool/${city.coin}/${poolId + parseInt(city.startingPoolId)}`}>
             <div>
               <button>
                   {$t.pool.viewPoolDetails}

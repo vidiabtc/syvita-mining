@@ -26,7 +26,8 @@
 			return {
 				props: {
 					poolId,
-					pool
+					pool,
+          city
 				}
 			};
 		}
@@ -36,6 +37,7 @@
 <script>
 	export let poolId;
 	export let pool;
+  export let city
 
 	import PoolStats from '$components/pool/poolStats.svelte';
 	import PoolActivity from '$components/pool/poolActivity.svelte';
@@ -43,14 +45,14 @@
 	import SelectCity from '$components/selectCity.svelte';
 	import Contribute from '$components/pool/contribute.svelte';
 
-	import { user, t, city } from '$lib/stores.js';
+	import { user, t } from '$lib/stores.js';
 	import { getPool, getBlockHeight, getLatestPoolId } from '$lib/apiCalls';
 	import { getStxAddress } from '$lib/auth';
 
 	$: stxAddress = getStxAddress($user);
 	// $: stxAddress = 'SP3YXDXXHX1KQWG7N7G9WJQR69QGYN6DR1NK5H8XK';
-	$: blockHeight = getBlockHeight($city);
-	$: latestPoolId = getLatestPoolId($city);
+	$: blockHeight = getBlockHeight(city);
+	$: latestPoolId = getLatestPoolId(city);
 </script>
 
 <div class="pool-wrapper">
@@ -63,11 +65,11 @@
 		{#await latestPoolId}
 			<h1>loading...</h1>
 		{:then latestPoolId}
-			<PoolStats city={$city} {poolId} {blockHeight} {stxAddress} />
-			<PoolHistory city={$city} poolId={latestPoolId} />
+			<PoolStats city={city} {poolId} {blockHeight} {stxAddress} />
+			<PoolHistory city={city} poolId={latestPoolId} />
 		{/await}
 
-		<!-- <PoolActivity city={$city} /> -->
+		<!-- <PoolActivity city={city} /> -->
 	{/await}
 </div>
 
