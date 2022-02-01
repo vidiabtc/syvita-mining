@@ -2,7 +2,7 @@ import { BASE_URL, API_URL, CYCLE_LENGTH, POOL_API_URL } from './constants.js';
 import { getReadOnlyTxOptions, claimMiningReward, parseClarityList } from './contractCalls.js';
 import { callReadOnlyFunction } from 'micro-stacks/transactions';
 
-import { cvToHex, hexToCV, hexToValue, standardPrincipalCV, uintCV, listCV } from 'micro-stacks/clarity';
+import { cvToHex, hexToCV, hexToValue, standardPrincipalCV, contractPrincipalCVFromAddress, contractPrincipalCVFromStandard, contractPrincipalCV, principalCV, uintCV, listCV } from 'micro-stacks/clarity';
 import { hexStringToInt, hexToBigInt, intToHex } from 'micro-stacks/common';
 import { StacksTestnet, StacksMainnet } from 'micro-stacks/network';
 
@@ -240,8 +240,24 @@ export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
 	});
 	let data = await res.json();
 	data = hexToCV(data.result).type;
-	console.log('CAN CLAIM MINING', data);
+	data == 3 ? console.log('Block Won: ', blockHeight) : console.log('Block Lost: ', blockHeight)
 	return data == 3 ? claimMiningReward(block) : false;
+};
+
+export const canClaimMiningRewardTest = async (blockHeight) => {
+	let canClaim = await callReadOnlyFunction({
+		contractAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+		contractName: 'miamicoin-core-v1',
+		functionName: "can-claim-mining-reward",
+		functionArgs: [contractPrincipalCVFromStandard(standardPrincipalCV('SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P'), 'syvita-mining-mia-v1'), uintCV(blockHeight)],
+		network: new StacksMainnet(),
+		senderAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+	});
+
+	canClaim.type == 3 ? console.log('BLOCK WON!!: ', blockHeight) : console.log('Block Lost: ', blockHeight)
+
+	
+	// console.log(`Can Claim ${blockHeight}: ${canClaim}`)
 };
 
 export const getContributionSum = (contributions) => {

@@ -1,6 +1,7 @@
 <script>
-	let numOfBlocks = 0;
-	let stxPerBlock = 0;
+	let contributionsStartBlock = 0;
+	let feePercentage = 0;
+	let minContribution = 0;
 </script>
 
 <div class="main-wrapper">
@@ -9,27 +10,28 @@
 		<div class="input-label">
 			<div class="input-field">
 				<p>Contributions start block</p>
-				<input bind:value={stxPerBlock} type="number" />
+				<input bind:value={contributionsStartBlock} type="number" />
 			</div>
 		</div>
 		<div class="input-label">
 			<div class="input-field">
 				<p>Fee %</p>
-				<input bind:value={stxPerBlock} type="number" />
+				<input bind:value={feePercentage} type="number" />
 			</div>
 		</div>
 		<div class="input-label">
 			<div class="input-field">
 				<p>Min contribution STX</p>
-				<input bind:value={stxPerBlock} type="number" />
+				<input bind:value={minContribution} type="number" />
 			</div>
 		</div>
 
 		<div class="submit">
 			<button
 				on:click={() => {
-					numOfBlocks = 0;
-					stxPerBlock = 0;
+					contributionsStartBlock = 0;
+					feePercentage = 0;
+					minContribution = 0;
 				}}
 				class="reset-button">Reset</button
 			>

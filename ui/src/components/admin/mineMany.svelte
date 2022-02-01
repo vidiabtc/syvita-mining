@@ -1,4 +1,5 @@
 <script>
+	let poolId = 0;
 	let numOfBlocks = 0;
 	let stxPerBlock = 0;
 </script>
@@ -10,10 +11,7 @@
 			<div class="input-field">
 				<p>Pool id</p>
 				<input
-					on:change={() => {
-						if (numOfBlocks > 200) numOfBlocks = 200;
-					}}
-					bind:value={numOfBlocks}
+					bind:value={poolId}
 					type="number"
 				/>
 			</div>
@@ -21,17 +19,14 @@
 		<div class="input-label">
 			<div class="input-field">
 				<p>Number of blocks</p>
-				<input bind:value={stxPerBlock} type="number" />
+				<input bind:value={numOfBlocks} type="number" />
 			</div>
 		</div>
 		<div class="input-label">
 			<div class="input-field">
 				<p>Stacks per block</p>
 				<input
-					on:change={() => {
-						if (numOfBlocks > 200) numOfBlocks = 200;
-					}}
-					bind:value={numOfBlocks}
+					bind:value={stxPerBlock}
 					type="number"
 				/>
 			</div>
@@ -39,6 +34,7 @@
 		<div class="submit">
 			<button
 				on:click={() => {
+					poolId = 0;
 					numOfBlocks = 0;
 					stxPerBlock = 0;
 				}}

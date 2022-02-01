@@ -1,6 +1,6 @@
 <script>
-	let numOfBlocks = 0;
-	let stxPerBlock = 0;
+	let mineManyId = 0;
+	let blockNumber = 0;
 </script>
 
 <div class="main-wrapper">
@@ -9,21 +9,21 @@
 		<div class="input-label">
 			<div class="input-field">
 				<p>Mine many Id</p>
-				<input bind:value={stxPerBlock} type="number" />
+				<input bind:value={mineManyId} type="number" />
 			</div>
 		</div>
 		<div class="input-label">
 			<div class="input-field">
 				<p>Block number</p>
-				<input bind:value={stxPerBlock} type="number" />
+				<input bind:value={blockNumber} type="number" />
 			</div>
 		</div>
 
 		<div class="submit">
 			<button
 				on:click={() => {
-					numOfBlocks = 0;
-					stxPerBlock = 0;
+					mineManyId = 0;
+					blockNumber = 0;
 				}}
 				class="reset-button">Reset</button
 			>

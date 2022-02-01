@@ -1,6 +1,5 @@
 <script>
-	let numOfBlocks = 0;
-	let stxPerBlock = 0;
+	let addAdminAddress = '';
 </script>
 
 <div class="main-wrapper">
@@ -9,15 +8,14 @@
 		<div class="input-label">
 			<div class="input-field">
 				<p>STX Address</p>
-				<input bind:value={stxPerBlock} type="number" />
+				<input bind:value={addAdminAddress} type="text" />
 			</div>
 		</div>
 
 		<div class="submit">
 			<button
 				on:click={() => {
-					numOfBlocks = 0;
-					stxPerBlock = 0;
+					addAdminAddress = '';
 				}}
 				class="reset-button">Rest</button
 			>
