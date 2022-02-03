@@ -3,9 +3,9 @@
 
 	export async function load({ page, fetch }) {
 		let city = page.params.city;
-		if (city != 'stx') {
+
 			city = CITIES[city];
-		}
+		
 		if (!city) {
 			return {
 				status: 303,
@@ -50,22 +50,20 @@
 	/>
 </svelte:head>
 
-{#if city == 'stx'}
-	<StxPoolStats />
-{:else}
-	<div class="pool-wrapper">
-		<div class="select-city">
-			<PoolSelectCity selectedCity={city.coin} />
-		</div>
-		{#await poolId}
-			<h1>loading...</h1>
-		{:then poolId}
-			<PoolStats {city} {poolId} {blockHeight} {stxAddress} />
-			<PoolHistory {city} {poolId} />
-			<EmailSubscribe />
-		{/await}
-	</div>
-{/if}
+
+<div class="pool-wrapper">
+  <div class="select-city">
+    <PoolSelectCity selectedCity={city.coin} />
+  </div>
+  {#await poolId}
+    <h1>loading...</h1>
+  {:then poolId}
+    <PoolStats {city} {poolId} {blockHeight} {stxAddress} />
+    <PoolHistory {city} {poolId} />
+    <EmailSubscribe />
+  {/await}
+</div>
+
 
 <style>
 	.pool-wrapper {

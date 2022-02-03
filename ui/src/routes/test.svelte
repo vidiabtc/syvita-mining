@@ -3,7 +3,7 @@
 
 
   const checkAll = async () => {
-    let startingBlock = 46980;
+    let startingBlock = 46747;
     for (let i = startingBlock; i <= startingBlock + 200; i++) {
       await canClaimMiningRewardTest(i)
     }
