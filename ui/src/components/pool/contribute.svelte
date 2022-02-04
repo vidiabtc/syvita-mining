@@ -21,7 +21,8 @@
 	<div class="contributions">
 		<div class="add-contributions">
 			<div class="input-field">
-				<input bind:value={amount} placeholder="40 STX Minimum" type="number" />
+        <p class='minimum'>Min {pool.stats.minContribution / 1000000} STX</p>
+				<input bind:value={amount} type="number" />
 			</div>
 			<button on:click={toggleModal}>{$t.pool.contribute}</button>
 		</div>
@@ -63,10 +64,20 @@
 		gap: 30px;
 	}
 	.input-field {
+    position: relative;
 		max-width: 500px;
 		min-width: 45px;
 		width: 100%;
 	}
+  .minimum {
+    position: absolute;
+    top: -7px;
+    left: 10px;
+    font-size: 0.7rem;
+		background: #050810;
+		padding-left: 5px;
+		padding-right: 5px;
+  }
 	input {
 		color: white;
 		width: 100%;
