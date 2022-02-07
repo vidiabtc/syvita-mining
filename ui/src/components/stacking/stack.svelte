@@ -3,8 +3,8 @@
 	import { city, t } from '$lib/stores.js';
 	import SelectCity from '$components/selectCity.svelte';
 
-	let amountToStack = 0;
-	let numOfCycles = 0;
+	let amountToStack;
+	let numOfCycles;
 </script>
 
 <div class="stack-wrapper">
@@ -15,7 +15,7 @@
 	<div class="stacking">
 		<div class="number-of-blocks">
 			<p>{$t.stack[`${$city.coin}AmountToStack`]}</p>
-			<input bind:value={amountToStack} type="number" />
+			<input bind:value={amountToStack} type="number" placeholder="0" />
 		</div>
 		<div class="stx-per-block">
 			<p>{$t.stack.numOfCycles}</p>
@@ -24,6 +24,7 @@
 					if (numOfCycles > 32) numOfCycles = 32;
 				}}
 				bind:value={numOfCycles}
+				placeholder="0"
 				type="number"
 			/>
 			<button on:click={() => (numOfCycles = 32)} class="max">{$t.mine.max}</button>
@@ -44,21 +45,18 @@
 </div>
 
 <style>
-		.stack-wrapper {
+	.stack-wrapper {
 		margin: auto;
 		max-width: 770px;
 		min-width: 320px;
 		height: max-content;
 		padding-top: 103px;
 		padding-bottom: 75px;
-
 	}
 
 	h1 {
 		font-size: 2.5rem;
 	}
-
-
 
 	.stack-wrapper div:first-child {
 		padding-bottom: 30px;
@@ -153,12 +151,12 @@
 	}
 
 	.stack-button:hover {
-	background-color: rgba(56, 76, 255, 0.9);
-	cursor: pointer;	
+		background-color: rgba(56, 76, 255, 0.9);
+		cursor: pointer;
 	}
 
 	.stack-button:active {
-	background-color: rgba(56, 76, 255, 0.8);	
+		background-color: rgba(56, 76, 255, 0.8);
 	}
 
 	input::-webkit-outer-spin-button,
@@ -167,12 +165,17 @@
 		margin: 0;
 	}
 
+	::placeholder {
+		color: gray;
+		font-size: 0.8rem;
+	}
+
 	/* Firefox */
 	input[type='number'] {
 		-moz-appearance: textfield;
 	}
 
-	@media(max-width:400px) {
+	@media (max-width: 400px) {
 		.submit {
 			gap: 18px;
 		}

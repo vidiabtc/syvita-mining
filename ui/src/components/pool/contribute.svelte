@@ -5,12 +5,12 @@
 	export let city;
 	export let pool;
 	let isModalOpen = false;
-// import SelectCity from '$components/selectCity.svelte';
+	// import SelectCity from '$components/selectCity.svelte';
 	export let poolId;
 	const toggleModal = () => {
-    isModalOpen = !isModalOpen
-  }
-	let amount = 0;
+		isModalOpen = !isModalOpen;
+	};
+	let amount;
 </script>
 
 <div class="contribute-wrapper">
@@ -21,15 +21,19 @@
 	<div class="contributions">
 		<div class="add-contributions">
 			<div class="input-field">
-        <p class='minimum'>Min {pool.stats.minContribution / 1000000} STX</p>
-				<input bind:value={amount} type="number" />
+				<p class="minimum">Amount STX</p>
+				<input
+					bind:value={amount}
+					placeholder="{pool.stats.minContribution / 1000000} STX Minimum"
+					type="number"
+				/>
 			</div>
 			<button on:click={toggleModal}>{$t.pool.contribute}</button>
 		</div>
 	</div>
 	{#if isModalOpen}
-  <PoolModal on:close={toggleModal} {pool} {city} {poolId} {amount}/>
-  {/if}
+		<PoolModal on:close={toggleModal} {pool} {city} {poolId} {amount} />
+	{/if}
 </div>
 
 <style>
@@ -37,7 +41,7 @@
 		max-width: 770px;
 		min-width: 300px;
 		margin: auto;
-    margin-top: 50px;
+		margin-top: 50px;
 		padding: 0 20px;
 	}
 	.title {
@@ -45,7 +49,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	
+
 		padding-bottom: 15px;
 	}
 	.contributions {
@@ -64,20 +68,20 @@
 		gap: 30px;
 	}
 	.input-field {
-    position: relative;
+		position: relative;
 		max-width: 500px;
 		min-width: 45px;
 		width: 100%;
 	}
-  .minimum {
-    position: absolute;
-    top: -7px;
-    left: 10px;
-    font-size: 0.7rem;
+	.minimum {
+		position: absolute;
+		top: -7px;
+		left: 10px;
+		font-size: 0.7rem;
 		background: #050810;
 		padding-left: 5px;
 		padding-right: 5px;
-  }
+	}
 	input {
 		color: white;
 		width: 100%;
@@ -85,8 +89,8 @@
 		padding-left: 10px;
 	}
 	::placeholder {
-		color: white;
-		font-size: 1rem;
+		color: gray;
+		font-size: 0.8rem;
 	}
 	button {
 		width: 180px;
@@ -103,10 +107,12 @@
 	input[type='number'] {
 		-moz-appearance: textfield;
 	}
-	@media(max-width: 400px) {
-	.add-contributions {	gap: 10px; }
-	.title {
-		font-size: 1.25rem;
-	}
+	@media (max-width: 400px) {
+		.add-contributions {
+			gap: 10px;
+		}
+		.title {
+			font-size: 1.25rem;
+		}
 	}
 </style>

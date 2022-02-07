@@ -86,7 +86,7 @@
 		</div>
 	</div>
 	<div class="join">
-		<a href="/pool">
+		<a href="/pool/mia">
 			<button>+ {$t.mine.joinMiningPool}</button>
 		</a>
 	</div>

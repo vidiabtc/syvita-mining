@@ -7,8 +7,8 @@
 	$: stxAddress = getStxAddress($user);
 	// $: stxAddress = 'SP18XC4F27VQ8P2QGKZ5P6KR41GK77ZVFWV468P1';
 
-	let blockHeight = 0;
-	let blockToCheck = 0;
+	let blockHeight;
+	let blockToCheck;
 	let claimBlockHeight = 0;
 	$: isWinner = blockToCheck > 0 ? canClaimMiningReward($city, stxAddress, blockToCheck) : null;
 
@@ -24,7 +24,7 @@
 	<div class="claim-block">
 		<div class="block-to-claim">
 			<p>{$t.mine.block}</p>
-			<input bind:value={blockHeight} type="number" />
+			<input bind:value={blockHeight} type="number" placeholder="0" />
 		</div>
 		<div class="submit">
 			<button on:click={() => (blockToCheck = blockHeight)} class="check-button"
@@ -80,11 +80,11 @@
 	}
 
 	.check-button:hover {
-	background-color: rgba(56, 76, 255, 0.9);
+		background-color: rgba(56, 76, 255, 0.9);
 	}
 
 	.check-button:active {
-	background-color: rgba(56, 76, 255, 0.8);	
+		background-color: rgba(56, 76, 255, 0.8);
 	}
 
 	.block-to-claim {
