@@ -109,7 +109,7 @@
 					<!-- promise is pending -->
 					<p>Checking for claimable MineManys...</p>
 				{:then mineManys}
-					<MineManyHistory {poolId} {mineManys} />
+					<MineManyHistory {city} {poolId} {mineManys} />
 				{/await}
 			</div>
 		{/if}
