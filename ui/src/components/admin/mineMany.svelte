@@ -10,7 +10,7 @@ import { uintCV } from "micro-stacks/clarity";
 const createMineManyAmounts = () => {
 		let mineManyAmounts = [];
 		for (let i = 1; i <= numOfBlocks; i++) {
-			mineManyAmounts.push(uintCV(stxPerBlock));
+			mineManyAmounts.push(uintCV(stxPerBlock * 1000000));
 		}
 		console.log(mineManyAmounts);
 		return mineManyAmounts;
