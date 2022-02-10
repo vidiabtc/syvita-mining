@@ -1,5 +1,5 @@
 <script>
-	import { t } from '$lib/stores.js';
+	import { t, city } from '$lib/stores.js';
 	import SelectLanguage from '$components/selectLanguage.svelte';
 </script>
 
@@ -7,7 +7,7 @@
 	<SelectLanguage />
 </div>
 <nav>
-	<a href="/pool/mia"><p>{$t.header.pool}</p></a>
+	<a href={`/pool/${$city.coin}`}><p>{$t.header.pool}</p></a>
 	<a href="/stack"><p>{$t.header.stack}</p></a>
 	<a href="/mine"><p>{$t.header.mine}</p></a>
 

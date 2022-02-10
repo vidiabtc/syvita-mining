@@ -1,5 +1,6 @@
 <script>
 	import { CITIES } from '$lib/constants.js';
+	import { city as cityStore } from '$lib/stores.js';
 
   export let selectedCity;
 
@@ -20,7 +21,10 @@
 				{#if city != selectedCity}
 					<div>
             <a href={`/pool/${city}`}>
-              <p>
+              <p on:click={() => {
+					cityStore.set(CITIES[city]);
+					console.log('city set to ', CITIES[selectedCity]);
+				}}>
                 <img class="coin" src={`/citycoins/${CITIES[city].coin.toUpperCase()}.svg`} alt={`${city}`} />
                 {CITIES[city].name}
               </p>
