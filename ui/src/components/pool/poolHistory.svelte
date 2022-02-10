@@ -23,8 +23,14 @@
 					<div class="pool-info">
 						<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
 						{#if poolId == poolIdList[0]}
-							<p>{$t.pool.current}</p>
+							<p class="current">Raising</p>
+						{:else if poolId == poolIdList[1]}
+							<p class="mining">Mining</p>
+						{:else}
+							<p class="complete">Complete</p>
 						{/if}
+
+						
 					</div>
 					<div class="block-dates">
 						<div>
@@ -116,15 +122,36 @@
 		font-size: 1.5rem;
 	}
 
-	.pool-info p:nth-child(2) {
+	.current {
 		font-size: 0.75rem;
 		width: 64px;
 		height: 24px;
 		background: #2fb002;
-		border-radius: 2px;
+		border-radius: 5px;
 		text-align: center;
 		line-height: 2;
 	}
+	
+	.mining {
+		font-size: 0.75rem;
+		width: 64px;
+		height: 24px;
+		background: darkorange;
+		border-radius: 5px;
+		text-align: center;
+		line-height: 2;
+	}
+
+	.complete {
+		font-size: 0.75rem;
+		width: 64px;
+		height: 24px;
+		background: blue;
+		border-radius: 5px;
+		text-align: center;
+		line-height: 2;
+	}
+	
 
 	.block-dates {
 		justify-content: space-between;
