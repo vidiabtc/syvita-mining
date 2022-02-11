@@ -1,6 +1,5 @@
 <script>
 	import MineMany from '$components/mine/mineMany.svelte';
-	import SelectCity from '$components/selectCity.svelte';
 	import ClaimMiningReward from '$components/mine/claimMiningReward.svelte';
 	// import MinedBlocks from '$components/minedBlocks.svelte';
 	import { user, city, t } from '$lib/stores.js';
@@ -86,7 +85,7 @@
 		</div>
 	</div>
 	<div class="join">
-		<a href="/pool/mia">
+		<a href={`/pool/${$city.coin}`}>
 			<button>+ {$t.mine.joinMiningPool}</button>
 		</a>
 	</div>

@@ -2,7 +2,7 @@
 	import { mineMany } from '$lib/contractCalls.js';
 
 	import { t } from '$lib/stores.js';
-	import SelectCity from '$components/selectCity.svelte';
+	import SelectCity from './mineSelectCity.svelte';
 	let numOfBlocks = 0;
 	let stxPerBlock = 0;
 

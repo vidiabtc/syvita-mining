@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { filterTxsByContractCalls, getAllTxsForAddress } from '$lib/apiCalls';
 
     import { getStxAddress } from '$lib/auth.js';
@@ -8,7 +8,7 @@
     $: txs = stxAddress ? getAllTxsForAddress(stxAddress) : null;
 
 
-</script>
+</script> -->
 
 <!-- 
 <p>Insert a STX address</p>
@@ -16,7 +16,7 @@
 
 <button on:click={transactions = getAllTxsForAddress(stxAddress)}>Get Transactions</button> -->
 
-{#await txs}
+<!-- {#await txs}
     <h2>loading...</h2>
 {:then txs}
     <ul>
@@ -49,6 +49,6 @@
         min-width: 100px;
         max-width: 200px;
     }
-</style>
+</style> -->
 
 

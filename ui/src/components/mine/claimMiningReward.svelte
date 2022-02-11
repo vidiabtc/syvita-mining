@@ -1,6 +1,5 @@
 <script>
 	import { user, t, city } from '$lib/stores.js';
-	import SelectCity from '$components/selectCity.svelte';
 	import { getStxAddress } from '$lib/auth.js';
 	import { canClaimMiningReward } from '$lib/apiCalls.js';
 
