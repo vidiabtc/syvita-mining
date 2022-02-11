@@ -327,3 +327,58 @@ export const getManyRounds = async () => {
 	}
 	console.log('Participants: ', allParticipants)
 }
+
+export const getAllTxsForAddress = async (address) => {
+	let allTxs = [];
+	for (let i=0; i < 10; i++) {
+		let url = `https://stacks-node-api.stacks.co/extended/v1/address/${address}/transactions?limit=50&offset=${i * 50}`;
+		let res = await fetch(url)
+		let txs = await res.json();
+		if (!(txs.total > 0)) break;
+		allTxs = allTxs.concat(txs.results);
+		console.log(`Transactions offset: ${i * 50}: `, txs)
+	};
+	console.log('All Transactions: ', allTxs)
+
+	let allTxsParsed = allTxs.map(tx => {
+		let parsedTx = {
+			id: tx.tx_id,
+			blockHeight: tx.block_height,
+			blockTime: tx.burn_block_time_iso.substring(0, 10),
+			status: tx.tx_status,
+			fee: tx.fee_rate,
+			type: tx.tx_type
+		}
+		let info;
+		if (tx.tx_type == 'contract_call') {
+			info = tx.contract_call;
+		} else if (tx.tx_type == 'smart_contract') {
+			info = tx.smart_contract;
+		} else if (tx.tx_type == 'token_transfer') {
+			info = tx.token_transfer;
+			info['incoming'] = info.recipient_address == address ? true : false
+		};
+
+		parsedTx['info'] = info;
+
+		return parsedTx;
+	})
+	console.log('All Transactions Parsed: ', allTxsParsed)
+
+	return allTxsParsed;
+}
+
+export const filterTxsByContractCalls = (allTxsParsed, contractAddress, contractName, functions) => {
+	allTxsParsed = allTxsParsed.map((tx) => {
+		if (tx.type == 'contract_call') {
+			if (tx.info.contract_id == `${contractAddress}.${contractName}`) {
+				if (functions.includes(tx.info.function_name)) {
+					return tx;
+				}
+			} 
+		}
+	}).filter(i=>i)
+	console.log('ALL TXS FILTERED: ', allTxsParsed)
+
+	return allTxsParsed
+}
