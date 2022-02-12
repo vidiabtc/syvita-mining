@@ -1,9 +1,11 @@
 <script>
 	export let poolId;
-  export let city;
+  	export let city;
+	export let blockHeight;
 
 	import { t } from '$lib/stores.js';
 	import { getPool } from '$lib/apiCalls';
+import { STATS } from '$lib/constants';
 
 	const poolIdList = [];
 
@@ -22,15 +24,15 @@
 				<div class="pool">
 					<div class="pool-info">
 						<p>{$t.pool.pool} {poolId + parseInt(city.startingPoolId)}</p>
-						{#if poolId == poolIdList[0]}
+						{#if pool.stats.contributionsEndBlock > blockHeight}
 							<p class="current">Raising</p>
-						{:else if poolId == poolIdList[1]}
+						<!-- {:else if poolId == poolIdList[1]}
+							<p class="mining">Mining</p> -->
+						{:else if (pool.stats.mineManyIds.length > 0) && (poolId == poolIdList[0] || poolId == poolIdList[1]) && (pool.mineManys[pool.stats.mineManyIds[pool.stats.mineManyIds.length - 1]].blockMiningStarted)  >= (blockHeight - 200)}
 							<p class="mining">Mining</p>
 						{:else}
 							<p class="complete">Complete</p>
-						{/if}
-
-						
+						{/if}		
 					</div>
 					<div class="block-dates">
 						<div>

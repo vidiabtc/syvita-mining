@@ -65,10 +65,12 @@
 		{#await latestPoolId}
 			<h1>loading...</h1>
 		{:then latestPoolId}
-			<PoolStats city={city} {poolId} {blockHeight} {stxAddress} />
-			<PoolHistory city={city} poolId={latestPoolId} />
+			{#await blockHeight}
+			{:then blockHeight}
+				<PoolStats city={city} {poolId} {blockHeight} {stxAddress} />
+				<PoolHistory city={city} poolId={latestPoolId} {blockHeight}/>
+			{/await}	
 		{/await}
-
 		<!-- <PoolActivity city={city} /> -->
 	{/await}
 </div>

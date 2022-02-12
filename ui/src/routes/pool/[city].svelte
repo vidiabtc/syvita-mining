@@ -58,9 +58,12 @@
   {#await poolId}
     <h1>loading...</h1>
   {:then poolId}
-    <PoolStats {city} {poolId} {blockHeight} {stxAddress} />
-    <PoolHistory {city} {poolId} />
-    <EmailSubscribe />
+	{#await blockHeight}
+	{:then blockHeight}
+		<PoolStats {city} {poolId} {blockHeight} {stxAddress} />
+		<PoolHistory {city} {poolId} {blockHeight} />
+		<EmailSubscribe />
+	{/await}
   {/await}
 </div>
 
