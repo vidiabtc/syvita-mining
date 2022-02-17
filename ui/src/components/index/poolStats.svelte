@@ -5,7 +5,7 @@
 
 <div class="pool-stats">
 	<div>
-		<p class="stx-contributed"><img src="/icons/stx.svg" />{STATS.totalSTXRaised}</p>
+		<p class="stx-contributed">> <img src="/icons/stx.svg" />4,000,000</p>
 		<p>{$t.home.totalStx}</p>
 	</div>
 	<div>
