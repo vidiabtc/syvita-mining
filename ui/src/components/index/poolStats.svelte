@@ -9,8 +9,8 @@
 		<p>{$t.home.totalStx}</p>
 	</div>
 	<div>
-		<p class="city-coins-won">
-			<img class="city-coin-img" src="/city-coins.svg" />{STATS.totalCityCoinsWon}
+		<p class="city-coins-won">> 
+			<img class="city-coin-img" src="/city-coins.svg" />400,000,000
 		</p>
 		<p>{$t.home.totalCityCoins}</p>
 	</div>
