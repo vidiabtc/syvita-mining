@@ -33,20 +33,11 @@ export let pool;
 							This pool engages in highly speculative behavior and there is substantial risk of
 							loss.
 						</li>
-						<li>
-							There is currently no liquid market for {city.coin.toUpperCase()} city, so mining {city.coin.toUpperCase()}
-							may mean you're stuck holding an illiquid asset until such time as it is listed on a liquid
-							exchange.
-						</li>
 
 						<li>Past performance is not necessarily indicative of future performance.</li>
 						<li>
 							The pool will keep {pool.stats.feePercentage}% of {city.coin.toUpperCase()} won to support further development of this
 							site and for transaction fees.
-						</li>
-						<li>
-							Because there is no liquid market for {city.coin.toUpperCase()} coin, we cannot know what its
-							true value is or if it has any value at all.
 						</li>
 						<li>
 							This service may not be suitable for all investors. If you have any doubts as to the
