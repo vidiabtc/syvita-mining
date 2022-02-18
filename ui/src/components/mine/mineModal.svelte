@@ -4,6 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
+	import {  city } from '$lib/stores.js';
 
 	export let numOfBlocks;
 	export let stxPerBlock;
@@ -21,7 +22,7 @@
 					</p>
 				</div>
 				<div class="buttons">
-					<a href="/pool"> <button> Join Pool</button></a>
+					<a href={`/pool/${$city.coin}`}> <button> Join Pool</button></a>
 					<button
 						class="confirm-terms"
 						on:click={() => mineMany(numOfBlocks, stxPerBlock * 1000000)}>Mine</button
