@@ -10,6 +10,7 @@
 		url = `${BASE_URL}/address/${CITIES['mia'].cityWalletAddress}/balances`;
 		res = await fetch(url);
 		let miaBalance = await res.json();
+    console.log('MIA BLAANCE', miaBalance)
 		miaBalance = Math.floor(miaBalance.stx.total_received / 1000000);
 
 		url = `${BASE_URL}/address/${CITIES['nyc'].cityWalletAddress}/balances`;
