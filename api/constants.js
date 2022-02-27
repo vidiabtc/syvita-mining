@@ -1,6 +1,6 @@
 export const IS_MAINNET = true
 
-export const BASE_URL = 'https://mainnet.syvita.org/extended/v1'
+export const BASE_URL = 'https://stacks-node-api.mainnet.stacks.co/extended/v1'
 export const API_URL = 'https://syvita-mining.ocelo.workers.dev/api'
 export const CYCLE_LENGTH = 2100
 
