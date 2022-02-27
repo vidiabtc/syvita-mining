@@ -2,10 +2,20 @@ import { BASE_URL, API_URL, CYCLE_LENGTH, POOL_API_URL } from './constants.js';
 import { getReadOnlyTxOptions, claimMiningReward, parseClarityList } from './contractCalls.js';
 import { callReadOnlyFunction } from 'micro-stacks/transactions';
 
-import { cvToHex, hexToCV, hexToValue, standardPrincipalCV, contractPrincipalCVFromAddress, contractPrincipalCVFromStandard, contractPrincipalCV, principalCV, uintCV, listCV } from 'micro-stacks/clarity';
+import {
+	cvToHex,
+	hexToCV,
+	hexToValue,
+	standardPrincipalCV,
+	contractPrincipalCVFromAddress,
+	contractPrincipalCVFromStandard,
+	contractPrincipalCV,
+	principalCV,
+	uintCV,
+	listCV
+} from 'micro-stacks/clarity';
 import { hexStringToInt, hexToBigInt, intToHex } from 'micro-stacks/common';
 import { StacksTestnet, StacksMainnet } from 'micro-stacks/network';
-
 
 export const getStxBalance = async (stxAddress) => {
 	let url = `${BASE_URL}/address/${stxAddress}/balances`;
@@ -52,7 +62,7 @@ export const getCurrentCycle = async (city) => {
 };
 
 export const getUserId = async (city, stxAddress) => {
-	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/get-user-id`;
+	let url = `https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/get-user-id`;
 
 	let res = await fetch(url, {
 		method: 'POST',
@@ -97,7 +107,7 @@ export const getPool = async (city, poolId) => {
 
 export const getStackingReward = async (city, userId, cycle) => {
 	let cycleNum = cycle;
-	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/get-stacker-at-cycle`;
+	let url = `https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/get-stacker-at-cycle`;
 
 	userId = '010000000000000000' + intToHex(userId);
 	cycle = '010000000000000000' + intToHex(cycle);
@@ -137,7 +147,7 @@ export const getStackingReward = async (city, userId, cycle) => {
 export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
 	let address = stxAddress;
 	console.log(poolId);
-	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.poolContractAddress}/${city.poolContractName}/get-claims-for-pool`;
+	let url = `https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/${city.poolContractAddress}/${city.poolContractName}/get-claims-for-pool`;
 	console.log(url);
 	// console.log(poolId)
 	// console.log(stxAddress)
@@ -224,7 +234,7 @@ export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
 };
 
 export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
-	let url = `https://mainnet.syvita.org/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/can-claim-mining-reward`;
+	let url = `https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/can-claim-mining-reward`;
 	let block = blockHeight;
 
 	stxAddress = cvToHex(standardPrincipalCV(stxAddress));
@@ -240,7 +250,7 @@ export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
 	});
 	let data = await res.json();
 	data = hexToCV(data.result).type;
-	data == 3 ? console.log('Block Won: ', blockHeight) : console.log('Block Lost: ', blockHeight)
+	data == 3 ? console.log('Block Won: ', blockHeight) : console.log('Block Lost: ', blockHeight);
 	return data == 3 ? claimMiningReward(block) : false;
 };
 
@@ -248,15 +258,22 @@ export const canClaimMiningRewardTest = async (blockHeight) => {
 	let canClaim = await callReadOnlyFunction({
 		contractAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
 		contractName: 'miamicoin-core-v1',
-		functionName: "can-claim-mining-reward",
-		functionArgs: [contractPrincipalCVFromStandard(standardPrincipalCV('SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P'), 'syvita-mining-mia-v1'), uintCV(blockHeight)],
+		functionName: 'can-claim-mining-reward',
+		functionArgs: [
+			contractPrincipalCVFromStandard(
+				standardPrincipalCV('SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P'),
+				'syvita-mining-mia-v1'
+			),
+			uintCV(blockHeight)
+		],
 		network: new StacksMainnet(),
-		senderAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+		senderAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27'
 	});
 
-	canClaim.type == 3 ? console.log('BLOCK WON!!: ', blockHeight) : console.log('Block Lost: ', blockHeight)
+	canClaim.type == 3
+		? console.log('BLOCK WON!!: ', blockHeight)
+		: console.log('Block Lost: ', blockHeight);
 
-	
 	// console.log(`Can Claim ${blockHeight}: ${canClaim}`)
 };
 
@@ -282,65 +299,104 @@ export const getUserContributions = (stxAddress, pool) => {
 };
 
 export const getManyRounds = async () => {
-	let allParticipants = {}
+	let allParticipants = {};
 	let lastContributorId = 0;
 	let id = 1;
 
 	for (let i = 1; i <= 3; i++) {
 		let functionArgs;
 		if (i == 1) {
-			functionArgs = [listCV([uintCV(1),uintCV(2),uintCV(3),uintCV(4),uintCV(5),uintCV(6),uintCV(7),uintCV(8),uintCV(9),uintCV(10)])]
+			functionArgs = [
+				listCV([
+					uintCV(1),
+					uintCV(2),
+					uintCV(3),
+					uintCV(4),
+					uintCV(5),
+					uintCV(6),
+					uintCV(7),
+					uintCV(8),
+					uintCV(9),
+					uintCV(10)
+				])
+			];
 		} else if (i == 2) {
-			functionArgs = [listCV([uintCV(11),uintCV(12),uintCV(13),uintCV(14),uintCV(15),uintCV(16),uintCV(17),uintCV(18),uintCV(19),uintCV(20)])]
+			functionArgs = [
+				listCV([
+					uintCV(11),
+					uintCV(12),
+					uintCV(13),
+					uintCV(14),
+					uintCV(15),
+					uintCV(16),
+					uintCV(17),
+					uintCV(18),
+					uintCV(19),
+					uintCV(20)
+				])
+			];
 		} else if (i == 3) {
-			functionArgs = [listCV([uintCV(21),uintCV(22),uintCV(23),uintCV(24),uintCV(25),uintCV(26),uintCV(27),uintCV(28),uintCV(29)])]
+			functionArgs = [
+				listCV([
+					uintCV(21),
+					uintCV(22),
+					uintCV(23),
+					uintCV(24),
+					uintCV(25),
+					uintCV(26),
+					uintCV(27),
+					uintCV(28),
+					uintCV(29)
+				])
+			];
 		}
 
 		let rounds = await callReadOnlyFunction({
 			contractAddress: 'SP343J7DNE122AVCSC4HEK4MF871PW470ZSXJ5K66',
 			contractName: 'miamipool-v1',
-			functionName: "get-many-rounds",
+			functionName: 'get-many-rounds',
 			functionArgs: functionArgs,
 			network: new StacksMainnet(),
-			senderAddress: 'SP343J7DNE122AVCSC4HEK4MF871PW470ZSXJ5K66',
+			senderAddress: 'SP343J7DNE122AVCSC4HEK4MF871PW470ZSXJ5K66'
 		});
 
 		rounds = rounds.value.list;
 
-
-		rounds = rounds.map(round => {
+		rounds = rounds.map((round) => {
 			let numOfUniqueIds = 0;
 
-			parseClarityList(round.data.round.data.participantIds).map(contributorId => {
+			parseClarityList(round.data.round.data.participantIds).map((contributorId) => {
 				if (contributorId > lastContributorId) {
 					numOfUniqueIds += 1;
 					lastContributorId += 1;
 				}
-			})
+			});
 
 			allParticipants[id] = {
 				totalParticipants: parseClarityList(round.data.round.data.participantIds).length,
 				newParticipants: numOfUniqueIds
-			}
-			id += 1
-		})
+			};
+			id += 1;
+		});
 	}
-	console.log('Participants: ', allParticipants)
-}
+	console.log('Participants: ', allParticipants);
+};
 
 export const getAllTxsForAddress = async (address) => {
 	let allTxs = [];
-	for (let i=0; i < 10; i++) {
-		let url = `https://stacks-node-api.stacks.co/extended/v1/address/${address}/transactions?limit=50&offset=${i * 50}`;
-		let res = await fetch(url)
+	for (let i = 0; i < 10; i++) {
+		let url = `https://stacks-node-api.stacks.co/extended/v1/address/${address}/transactions?limit=50&offset=${
+			i * 50
+		}`;
+		let res = await fetch(url);
 		let txs = await res.json();
 		if (!(txs.total > 0)) break;
 		allTxs = allTxs.concat(txs.results);
-		console.log(`Transactions offset: ${i * 50}: `, txs)
-	};
-	console.log('All Transactions: ', allTxs)
+		console.log(`Transactions offset: ${i * 50}: `, txs);
+	}
+	console.log('All Transactions: ', allTxs);
 
-	let allTxsParsed = allTxs.map(tx => {
+	let allTxsParsed = allTxs.map((tx) => {
 		let parsedTx = {
 			id: tx.tx_id,
 			blockHeight: tx.block_height,
@@ -348,7 +404,7 @@ export const getAllTxsForAddress = async (address) => {
 			status: tx.tx_status,
 			fee: tx.fee_rate,
 			type: tx.tx_type
-		}
+		};
 		let info;
 		if (tx.tx_type == 'contract_call') {
 			info = tx.contract_call;
@@ -356,29 +412,36 @@ export const getAllTxsForAddress = async (address) => {
 			info = tx.smart_contract;
 		} else if (tx.tx_type == 'token_transfer') {
 			info = tx.token_transfer;
-			info['incoming'] = info.recipient_address == address ? true : false
-		};
+			info['incoming'] = info.recipient_address == address ? true : false;
+		}
 
 		parsedTx['info'] = info;
 
 		return parsedTx;
-	})
-	console.log('All Transactions Parsed: ', allTxsParsed)
+	});
+	console.log('All Transactions Parsed: ', allTxsParsed);
 
 	return allTxsParsed;
-}
+};
 
-export const filterTxsByContractCalls = (allTxsParsed, contractAddress, contractName, functions) => {
-	allTxsParsed = allTxsParsed.map((tx) => {
-		if (tx.type == 'contract_call') {
-			if (tx.info.contract_id == `${contractAddress}.${contractName}`) {
-				if (functions.includes(tx.info.function_name)) {
-					return tx;
+export const filterTxsByContractCalls = (
+	allTxsParsed,
+	contractAddress,
+	contractName,
+	functions
+) => {
+	allTxsParsed = allTxsParsed
+		.map((tx) => {
+			if (tx.type == 'contract_call') {
+				if (tx.info.contract_id == `${contractAddress}.${contractName}`) {
+					if (functions.includes(tx.info.function_name)) {
+						return tx;
+					}
 				}
-			} 
-		}
-	}).filter(i=>i)
-	console.log('ALL TXS FILTERED: ', allTxsParsed)
+			}
+		})
+		.filter((i) => i);
+	console.log('ALL TXS FILTERED: ', allTxsParsed);
 
-	return allTxsParsed
-}
+	return allTxsParsed;
+};
