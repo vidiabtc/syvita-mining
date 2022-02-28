@@ -3,7 +3,7 @@ type = "webpack"
 
 account_id = "1b716765706e783e5a7c99ad054a97ea"
 workers_dev = true
-route = "syvitamining/api/*"
+# route = "syvitamining/api/*"
 zone_id = "bd9317240018ea784963a8d1784f841a"
 compatibility_date = "2021-12-04"
 webpack_config = "webpack.config.js"

@@ -1,5 +1,7 @@
 import { Router } from 'itty-router'
 import { runCron } from './cron.js'
+import sanityClient from '@sanity/client'
+import { getCats } from './docs.js'
 
 const router = Router({ base: '/api' })
 
@@ -8,7 +10,23 @@ const headers = {
   'Access-Control-Allow-Origin': '*',
 }
 
+// initialize sanity client
+export const client = sanityClient({
+  projectId: 'indusCMS',
+  dataset: 'production',
+  apiVersion: '2022-02-28', // use current UTC date - see "specifying API version"!
+  // or leave blank for unauthenticated usage
+  token: '',
+  useCdn: true, // `false` if you want to ensure fresh data
+})
+
+
 router.get('/', async () => new Response('zoopy poopy', headers))
+
+// router.get('/docs', async () => {
+//   let docs = await getCats();
+//   return new Response(JSON.stringify(docs), { headers })
+// })
 
 // return stacking cycle stats for city
 router.get('/:city/cycles', async ({ params }) => {
@@ -22,7 +40,7 @@ router.get('/:city/cycles', async ({ params }) => {
 // return latest block height
 router.get('/blockheight', async () => {
   let blockHeight = await CITYCOINS.get('current-block-height')
-  return new Response(blockHeight, { headers })
+  return new Response('blockHeight', { headers })
 })
 
 // return stx price
