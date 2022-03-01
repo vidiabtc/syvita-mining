@@ -1,8 +1,14 @@
 import { client } from "./index.js";
 
-export const getCats = async () => {
-    let query = "*[_type == 'category']{ title }"
-    let categories = await client.fetch(query)
-    console.log('Categories: ', categories)
-    return categories
+export const getDocs = async () => {
+    let query = "*[_type == 'post']"
+    let post = await client.fetch(query)
+
+    post = {
+        title: post[0].title,
+        text: post[0].body[0].children[0].text
+    }
+    
+    console.log('Post: ', post)
+    return post
 }

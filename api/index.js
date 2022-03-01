@@ -1,7 +1,7 @@
 import { Router } from 'itty-router'
 import { runCron } from './cron.js'
 import sanityClient from '@sanity/client'
-import { getCats } from './docs.js'
+import { getDocs } from './docs.js'
 
 const router = Router({ base: '/api' })
 
@@ -12,7 +12,7 @@ const headers = {
 
 // initialize sanity client
 export const client = sanityClient({
-  projectId: 'indusCMS',
+  projectId: 'ip20ax2s',
   dataset: 'production',
   apiVersion: '2022-02-28', // use current UTC date - see "specifying API version"!
   // or leave blank for unauthenticated usage
@@ -23,10 +23,10 @@ export const client = sanityClient({
 
 router.get('/', async () => new Response('zoopy poopy', headers))
 
-// router.get('/docs', async () => {
-//   let docs = await getCats();
-//   return new Response(JSON.stringify(docs), { headers })
-// })
+router.get('/docs', async () => {
+  let docs = await getDocs();
+  return new Response(JSON.stringify(docs), { headers })
+})
 
 // return stacking cycle stats for city
 router.get('/:city/cycles', async ({ params }) => {
