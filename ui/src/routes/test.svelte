@@ -1,54 +1,24 @@
-<!-- <script>
-    import { filterTxsByContractCalls, getAllTxsForAddress } from '$lib/apiCalls';
+<script context="module">
+	import { API_URL } from '$lib/constants';
 
-    import { getStxAddress } from '$lib/auth.js';
-    import { user, city } from '$lib/stores.js';
+	export async function load({ fetch }) {
+		let url = `${API_URL}/docs`;
+		let res = await fetch(url);
+		let docs = await res.json();
 
-    $: stxAddress = getStxAddress($user);
-    $: txs = stxAddress ? getAllTxsForAddress(stxAddress) : null;
+		return {
+			props: {
+				docs
+			}
+		};
+	}
+</script>
 
+<script>
+	export let docs;
+</script>
 
-</script> -->
+<h1>Sanity Docs</h1>
 
-<!-- 
-<p>Insert a STX address</p>
-<input bind:value={stxAddress} type="text"/>
-
-<button on:click={transactions = getAllTxsForAddress(stxAddress)}>Get Transactions</button> -->
-
-<!-- {#await txs}
-    <h2>loading...</h2>
-{:then txs}
-    <ul>
-        {#each filterTxsByContractCalls(txs, $city.contractAddress, $city.contractName, ['stack-tokens', 'claim-stacking-reward']) as tx}
-            <li>
-                <p>{tx.blockHeight}</p>
-                <p>{tx.blockTime}</p>
-                <p>{tx.fee}</p>
-                <p>{tx.status}</p>
-                <p>{tx.type}</p>
-                <p>{JSON.stringify(tx.info)}</p>
-                <p>{tx.id}</p>
-            </li>
-        {/each}
-    </ul>
-{/await}
-
-<style>
-    ul {
-        max-width: 1000px;
-        list-style-type: none;
-    }
-
-    li {
-        display: flex;
-        padding: 5px;
-    }
-
-    p {
-        min-width: 100px;
-        max-width: 200px;
-    }
-</style> -->
-
-
+<h2>{docs.title}</h2>
+<h3>{docs.text}</h3>

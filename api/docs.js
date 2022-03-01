@@ -6,7 +6,7 @@ export const getDocs = async () => {
 
     post = {
         title: post[0].title,
-        text: post[0].body[0].children[0].text
+        text: post[0].body.map(body => body.children[0].text)
     }
     
     console.log('Post: ', post)
