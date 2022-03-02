@@ -40,7 +40,7 @@ router.get('/:city/cycles', async ({ params }) => {
 // return latest block height
 router.get('/blockheight', async () => {
   let blockHeight = await CITYCOINS.get('current-block-height')
-  return new Response('blockHeight', { headers })
+  return new Response(blockHeight, { headers })
 })
 
 // return stx price
