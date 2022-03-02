@@ -15,7 +15,7 @@
 	import { user, city, t } from '$lib/stores.js';
 	import { getStxAddress } from '$lib/auth.js';
 
-	$: stxAddress = getStxAddress($user);
+	$: stxAddress = 'SPBA7BPCQTPVJATE06PPRJZ5ND1QK5V6ZAAQN9B7';
 	$: userId = stxAddress ? getUserId($city, stxAddress) : null;
 	// $: userId = 10;
 

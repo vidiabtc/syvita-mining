@@ -125,8 +125,11 @@ export const claimStackingReward = async (cycleNumber, cycleInfo, amountStacked,
 
 	let coin = get(city);
 
-	let claimableStx =
-		((amountStacked / cycleInfo[coin.coin]) * cycleInfo.stx).toFixed(7).slice(0, -1) * 1000000;
+	let claimableStx = Math.round(
+		parseFloat(
+			((amountStacked / cycleInfo[coin.coin]) * cycleInfo.stx).toFixed(7).slice(0, -1) * 1000000
+		)
+	);
 	console.log('CLAIMABLE STX: ', claimableStx);
 
 	await callContract(
@@ -240,7 +243,6 @@ export const addFunds = async (city, amount) => {
 	});
 };
 
-
 export const adminMineMany = async (city, poolId, amounts) => {
 	console.log(poolId);
 	console.log(amounts);
@@ -287,7 +289,6 @@ export const adminUpdateFeeAddress = async (city, address) => {
 export const adminClaimSingle = async (city, mineManyId, block) => {
 	await callPoolContract(city, 'contract-claim-single', [uintCV(mineManyId), uintCV(block)], []);
 };
-
 
 export const adminClaimMany = async (city, mineManyId, blocks) => {
 	console.log('CLAIMG MANY');
