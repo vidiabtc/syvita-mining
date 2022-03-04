@@ -7,7 +7,7 @@
 	<p class="flex-item">
 		{$t.home.subHeading}
 	</p>
-	<img class="city-coins-logo flex-item" src="/city-coins-header.svg" alt="" />
+	<img class="city-coins-logo flex-item" src="/city-coins-header.png" alt="" />
 </header>
 
 <style>
@@ -18,8 +18,9 @@
 		align-items: center;
 	}
 	h1 {
-		font-size: clamp(4rem, 10vw, 5.75rem);
-		max-width: 525px;
+		font-size: clamp(4rem, 10vw, 5rem);
+		max-width: 800px;
+		padding-right: 100px;
 	}
 
 	header p {
@@ -30,13 +31,17 @@
 
 	.city-coins-logo {
 		margin: auto;
-		margin-top: -10px;
+		margin-top: -5px;
 		width: 100%;
 	}
 
 	@media (max-width: 1129px) {
 		header {
 			text-align: center;
+		}
+
+		h1 {
+			padding-right: 0px;
 		}
 
 		.flex-item:nth-child(1) {

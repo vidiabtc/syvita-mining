@@ -53,7 +53,7 @@ export const LANGUAGES = {
 		translatedName: 'English',
 		img: '🇺🇸',
 		home: {
-			title: 'Mine City Coins',
+			title: 'Mine CityCoins',
 			subHeading:
 				"The most effective way to mine CityCoins is as a team. With Syvita Mining your contributions are pooled with others to increase the pool's chance of winning blocks.",
 			totalStx: 'Total STX raised for Pool',
