@@ -2,6 +2,7 @@
 	export let city;
 	export let poolId;
 	export let mineManys;
+	export let pool;
 	import { t } from '$lib/stores.js';
 	import { claimAllRewardsForPool } from '$lib/contractCalls.js';
 
@@ -20,33 +21,48 @@
 </script>
 
 <div class="mine-many-history-wrapper">
-	<div class="headers">
-		<p>MineMany Id</p>
-		<p>{city.coin.toUpperCase()} to Claim</p>
-		{#if canClaim()}
-			<p><button on:click={() => claimAllRewardsForPool(city, poolId)}>Claim All</button></p>
-		{:else}
-			<p>All Claimed</p>
-		{/if}
-	</div>
 
-	{#each Object.keys(mineManys).reverse() as id}
-		<div class="data">
-			<p>{id}</p>
-			<p>{mineManys[id].claimAmount}</p>
-			{#if mineManys[id].claimable}
-				<p>Can Claim</p>
+	<table>
+		<tr>
+			<th>MineMany</th>
+			<th>STX per block</th>
+			<th>Start Block</th>
+			<th>End Block</th>
+			<th>STX Spent</th>
+			<th>{city.coin.toUpperCase()} Won</th>
+			<th>{city.coin.toUpperCase()} to Claim</th>
+			{#if canClaim()}
+				<th><button on:click={() => claimAllRewardsForPool(city, poolId)}>Claim All</button></th>
 			{:else}
-				<p>Claimed</p>
+				<th>All Claimed</th>
 			{/if}
-		</div>
+		</tr>
+
+		{#each Object.keys(mineManys).reverse() as id}
+		<tr>
+			<td>{id}</td>
+			<td>{Math.round(pool.mineManys[id].ustxAmounts[0] / 1000000 * 100) / 100}</td>
+			<td>{pool.mineManys[id].blockMiningStarted}</td>
+			<td>{pool.mineManys[id].blockMiningStarted + pool.mineManys[id].ustxAmounts.length}</td>
+			<td>{Math.floor(pool.mineManys[id].ustxAmounts[0] / 1000000 * pool.mineManys[id].ustxAmounts.length)}</td>
+			<td>{pool.mineManys[id].coinsWon.toLocaleString()}</td>
+			<td>{mineManys[id].claimAmount.toLocaleString()}</td>
+			{#if mineManys[id].claimable}
+				<td>Can Claim</td>
+			{:else}
+				<td>Claimed</td>
+			{/if}
+		</tr>
 	{/each}
+	</table>
+
+	
 </div>
 
 <style>
 	.mine-many-history-wrapper {
 		font-size: 1.25rem;
-		max-width: 750px;
+		max-width: 1000px;
 		border: solid 1px rgba(255, 255, 255, 0.2);
 
 		border-radius: 10px;
@@ -88,6 +104,16 @@
 
 	.data p:last-child {
 		border-right: none;
+	}
+
+	table {
+		width: 1000px;
+		text-align: center;
+	}
+
+	td {
+		padding: 5px;
+	
 	}
 
 	button {

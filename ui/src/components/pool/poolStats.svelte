@@ -109,10 +109,12 @@
 					<!-- promise is pending -->
 					<p>Checking for claimable MineManys...</p>
 				{:then mineManys}
-					<MineManyHistory {city} {poolId} {mineManys} />
+					<MineManyHistory {city} {poolId} {mineManys} {pool} />
 				{/await}
 			</div>
 		{/if}
+		
+		
 	</div>
 {/await}
 
@@ -235,6 +237,10 @@
 	.coin-logo img {
 		width: 30px;
 	}
+
+	table {
+        text-align: center;
+    }
 
 	@media (max-width: 1220px) {
 		.pool-stats-wrapper {

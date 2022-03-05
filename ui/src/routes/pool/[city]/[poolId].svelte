@@ -50,7 +50,7 @@
 	import { getStxAddress } from '$lib/auth';
 
 	$: stxAddress = getStxAddress($user);
-	// $: stxAddress = 'SP3YXDXXHX1KQWG7N7G9WJQR69QGYN6DR1NK5H8XK';
+	// $: stxAddress = 'SPBA7BPCQTPVJATE06PPRJZ5ND1QK5V6ZAAQN9B7';
 	$: blockHeight = getBlockHeight(city);
 	$: latestPoolId = getLatestPoolId(city);
 </script>

@@ -5,13 +5,19 @@
 
 	import { t } from '$lib/stores.js';
 	import { getPool } from '$lib/apiCalls';
-import { STATS } from '$lib/constants';
+	import { STATS } from '$lib/constants';
+
+	let isModalOpen = false;
+	const toggleModal = () => {
+		isModalOpen = !isModalOpen;
+	};
 
 	const poolIdList = [];
 
 	for (let i = poolId; i > 0; i--) {
 		poolIdList.push(i);
 	}
+
 </script>
 
 <div class="pool-history-wrapper">
@@ -36,19 +42,21 @@ import { STATS } from '$lib/constants';
 					</div>
 					<div class="block-dates">
 						<div>
-							<p>{$t.pool.startBlock}</p>
+							<p>Raising Start</p>
 							<p>{pool.stats.contributionsStartBlock}</p>
 						</div>
 						<div>
-							<p>{$t.pool.endBlock}</p>
+							<p>Raising End</p>
 							<p>{pool.stats.contributionsEndBlock}</p>
 						</div>
 					</div>
+		
 					<div class="pool-contributions">
 						<div>
 							<p>{$t.pool.contributors}</p>
 							<p>{Object.keys(pool.contributions).length}</p>
 						</div>
+
 					</div>
 					<div class="pool-performance">
 						<div>
@@ -60,6 +68,7 @@ import { STATS } from '$lib/constants';
 							<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
 						</div>
 					</div>
+
           <a href={`/pool/${city.coin}/${poolId + parseInt(city.startingPoolId)}`}>
             <div>
               <button>
@@ -106,7 +115,6 @@ import { STATS } from '$lib/constants';
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-
 		padding: 0 20px;
 	}
 
@@ -122,6 +130,12 @@ import { STATS } from '$lib/constants';
 
 	.pool-info p:first-child {
 		font-size: 1.5rem;
+	}
+
+	.blocks-mined button{
+		height: 45px;
+		width: 130px;
+		margin-left: 35px;
 	}
 
 	.current {
