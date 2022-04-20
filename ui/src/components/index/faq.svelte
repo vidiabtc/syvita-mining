@@ -34,7 +34,7 @@
   <p>How to get STX?</p>
   <img class={toggle4 ? 'chevron-up' : 'chevron'}  src='/icons/chevron-up.svg'/>
 </div>
-<div class={toggle4 ? "faq-description" : "faq-description-hidden"}>In order to buy Stacks it is first important you first have a wallet. The most popular wallet is the <a href="https://chrome.google.com/webstore/detail/hiro-wallet/ldinpeekobnhjjdofggfgjlcehhmanlj">Hiro browser wallet</a> which is a chrome extension. Once you have completed the setup of your wallet you can purchase Stacks directly in the wallet.  
+<div class={toggle4 ? "faq-description" : "faq-description-hidden"}>In order to buy Stacks it is first important you first have a wallet. The most popular wallet is the <a href="https://www.hiro.so/wallet/install-web">Hiro browser wallet</a> which is a chrome extension. Once you have completed the setup of your wallet you can purchase Stacks directly in the wallet.  
 </div>
 </div>
 </div>
