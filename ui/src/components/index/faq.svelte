@@ -30,7 +30,7 @@
 </div>
 <div class={toggle3 ? "faq-description" : "faq-description-hidden"}><a href="/stack">CityCoins stacking</a> is the process in which you can lock your CityCoins in a smart contract to receive a portion of the STX spent by miners; 70% of all miner bids are redistributed to stackers. With stacking, you are being paid a yield in exchange for giving up liquidity. Stacking occurs in cycles. You can stack between 1 and 32 cycles. One cycle lasts 2100 Stacks blocks: approximately 2 weeks. When you stack your CityCoins, they will be locked up for the number of cycles you specify. STX rewards can be claimed at the end of each cycle in which your CityCoins are stacked. Stacked CityCoins can be claimed after the number of cycles you have stacked for have completed.</div>
 
-<div class="faq" on:click={() => (toggle4 = !toggle4)}>
+<div class={toggle4 ? "faq" : "faq-last"} on:click={() => (toggle4 = !toggle4)}>
   <p>How to get STX?</p>
   <img class={toggle4 ? 'chevron-up' : 'chevron'}  src='/icons/chevron-up.svg'/>
 </div>
@@ -64,6 +64,16 @@
     width: 100%;
     height: 60px;
     border-bottom: 1px solid white;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .faq-last {
+    width: 100%;
+    height: 60px;
     font-size: 1.25rem;
     display: flex;
     align-items: center;
