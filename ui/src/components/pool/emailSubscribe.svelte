@@ -5,21 +5,24 @@
 	let email = '';
 
 	const submitEmail = async (email) => {
-		let url = `https://cors.sjoerd.dev/https://api.getresponse.com/v3/contacts/`;
+		let url = `https://guarded-island-36278.herokuapp.com/https://api.sendgrid.com/v3/marketing/contacts`;
 
 		let res = await fetch(url, {
-			method: 'POST',
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Auth-Token': `api-key ${import.meta.env.VITE_EMAIL_API_KEY}`
+				'Authorization': `Bearer ${import.meta.env.VITE_EMAIL_API_KEY}`
 			},
-			body: JSON.stringify({
-				campaign: {
-					campaignId: 'rmxgr'
-				},
-				email: email
-			})
-		});
+			body: JSON.stringify (
+      { "contacts": [
+        {
+          "email": email
+        }
+    ]
+     }
+    )
+	
+  });
 
 		alert('Email Submitted Succesfully');
 	};
