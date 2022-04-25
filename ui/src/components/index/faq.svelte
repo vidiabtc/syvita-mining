@@ -19,10 +19,10 @@
 
 
 <div class="faq" on:click={() => (toggle2 = !toggle2)}>
-  <p>How does CityCoins mining work</p>
+  <p>How does CityCoins mining work?</p>
   <img class={toggle2 ? 'chevron-up' : 'chevron'}  src='/icons/chevron-up.svg'/>
 </div>
-<div class={toggle2 ? "faq-description" : "faq-description-hidden"}>CityCoins mining happens through a process known as <a href="https://github.com/jcnelson/poxl">Proof of Transfer Lite (PoXL)</a>. PoXL does not require any specialized hardware like Bitcoin mining. Instead, miners bid STX in a competition to mint a new block of CityCoins. Winners are chosen by a verifiable random function (VRF), with a miner’s probability of winning being directly proportional to the size of their bid relative to total bids. The more STX you bid on a block, the higher your chances of winning a block, but also the higher the cost of the block. When mining, all STX bids are irrevocably redistributed, with 70% going to CityCoins stackers and 30% going to a designated wallet for the benefit of the nominal city. Mining individually can be time-consuming and potentially risky, especially for miners deploying small amounts of STX. At Syvita Mining, we are continuously monitoring block bids and market data (flex Matts expertise here) to make sure we are mining as efficiently as we can, to join one of our pools the minimum contribution is just 40 STX.</div>
+<div class={toggle2 ? "faq-description" : "faq-description-hidden"}>CityCoins mining happens through a process known as <a href="https://github.com/jcnelson/poxl">Proof of Transfer Lite (PoXL)</a>. PoXL does not require any specialized hardware like Bitcoin mining. Instead, miners bid STX in a competition to mint a new block of CityCoins. Winners are chosen by a verifiable random function (VRF), with a miner’s probability of winning being directly proportional to the size of their bid relative to total bids. The more STX you bid on a block, the higher your chances of winning a block, but also the higher the cost of the block. When mining, all STX bids are irrevocably redistributed, with 70% going to CityCoins stackers and 30% going to a designated wallet for the benefit of the nominal city. Mining individually can be time-consuming and potentially risky, especially for miners deploying small amounts of STX. We are continuously monitoring block bids and market data to make sure we are mining as efficiently as we can. To join one of our pools the minimum contribution is just 40 STX.</div>
 
 <div class="faq" on:click={() => (toggle3 = !toggle3)}>
   <p>What is stacking?</p>
