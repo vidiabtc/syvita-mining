@@ -38,6 +38,7 @@
 	import MayorStats from '$components/index/mayorStats.svelte';
 	import MobileMayorStats from '$components/index/mobileMayorStats.svelte';
 	import CityStats from '$components/index/cityStats.svelte';
+	import InfoSection from '$components/index/infoSection.svelte';
 	import News from '$components/index/news.svelte';
 	import Mobilenews from '$components/index/mobileNews.svelte';
 	import Faq from '$components/index/faq.svelte';
@@ -55,7 +56,7 @@
 <div>
 	<Header />
 	<PoolStats />
-
+<InfoSection/>
 	<MayorStats {stxPrice} {miaBalance} {nycBalance} />
 	<MobileMayorStats {stxPrice} {miaBalance} {nycBalance}/>
 	<!-- <CityStats /> -->
