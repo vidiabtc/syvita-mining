@@ -61,7 +61,9 @@ export const callContract = async (functionName, functionArgs, postConditions) =
 		stxAddress: stxAddress,
 		AnchorMode: AnchorMode.Any,
 		postConditionMode:
-			functionName == 'claim-mining-reward' ? PostConditionMode.Allow : PostConditionMode.Deny,
+			functionName == 'claim-mining-reward' || 'claim-stacking-reward'
+				? PostConditionMode.Allow
+				: PostConditionMode.Deny,
 		postConditions: postConditions
 	});
 
