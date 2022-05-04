@@ -61,7 +61,7 @@ export const callContract = async (functionName, functionArgs, postConditions) =
 		stxAddress: stxAddress,
 		AnchorMode: AnchorMode.Any,
 		postConditionMode:
-			functionName == 'claim-mining-reward' || 'claim-stacking-reward'
+			functionName == 'claim-mining-reward' || functionName == 'claim-stacking-reward'
 				? PostConditionMode.Allow
 				: PostConditionMode.Deny,
 		postConditions: postConditions
@@ -134,25 +134,7 @@ export const claimStackingReward = async (cycleNumber, cycleInfo, amountStacked,
 	);
 	console.log('CLAIMABLE STX: ', claimableStx);
 
-	await callContract(
-		'claim-stacking-reward',
-		[uintCV(cycleNumber)],
-		[
-			makeContractSTXPostCondition(
-				coin.contractAddress,
-				coin.contractName,
-				FungibleConditionCode.LessEqual,
-				uintCV(claimableStx).value
-			),
-			makeContractFungiblePostCondition(
-				coin.contractAddress,
-				coin.contractName,
-				FungibleConditionCode.LessEqual,
-				uintCV(toReturn).value,
-				createAssetInfo(coin.contractAddress, coin.tokenContractName, coin.tokenName)
-			)
-		]
-	);
+	await callContract('claim-stacking-reward', [uintCV(cycleNumber)], []);
 };
 
 export const claimMiningReward = async (blockHeight) => {
