@@ -14,7 +14,7 @@ import {
 	FungibleConditionCode,
 	createAssetInfo
 } from 'micro-stacks/transactions';
-import { listCV, uintCV, standardPrincipalCV } from 'micro-stacks/clarity';
+import { listCV, uintCV, standardPrincipalCV, noneCV } from 'micro-stacks/clarity';
 import { user, city } from '$lib/stores.js';
 import { get } from 'svelte/store';
 
@@ -279,4 +279,139 @@ export const adminClaimMany = async (city, mineManyId, blocks) => {
 	console.log(mineManyId);
 	// console.log(JSON.stringify(blocks))
 	await callPoolContract(city, 'contract-claim-many', [uintCV(mineManyId), listCV(blocks)], []);
+};
+
+export const registerUser = async (city) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	let privateKey = JSON.parse(get(user)).appPrivateKey;
+
+	const token = await makeContractCallToken({
+		appDetails: { name: 'syvita mining', icon: '/' },
+		privateKey: privateKey,
+		contractAddress: city.contractAddress,
+		contractName: city.contractName,
+		functionName: 'register-user',
+		functionArgs: [noneCV()],
+		network: NETWORK,
+		stxAddress: stxAddress,
+		AnchorMode: AnchorMode.Any
+	});
+
+	return openTransactionPopup({
+		token,
+		onFinish: (result) => {},
+		onCancel: () => {}
+	});
+};
+
+export const convertToV2 = async (city, amountV1) => {
+	console.log('amount v1: ', amountV1);
+	amountV1 = parseInt(amountV1);
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	await callConvertToV2(
+		city,
+		'convert-to-v2',
+		[],
+		[
+			makeStandardFungiblePostCondition(
+				stxAddress,
+				FungibleConditionCode.Equal,
+				uintCV(amountV1).value,
+				createAssetInfo(city.contractAddress, city.v1TokenContractName, city.tokenName)
+			)
+			// makeContractFungiblePostCondition(
+			// 	city.contractAddress,
+			// 	city.contractName,
+			// 	FungibleConditionCode.Equal,
+			// 	uintCV(amountV1 * 1000000).value,
+			// 	createAssetInfo(city.contractAddress, city.tokenContractName, city.tokenName)
+			// )
+		]
+	);
+};
+
+export const burn = async (city) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	await callBurn(
+		city,
+		'burn',
+		[uintCV(1), standardPrincipalCV(stxAddress)],
+		[
+			makeStandardFungiblePostCondition(
+				stxAddress,
+				FungibleConditionCode.Equal,
+				uintCV(1).value,
+				createAssetInfo(city.contractAddress, city.v1TokenContractName, city.tokenName)
+			)
+			// makeContractFungiblePostCondition(
+			// 	city.contractAddress,
+			// 	city.contractName,
+			// 	FungibleConditionCode.Equal,
+			// 	uintCV(amountV1 * 1000000).value,
+			// 	createAssetInfo(city.contractAddress, city.tokenContractName, city.tokenName)
+			// )
+		]
+	);
+};
+
+const callBurn = async (city, functionName, functionArgs, postConditions) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	let privateKey = JSON.parse(get(user)).appPrivateKey;
+	console.log('upgrading token ', city.name);
+
+	const token = await makeContractCallToken({
+		appDetails: { name: 'syvita mining', icon: '/' },
+		privateKey: privateKey,
+		contractAddress: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+		contractName: city.v1TokenContractName,
+		functionName: functionName,
+		functionArgs: functionArgs,
+		network: NETWORK,
+		stxAddress: stxAddress,
+		AnchorMode: AnchorMode.Any
+		// postConditionMode: PostConditionMode.Deny,
+		// postConditions: postConditions
+	});
+
+	return openTransactionPopup({
+		token,
+		onFinish: (result) => {},
+		onCancel: () => {}
+	});
+};
+
+const callConvertToV2 = async (city, functionName, functionArgs, postConditions) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	let privateKey = JSON.parse(get(user)).appPrivateKey;
+	console.log('upgrading token ', city.name);
+
+	const token = await makeContractCallToken({
+		appDetails: { name: 'syvita mining', icon: '/' },
+		privateKey: privateKey,
+		contractAddress: city.contractAddress,
+		contractName: city.tokenContractName,
+		functionName: functionName,
+		functionArgs: functionArgs,
+		network: NETWORK,
+		stxAddress: stxAddress,
+		AnchorMode: AnchorMode.Any
+		// postConditionMode: PostConditionMode.Deny,
+		// postConditions: postConditions
+	});
+
+	return openTransactionPopup({
+		token,
+		onFinish: (result) => {},
+		onCancel: () => {}
+	});
 };

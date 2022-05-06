@@ -10,6 +10,7 @@
 	<a href={`/pool/${$city.coin}`}><p>{$t.header.pool}</p></a>
 	<a href="/stack"><p>{$t.header.stack}</p></a>
 	<a href="/mine"><p>{$t.header.mine}</p></a>
+	<a href="/v2"><p>V2</p></a>
 
 	<a
 		target="_blank"
@@ -37,7 +38,7 @@
 	}
 	.discord {
 		display: flex;
-		margin-left: -20px;
+		margin-left: -50px;
 	}
 	.discord p {
 		margin-left: -10px;

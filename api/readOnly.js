@@ -26,7 +26,7 @@ export const getStackingStatsAtCycle = async (city, cycle) => {
   return res
 }
 
-export const getLatestUserId = async city => {
+export const getLatestUserId = async (city) => {
   const options = getReadOnlyTxOptions(city, 'get-registered-users-nonce', [])
   let res = await callReadOnlyFunction(options)
   res = res.value

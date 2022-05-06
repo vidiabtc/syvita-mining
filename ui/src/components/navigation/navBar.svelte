@@ -3,7 +3,7 @@
 	import NavLinks from './navLinks.svelte';
 	import MobileNavBar from './mobileNavBar.svelte';
 	import { page } from '$app/stores';
-	let toggle = false
+	let toggle = false;
 	$: $page, (toggle = false);
 </script>
 

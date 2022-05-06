@@ -1,8 +1,8 @@
 <script context="module">
 	import { CITIES } from '$lib/constants';
 
-	export async function load({ page, fetch }) {
-		let city = page.params.city;
+	export async function load({ params, fetch }) {
+		let city = params.city;
 
 			city = CITIES[city];
 		

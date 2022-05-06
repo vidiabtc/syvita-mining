@@ -81,9 +81,6 @@
     cursor: pointer;
   }
 
- 
-  
-
   .faq-description {
     padding: 10px 0;
     line-height: 1.4rem;
@@ -110,4 +107,8 @@
   a {
     text-decoration: underline;
   }
+
+  a:hover {
+		color: #384cff;
+	}
 </style>

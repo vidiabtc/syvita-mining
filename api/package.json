@@ -14,7 +14,7 @@
     "prettier": "^1.18.2"
   },
   "dependencies": {
-    "@sanity/client": "^3.1.0",
+
     "itty-router": "^2.4.5",
     "micro-stacks": "^0.1.7"
   }
