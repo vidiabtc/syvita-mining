@@ -13,7 +13,7 @@
 	$: blockHeight = getBlockHeight($city);
 
 	// client side
-	$: coinBalance = stxAddress ? getCoinBalance($city, stxAddress) : 0;
+	$: coinBalance = stxAddress ? getCoinBalance($city, stxAddress, true) : 0;
 	$: stxBalance = stxAddress ? getStxBalance(stxAddress) : 0;
 </script>
 

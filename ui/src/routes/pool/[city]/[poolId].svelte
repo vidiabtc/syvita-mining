@@ -1,15 +1,15 @@
 <script context="module">
 	import { CITIES } from '$lib/constants';
 
-	export async function load({ page, fetch }) {
-		let city = CITIES[page.params.city];
+	export async function load({ params, fetch }) {
+		let city = CITIES[params.city];
 		if (!city) {
 			return {
 				status: 303,
 				redirect: '/pool'
 			};
 		} else {
-			let poolId = page.params.poolId - city.startingPoolId;
+			let poolId = params.poolId - city.startingPoolId;
 			let url = `https://api.ocelo.workers.dev/api/${city.coin}/pool/${poolId}`;
 			let res = await fetch(`https://api.ocelo.workers.dev/api/${city.coin}/pool/${poolId}`);
 			let pool;

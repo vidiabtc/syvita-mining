@@ -35,6 +35,10 @@
     text-decoration: underline;
   }
 
+  a:hover {
+		color: #384cff;
+	}
+
   @media(max-width: 400px) {
     div {
       padding: 0 0px;
