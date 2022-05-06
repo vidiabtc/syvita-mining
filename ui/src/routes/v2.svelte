@@ -19,7 +19,7 @@
 	</div>
 
 	<div class="contract-calls">
-		<Activate />
+		<!-- <Activate /> -->
 		<UpgradeV2 />
 		<!-- <Claim /> -->
 	</div>
