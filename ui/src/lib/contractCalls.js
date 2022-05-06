@@ -321,11 +321,11 @@ export const convertToV2 = async (city, amountV1) => {
 				stxAddress,
 				FungibleConditionCode.Equal,
 				uintCV(amountV1).value,
-				createAssetInfo(city.contractAddress, city.v1TokenContractName, city.tokenName)
+				createAssetInfo(city.v1Address, city.v1TokenContractName, city.tokenName)
 			)
 			// makeContractFungiblePostCondition(
 			// 	city.contractAddress,
-			// 	city.contractName,
+			// 	city.tokenContractName,
 			// 	FungibleConditionCode.Equal,
 			// 	uintCV(amountV1 * 1000000).value,
 			// 	createAssetInfo(city.contractAddress, city.tokenContractName, city.tokenName)
@@ -404,9 +404,9 @@ const callConvertToV2 = async (city, functionName, functionArgs, postConditions)
 		functionArgs: functionArgs,
 		network: NETWORK,
 		stxAddress: stxAddress,
-		AnchorMode: AnchorMode.Any
-		// postConditionMode: PostConditionMode.Deny,
-		// postConditions: postConditions
+		AnchorMode: AnchorMode.Any,
+		postConditionMode: PostConditionMode.Deny,
+		postConditions: postConditions
 	});
 
 	return openTransactionPopup({
