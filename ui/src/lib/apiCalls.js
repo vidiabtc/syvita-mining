@@ -35,9 +35,10 @@ export const getBlockHeight = async (city) => {
 	return parseInt(block);
 };
 
-export const getCoinBalance = async (city, stxAddress) => {
-	let token = city.token;
+export const getCoinBalance = async (city, stxAddress, v2) => {
+	let token = v2 ? city.token : city.v1Token;
 	let url = `${BASE_URL}/address/${stxAddress}/balances`;
+	console.log(url);
 	let res = await fetch(url);
 	let data = await res.json();
 	let balance = parseInt(data.fungible_tokens[token].balance);
