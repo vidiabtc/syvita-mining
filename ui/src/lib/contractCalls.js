@@ -74,6 +74,35 @@ export const callContract = async (functionName, functionArgs, postConditions) =
 	});
 };
 
+export const callV1Contract = async (coin, functionName, functionArgs, postConditions) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	let privateKey = JSON.parse(get(user)).appPrivateKey;
+
+	console.log(functionArgs);
+
+	const token = await makeContractCallToken({
+		appDetails: { name: 'Syvita Mining', icon: '/' },
+		privateKey: privateKey,
+		contractAddress: coin.v1Address,
+		contractName: coin.v1ContractName,
+		functionName: functionName,
+		functionArgs: functionArgs,
+		network: NETWORK,
+		stxAddress: stxAddress,
+		AnchorMode: AnchorMode.Any,
+		postConditionMode: PostConditionMode.Deny,
+		postConditions: postConditions
+	});
+
+	return openTransactionPopup({
+		token,
+		onFinish: (result) => {},
+		onCancel: () => {}
+	});
+};
+
 export const parseClarityList = (list) => {
 	list = list.list.map((element) => {
 		return parseInt(element.value);
@@ -135,6 +164,23 @@ export const claimStackingReward = async (cycleNumber, cycleInfo, amountStacked,
 	console.log('CLAIMABLE STX: ', claimableStx);
 
 	await callContract('claim-stacking-reward', [uintCV(cycleNumber)], []);
+};
+
+export const claimV1Tokens = async (city, cycle, amountStacked) => {
+	await callV1Contract(
+		city,
+		'claim-stacking-reward',
+		[uintCV(cycle)],
+		[
+			makeContractFungiblePostCondition(
+				city.v1Address,
+				city.v1ContractName,
+				FungibleConditionCode.Equal,
+				uintCV(amountStacked).value,
+				createAssetInfo(city.v1Address, city.v1TokenContractName, city.tokenName)
+			)
+		]
+	);
 };
 
 export const claimMiningReward = async (blockHeight) => {

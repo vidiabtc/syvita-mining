@@ -61,6 +61,7 @@
 	.city-selector p {
 		display: flex;
 		align-items: center;
+		
 	}
 
 	.chevron {
@@ -84,7 +85,7 @@
 		position: absolute;
 		display: flex;
 		flex-direction: column;
-		left: 20px;
+		left: 0px;
 		padding-top: 10px;
 		background-color: #050810;
 	}
@@ -110,11 +111,11 @@
 		}
 
 		.city-selector {
-			width: 150px;
+			width: 170px;
 		}
 
 		.dropdown p {
-			width: 150px;
+			width: 170px;
 		}
 
 		.city-selector {

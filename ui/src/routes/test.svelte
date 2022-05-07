@@ -1,24 +1,41 @@
-<script context="module">
-	import { API_URL } from '$lib/constants';
-
-	export async function load({ fetch }) {
-		let url = `${API_URL}/docs`;
-		let res = await fetch(url);
-		let docs = await res.json();
-
-		return {
-			props: {
-				docs
-			}
-		};
-	}
-</script>
-
 <script>
-	export let docs;
+	import UpgradeV2 from '$components/v2/upgradeV2.svelte';
+	import Claim from '$components/v2/claim.svelte';
+	import Activate from '$components/v2/activate.svelte';
 </script>
 
-<h1>Sanity Docs</h1>
+<svelte:head>
+	<title>CityCoins Upgrade | Syvita Mining</title>
+	<meta name="CityCoins Upgrade | Syvita Mining" />
+</svelte:head>
 
-<h2>{docs.title}</h2>
-<h3>{docs.text}</h3>
+<div class="contract-calls-wrapper">
+
+
+	<div class="contract-calls">
+		<!-- <Activate /> -->
+		<UpgradeV2 />
+		<Claim />
+	</div>
+</div>
+
+<style>
+	.contract-calls-wrapper {
+		padding: 0 20px;
+	}
+
+
+
+
+
+
+	.contract-calls {
+		max-width: 600px;
+		margin: auto;
+		padding-top: 100px;
+	}
+
+
+
+</style>
+
