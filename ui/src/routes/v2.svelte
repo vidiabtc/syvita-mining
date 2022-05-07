@@ -15,7 +15,7 @@
 	<div class="contract-calls">
 		<!-- <Activate /> -->
 		<UpgradeV2 />
-		<!-- <Claim /> -->
+		<Claim />
 	</div>
 </div>
 
