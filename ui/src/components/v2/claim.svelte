@@ -68,6 +68,7 @@ import { claimV1Tokens } from '$lib/contractCalls';
 		console.log('Final Array', userTransactions)
 
 		let stackedV1Tokens = []
+		
 
 		userTransactions.map(tx => {
 			let city = getCityFromTx(tx)
@@ -81,30 +82,56 @@ import { claimV1Tokens } from '$lib/contractCalls';
 			let lastCycleStacked = cycle + cyclesStacked - 1
 			// console.log('Last cycle stacked: ', lastCycleStacked)
 
+			
+
 
 			if (city.coin === 'mia') {
 				if (lastCycleStacked > 16) {
-					stackedV1Tokens.push({
-					token: city.coin,
-					amountStacked,
-					lastCycleStacked,
-			})
-				}
-			} else {
-				if (lastCycleStacked > 10) {
-					stackedV1Tokens.push({
+
+				stackedV1Tokens = stackedV1Tokens.filter(tx => {
+					if (tx.lastCycleStacked == lastCycleStacked) {
+						amountStacked += tx.amountStacked
+						return false
+					}
+					return true
+				})	
+				console.log('same cycle ', stackedV1Tokens)
+
+				stackedV1Tokens.push({
 					token: city.coin,
 					amountStacked,
 					lastCycleStacked,
 				})
+
 				}
+			} else {
+
+
+				if (lastCycleStacked > 10) {
+
+					stackedV1Tokens = stackedV1Tokens.filter(tx => {
+						if (tx.lastCycleStacked == lastCycleStacked) {
+							 amountStacked += tx.amountStacked
+							 return false
+						}
+						return true
+					})	
+					console.log('same cycle ', stackedV1Tokens)
+
+					stackedV1Tokens.push({
+						token: city.coin,
+						amountStacked,
+						lastCycleStacked,
+					})
+				}
+
+
 			}
-
-
-	
 		})
 
 		console.log(stackedV1Tokens)
+
+
 		return stackedV1Tokens
 
 	}
