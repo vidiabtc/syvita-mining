@@ -85,7 +85,7 @@
 		position: absolute;
 		display: flex;
 		flex-direction: column;
-		left: 0px;
+		left: 20px;
 		padding-top: 10px;
 		background-color: #050810;
 	}
@@ -112,6 +112,10 @@
 
 		.city-selector {
 			width: 170px;
+		}
+
+		.dropdown {
+			left: 0px;
 		}
 
 		.dropdown p {
