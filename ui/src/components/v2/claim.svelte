@@ -13,7 +13,7 @@ import { claimV1Tokens } from '$lib/contractCalls';
 	$: stxAddress = getStxAddress($user);
 	// $: transactions = stxAddress ? fetchUserTransactions(stxAddress) : [];
 
-	$: stackedTokens = stxAddress ? fetchUserTransactions('SPBA7BPCQTPVJATE06PPRJZ5ND1QK5V6ZAAQN9B7') : []; // user id 918
+	$: stackedTokens = stxAddress ? fetchUserTransactions(stxAddress) : []; // user id 918
 
 	const getCycleNumberFromBlock = (blockHeight, activationBlock) => {
 		console.log(blockHeight)
