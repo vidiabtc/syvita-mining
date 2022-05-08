@@ -137,12 +137,12 @@ export const stack = async (amountToStack, numOfCycles) => {
 
 	await callContract(
 		'stack-tokens',
-		[uintCV(amountToStack), uintCV(numOfCycles)],
+		[uintCV(amountToStack * 1000000), uintCV(numOfCycles)],
 		[
 			makeStandardFungiblePostCondition(
 				stxAddress,
 				FungibleConditionCode.Equal,
-				uintCV(amountToStack).value,
+				uintCV(amountToStack * 1000000).value,
 				createAssetInfo(coin.contractAddress, coin.tokenContractName, coin.tokenName)
 			)
 		]
