@@ -89,7 +89,7 @@ import { claimV1Tokens } from '$lib/contractCalls';
 				if (lastCycleStacked > 16) {
 
 				stackedV1Tokens = stackedV1Tokens.filter(tx => {
-					if (tx.lastCycleStacked == lastCycleStacked) {
+					if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'mia') {
 						amountStacked += tx.amountStacked
 						return false
 					}
@@ -105,12 +105,10 @@ import { claimV1Tokens } from '$lib/contractCalls';
 
 				}
 			} else {
-
-
 				if (lastCycleStacked > 10) {
 
 					stackedV1Tokens = stackedV1Tokens.filter(tx => {
-						if (tx.lastCycleStacked == lastCycleStacked) {
+						if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'nyc') {
 							 amountStacked += tx.amountStacked
 							 return false
 						}
