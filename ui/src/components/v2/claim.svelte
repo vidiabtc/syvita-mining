@@ -109,8 +109,7 @@ import { claimV1Tokens } from '$lib/contractCalls';
 			} else {
 				if (lastCycleStacked > 10) {
 
-					stackedV1Tokens = stack
-					edV1Tokens.filter(tx => {
+					stackedV1Tokens = stackedV1Tokens.filter(tx => {
 						if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'nyc') {
 							 amountStacked += tx.amountStacked
 							 return false
@@ -150,7 +149,7 @@ import { claimV1Tokens } from '$lib/contractCalls';
 
 <div class="main-wrapper">
 	<h2>Claim your CityCoins V1 tokens</h2>
-	<p>Keep track of which cycles you are claiming for so you are not trying to claim already .</p>
+	<p>Keep track of which cycles you are claiming for so you are not trying to claim already claimed cycles..</p>
 
 	{#await stackedTokens}
 		<h1>Loading...</h1>
