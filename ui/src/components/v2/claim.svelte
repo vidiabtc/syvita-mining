@@ -138,7 +138,11 @@ import { claimV1Tokens } from '$lib/contractCalls';
 
 
 	const getCityFromTx = (tx) => {
-		return tx.contract_call.contract_id === 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1' ? CITIES['nyc'] : CITIES['mia']
+		if (tx.contract_call.contract_id === 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1') {
+			return CITIES['nyc']
+		} else if (tx.contract_call.contract_id === 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1') {
+			return CITIES['mia']
+		}
 	}
 
 	
