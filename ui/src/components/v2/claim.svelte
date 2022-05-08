@@ -13,7 +13,7 @@ import { claimV1Tokens } from '$lib/contractCalls';
 	$: stxAddress = getStxAddress($user);
 	// $: transactions = stxAddress ? fetchUserTransactions(stxAddress) : [];
 
-	$: stackedTokens = stxAddress ? fetchUserTransactions(stxAddress) : []; // user id 918
+	$: stackedTokens = stxAddress ? fetchUserTransactions('SPBA7BPCQTPVJATE06PPRJZ5ND1QK5V6ZAAQN9B7') : []; // user id 918
 
 	const getCycleNumberFromBlock = (blockHeight, activationBlock) => {
 		console.log(blockHeight)
@@ -53,11 +53,13 @@ import { claimV1Tokens } from '$lib/contractCalls';
 
 		 
 		const isStackTokens = (tx) => {
-			if (tx.tx_type === 'contract_call') {
+			if (tx.tx_status === 'success') {
+				if (tx.tx_type === 'contract_call') {
 				if (tx.contract_call.function_name === 'stack-tokens') {
 					return true
 				}
-			} 
+				} 
+			}	
 			return false
 		}
 
@@ -107,7 +109,8 @@ import { claimV1Tokens } from '$lib/contractCalls';
 			} else {
 				if (lastCycleStacked > 10) {
 
-					stackedV1Tokens = stackedV1Tokens.filter(tx => {
+					stackedV1Tokens = stack
+					edV1Tokens.filter(tx => {
 						if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'nyc') {
 							 amountStacked += tx.amountStacked
 							 return false
@@ -147,6 +150,7 @@ import { claimV1Tokens } from '$lib/contractCalls';
 
 <div class="main-wrapper">
 	<h2>Claim your CityCoins V1 tokens</h2>
+	<p>Keep track of which cycles you are claiming for so you are not trying to claim already .</p>
 
 	{#await stackedTokens}
 		<h1>Loading...</h1>
