@@ -22,7 +22,7 @@ export const CITIES = {
 		contractName: 'miamicoin-core-v2',
 		v1ContractName: 'miamicoin-core-v1',
 		poolContractAddress: 'SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P',
-		poolContractName: 'syvita-mining-mia-v1',
+		poolContractName: 'syvita-mining-mia-v2',
 		v1TokenContractName: 'miamicoin-token',
 		tokenContractName: 'miamicoin-token-v2',
 		tokenName: 'miamicoin',
@@ -31,7 +31,7 @@ export const CITIES = {
 		token: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token-v2::miamicoin',
 		miningHistoryUrl: 'miamining.com',
 		activationBlock: '24497',
-		startingPoolId: '8'
+		startingPoolId: '21'
 	},
 	nyc: {
 		name: 'New York',
@@ -42,7 +42,7 @@ export const CITIES = {
 		contractName: 'newyorkcitycoin-core-v2',
 		v1ContractName: 'newyorkcitycoin-core-v1',
 		poolContractAddress: 'SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P',
-		poolContractName: 'syvita-mining-nyc-v1',
+		poolContractName: 'syvita-mining-nyc-v2',
 		v1Address: 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5',
 		v1Token: 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-token::newyorkcitycoin',
 		token: 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-token-v2::newyorkcitycoin',
@@ -51,7 +51,7 @@ export const CITIES = {
 		tokenName: 'newyorkcitycoin',
 		miningHistoryUrl: 'mining.nyc',
 		activationBlock: '37449',
-		startingPoolId: '5'
+		startingPoolId: '17'
 	}
 };
 
