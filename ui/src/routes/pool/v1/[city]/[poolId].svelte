@@ -9,9 +9,9 @@
 				redirect: '/pool'
 			};
 		} else {
-			let poolId = page.params.poolId - city.startingPoolId;
-			let url = `https://api.ocelo.workers.dev/api/${city.coin}/pool/v2/${poolId}`;
-			let res = await fetch(`https://api.ocelo.workers.dev/api/${city.coin}/pool/v2/${poolId}`);
+			let poolId = page.params.poolId - city.v1StartingPoolId;
+			let url = `https://api.ocelo.workers.dev/api/${city.coin}/pool/${poolId}`;
+			let res = await fetch(`https://api.ocelo.workers.dev/api/${city.coin}/pool/${poolId}`);
 			let pool;
 
 			try {
@@ -39,7 +39,7 @@
 	export let pool;
   export let city
 
-	import PoolStats from '$components/pool/poolStats.svelte';
+	import V1PoolStats from '$components/pool/v1PoolStats.svelte';
 	import PoolActivity from '$components/pool/poolActivity.svelte';
 	import PoolHistory from '$components/pool/poolHistory.svelte';
 	import SelectCity from '$components/selectCity.svelte';
@@ -67,7 +67,7 @@
 		{:then latestPoolId}
 			{#await blockHeight}
 			{:then blockHeight}
-				<PoolStats city={city} {poolId} {blockHeight} {stxAddress} />
+				<V1PoolStats city={city} {poolId} {blockHeight} {stxAddress} />
 				<PoolHistory city={city} poolId={latestPoolId} {blockHeight}/>
 			{/await}	
 		{/await}

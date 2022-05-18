@@ -31,7 +31,9 @@ export const CITIES = {
 		token: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token-v2::miamicoin',
 		miningHistoryUrl: 'miamining.com',
 		activationBlock: '24497',
-		startingPoolId: '21'
+		startingPoolId: '21',
+		v1StartingPoolId: '8',
+		v1LatestPoolId: '13'
 	},
 	nyc: {
 		name: 'New York',
@@ -51,7 +53,9 @@ export const CITIES = {
 		tokenName: 'newyorkcitycoin',
 		miningHistoryUrl: 'mining.nyc',
 		activationBlock: '37449',
-		startingPoolId: '17'
+		startingPoolId: '17',
+		v1StartingPoolId: '5',
+		v1LatestPoolId: '12'
 	}
 };
 

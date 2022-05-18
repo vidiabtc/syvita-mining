@@ -4,8 +4,8 @@
 	export let blockHeight;
 
 	import { t } from '$lib/stores.js';
-	import { getPool } from '$lib/apiCalls';
-	import { STATS } from '$lib/constants';
+	import { getPool, getV2Pool } from '$lib/apiCalls';
+	import { CITIES, STATS } from '$lib/constants';
 
 	let isModalOpen = false;
 	const toggleModal = () => {
@@ -18,13 +18,22 @@
 		poolIdList.push(i);
 	}
 
+	let v1PoolIdList = []
+
+	for (let i = city.v1LatestPoolId; i > 0; i--) {
+		v1PoolIdList.push(i);
+	}
+
+	console.log('v1 pool ids: ', v1PoolIdList)
+
+
 </script>
 
 <div class="pool-history-wrapper">
 	<h3>{$t.pool.allPools}</h3>
 	<div class="pools">
 		{#each poolIdList as poolId}
-			{#await getPool(city, poolId)}
+			{#await getV2Pool(city, poolId)}
 				<h1>loading...</h1>
 			{:then pool}
 				<div class="pool">
@@ -70,6 +79,62 @@
 					</div>
 
           <a href={`/pool/${city.coin}/${poolId + parseInt(city.startingPoolId)}`}>
+            <div>
+              <button>
+                  {$t.pool.viewPoolDetails}
+              </button>
+            </div>
+         </a>
+				</div>
+			{/await}
+		{/each}
+		{#each v1PoolIdList as poolId}
+			{#await getPool(city, poolId)}
+				<h1>loading...</h1>
+			{:then pool}
+				<div class="pool">
+					<div class="pool-info">
+						<p>{$t.pool.pool} {parseInt(poolId) + parseInt(city.v1StartingPoolId)}</p>
+						{#if pool.stats.contributionsEndBlock > blockHeight}
+							<p class="current">Raising</p>
+						<!-- {:else if poolId == poolIdList[1]}
+							<p class="mining">Mining</p> -->
+						{:else if (pool.stats.mineManyIds.length > 0) && (poolId == poolIdList[0] || poolId == poolIdList[1]) && (pool.mineManys[pool.stats.mineManyIds[pool.stats.mineManyIds.length - 1]].blockMiningStarted)  >= (blockHeight - 200)}
+							<p class="mining">Mining</p>
+						{:else}
+							<p class="complete">Complete</p>
+						{/if}		
+					</div>
+					<div class="block-dates">
+						<div>
+							<p>Raising Start</p>
+							<p>{pool.stats.contributionsStartBlock}</p>
+						</div>
+						<div>
+							<p>Raising End</p>
+							<p>{pool.stats.contributionsEndBlock}</p>
+						</div>
+					</div>
+		
+					<div class="pool-contributions">
+						<div>
+							<p>{$t.pool.contributors}</p>
+							<p>{Object.keys(pool.contributions).length}</p>
+						</div>
+
+					</div>
+					<div class="pool-performance">
+						<div>
+							<p>{$t.pool.committedStx}</p>
+							<p>{Math.floor(pool.stats.totalContributed / 1000000).toLocaleString()} STX</p>
+						</div>
+						<div>
+							<p>{$t.pool[`${city.coin}Won`]}</p>
+							<p>{pool.stats.totalCoinsWon.toLocaleString()}</p>
+						</div>
+					</div>
+
+          <a href={`/pool/v1/${city.coin}/${parseInt(poolId) + parseInt(city.v1StartingPoolId)}`}>
             <div>
               <button>
                   {$t.pool.viewPoolDetails}

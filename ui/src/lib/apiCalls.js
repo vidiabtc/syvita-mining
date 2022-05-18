@@ -96,6 +96,16 @@ export const getLatestPoolId = async (city) => {
 	return id;
 };
 
+export const getV2Pool = async (city, poolId) => {
+	console.log(city);
+	console.log(poolId);
+	let url = `${POOL_API_URL}/${city.coin}/pool/v2/${poolId}`;
+	console.log('URL: ', url);
+	let res = await fetch(url);
+	let pool = await res.json();
+	return pool;
+};
+
 export const getPool = async (city, poolId) => {
 	console.log(city);
 	console.log(poolId);
