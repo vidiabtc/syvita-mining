@@ -40,7 +40,7 @@
   export let city
 
 	import PoolStats from '$components/pool/poolStats.svelte';
-	import PoolActivity from '$components/pool/poolActivity.svelte';
+	// import PoolActivity from '$components/pool/poolActivity.svelte';
 	import PoolHistory from '$components/pool/poolHistory.svelte';
 	import SelectCity from '$components/selectCity.svelte';
 	import Contribute from '$components/pool/contribute.svelte';
