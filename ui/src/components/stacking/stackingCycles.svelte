@@ -20,7 +20,7 @@
 				<p>{$t.stack.cycle}</p>
 			</div>
 			<div>
-				<p>{cycles[cycle][$city.coin].toLocaleString()}</p>
+				<p>{Math.floor(cycles[cycle][$city.coin]).toLocaleString()}</p>
 				<p>{$t.stack[`${$city.coin}Stacked`]}</p>
 			</div>
 			<div>
