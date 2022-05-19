@@ -22,7 +22,7 @@ export const CITIES = {
     coin: 'nyc',
     img: 'citycoins/nyc.svg',
     cityWalletAddress: 'SM18VBF2QYAAHN57Q28E2HSM15F6078JZYZ2FQBCX',
-    contractAddress: 'SM18VBF2QYAAHN57Q28E2HSM15F6078JZYZ2FQBCX',
+    contractAddress: 'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11',
     contractName: 'newyorkcitycoin-core-v2',
     token:
       'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-token::newyorkcitycoin',

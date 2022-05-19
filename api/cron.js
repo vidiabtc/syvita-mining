@@ -99,6 +99,8 @@ const updateStackingCycleData = async (city, currentBlock) => {
 
   let allCycleData = await CITYCOINS.get(`cycle-stacking-stats-${city.coin}`)
 
+  console.log('all cycle data: ', allCycleData)
+
   if (allCycleData == null) {
     let cycleStackingStats = await getStackingStatsAtCycle(city, 1)
     allCycleData = {
