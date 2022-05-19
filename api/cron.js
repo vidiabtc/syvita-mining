@@ -103,7 +103,7 @@ const updateStackingCycleData = async (city, currentBlock) => {
     let cycleStackingStats = await getStackingStatsAtCycle(city, 1)
     allCycleData = {
       [1]: {
-        [city.coin]: parseInt(cycleStackingStats.amountToken.value),
+        [city.coin]: parseInt(cycleStackingStats.amountToken.value) / 1000000,
         stx: parseInt(cycleStackingStats.amountUstx.value) / 1000000,
       },
     }
@@ -118,19 +118,19 @@ const updateStackingCycleData = async (city, currentBlock) => {
         lastUpdatedCycle + 1,
       )
       allCycleData[lastUpdatedCycle + 1] = {
-        [city.coin]: parseInt(cycleStackingStats.amountToken.value),
+        [city.coin]: parseInt(cycleStackingStats.amountToken.value) / 1000000,
         stx: parseInt(cycleStackingStats.amountUstx.value) / 1000000,
       }
     } else if (lastUpdatedCycle == currentCycle) {
       let cycleStackingStats = await getStackingStatsAtCycle(city, currentCycle)
       allCycleData[currentCycle] = {
-        [city.coin]: parseInt(cycleStackingStats.amountToken.value),
+        [city.coin]: parseInt(cycleStackingStats.amountToken.value) / 1000000,
         stx: parseInt(cycleStackingStats.amountUstx.value) / 1000000,
       }
 
       cycleStackingStats = await getStackingStatsAtCycle(city, currentCycle - 1)
       allCycleData[currentCycle - 1] = {
-        [city.coin]: parseInt(cycleStackingStats.amountToken.value),
+        [city.coin]: parseInt(cycleStackingStats.amountToken.value) / 1000000,
         stx: parseInt(cycleStackingStats.amountUstx.value) / 1000000,
       }
     }
