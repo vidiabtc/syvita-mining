@@ -3,13 +3,13 @@
 		getPool,
 		getContributionSum,
 		getUserContributions,
-		getMineManyClaims
+		getMineManyClaimsV1
 	} from '$lib/apiCalls';
 	import Contribute from '$components/pool/contribute.svelte';
 	import { t } from '$lib/stores.js';
 
 	import { claimAllRewardsForPool } from '$lib/contractCalls.js';
-	import MineManyHistory from './MineManyHistory.svelte';
+	import V1MineManyHistory from './v1MineManyHistory.svelte';
 
 	export let poolId;
 	export let blockHeight;
@@ -105,11 +105,11 @@
 		{#if stxAddress}
 			<div class="mine-many-history">
 				<h3>{$t.stack.claimRewards}</h3>
-				{#await getMineManyClaims(city, poolId, stxAddress, pool)}
+				{#await getMineManyClaimsV1(city, poolId, stxAddress, pool)}
 					<!-- promise is pending -->
 					<p>Checking for claimable MineManys...</p>
 				{:then mineManys}
-					<MineManyHistory {city} {poolId} {mineManys} {pool} />
+					<V1MineManyHistory {city} {poolId} {mineManys} {pool} />
 				{/await}
 			</div>
 		{/if}

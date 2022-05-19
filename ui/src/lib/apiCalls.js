@@ -244,6 +244,95 @@ export const getMineManyClaims = async (city, poolId, stxAddress, pool) => {
 	return mineManys;
 };
 
+export const getMineManyClaimsV1 = async (city, poolId, stxAddress, pool) => {
+	let address = stxAddress;
+	console.log(poolId);
+	let url = `https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/${city.poolContractAddress}/${city.poolContractNameV1}/get-claims-for-pool`;
+	console.log(url);
+	// console.log(poolId)
+	// console.log(stxAddress)
+	stxAddress = cvToHex(standardPrincipalCV(stxAddress));
+	poolId = '010000000000000000' + intToHex(poolId);
+
+	let res = await fetch(url, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			sender: 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27',
+			arguments: [poolId, stxAddress]
+		})
+	});
+	let data = await res.json();
+	console.log('CLAIMS FOR POOL', data);
+	data = hexToCV(data.result);
+	console.log('TEST ');
+	console.log('DATA ', data);
+
+	if (data.type == 8) {
+		console.log('Participant not in pool');
+		return [];
+	} else {
+		console.log('Claims found');
+		data = data.value.data.mineManysClaimed.list;
+		console.log('CLAIMS FOR POOL PARSED', data);
+	}
+
+	let claimedMineManys = [];
+
+	for (let num in data) {
+		claimedMineManys.push(parseInt(data[num].value));
+	}
+	console.log(claimedMineManys);
+
+	let claimingEnabledMineManys = [];
+
+	for (let id in pool.mineManys) {
+		let mineMany = pool.mineManys[id];
+		console.log('claiming enabled', mineMany.claimingEnabled);
+		if (mineMany.claimingEnabled) {
+			claimingEnabledMineManys.push(parseInt(id));
+		}
+	}
+
+	console.log('Claiming enabled mine manys: ', claimingEnabledMineManys);
+
+	// let claimableMineManys = []
+	// claimingEnabledMineManys.map((id) => {
+	// 	if (!claimedMineManys.includes(id)) {
+	// 		claimableMineManys.push(id);
+	// 	}
+	// });
+	// console.log('CLAIMABLE MINE ANYS: ', claimableMineManys)
+
+	let mineManys = {};
+
+	claimingEnabledMineManys.map((mineManyId) => {
+		let claimable = claimedMineManys.includes(mineManyId) ? false : true;
+		let mineMany = pool.mineManys[mineManyId];
+		let coinsWon = parseInt(mineMany.coinsWon);
+		let fee = parseInt(pool.stats.feePercentage) / 100;
+		let poolContribution = parseInt(pool.stats.totalContributed) / 1000000;
+		let userContribution = parseInt(getContributionSum(pool.contributions[address]));
+		console.log('coinsWon: ', coinsWon);
+		console.log('pool fee: ', fee);
+		console.log('user contribution ', userContribution);
+		console.log('pool contribution ', poolContribution);
+
+		let claimAmount = Math.floor((userContribution / poolContribution) * (coinsWon * (1 - fee)));
+
+		console.log('amount to claim ', claimAmount);
+
+		mineManys[mineManyId] = {
+			claimable: claimable,
+			claimAmount: claimAmount
+		};
+	});
+
+	console.log('Mine Manys to claim:', mineManys);
+
+	return mineManys;
+};
+
 export const canClaimMiningReward = async (city, stxAddress, blockHeight) => {
 	let url = `https://stacks-node-api.mainnet.stacks.co/v2/contracts/call-read/${city.contractAddress}/${city.contractName}/can-claim-mining-reward`;
 	let block = blockHeight;

@@ -192,6 +192,11 @@ export const claimAllRewardsForPool = async (city, poolId) => {
 	await callPoolContract(city, 'contributor-claim-all-rewards-for-pool', [uintCV(poolId)], []);
 };
 
+export const claimAllRewardsForPoolV2 = async (city, poolId) => {
+	await callPoolContractV2(city, 'contributor-claim-all-rewards-for-pool', [uintCV(poolId)], []);
+};
+
+
 export const contribute = async (city, poolId, amount) => {
 	let stxAddress = IS_MAINNET
 		? JSON.parse(get(user)).addresses.mainnet
@@ -216,6 +221,35 @@ const callPoolContract = async (city, functionName, functionArgs, postConditions
 		privateKey: privateKey,
 		contractAddress: city.poolContractAddress,
 		contractName: city.poolContractName,
+		functionName: functionName,
+		functionArgs: functionArgs,
+		network: NETWORK,
+		stxAddress: stxAddress,
+		AnchorMode: AnchorMode.Any,
+		postConditionMode:
+			functionName == 'contribute' ? PostConditionMode.Deny : PostConditionMode.Allow,
+		postConditions: postConditions
+	});
+
+	return openTransactionPopup({
+		token,
+		onFinish: (result) => {},
+		onCancel: () => {}
+	});
+};
+
+
+const callPoolContractV2 = async (city, functionName, functionArgs, postConditions) => {
+	let stxAddress = IS_MAINNET
+		? JSON.parse(get(user)).addresses.mainnet
+		: JSON.parse(get(user)).addresses.testnet;
+	let privateKey = JSON.parse(get(user)).appPrivateKey;
+
+	const token = await makeContractCallToken({
+		appDetails: { name: 'syvita mining', icon: '/' },
+		privateKey: privateKey,
+		contractAddress: city.poolContractAddress,
+		contractName: city.poolContractNameV1,
 		functionName: functionName,
 		functionArgs: functionArgs,
 		network: NETWORK,

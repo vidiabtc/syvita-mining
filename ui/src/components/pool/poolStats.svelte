@@ -1,6 +1,7 @@
 <script>
 	import {
 		getPool,
+		getV2Pool,
 		getContributionSum,
 		getUserContributions,
 		getMineManyClaims
@@ -17,7 +18,7 @@
 	export let city;
 </script>
 
-{#await getPool(city, poolId) then pool}
+{#await getV2Pool(city, poolId) then pool}
 	<div class="pool-stats-wrapper">
 		<div class="stats-wrapper">
 			<div>
