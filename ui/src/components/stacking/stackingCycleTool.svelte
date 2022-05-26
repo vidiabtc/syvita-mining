@@ -39,12 +39,12 @@
 							<p>{reward.amountStacked.toLocaleString()}</p>
 							<p>
 								{Math.floor(
-									((reward.amountStacked / cycles[cycle][$city.coin]) * cycles[cycle].stx)
+									(((reward.amountStacked / 1000000) / cycles[cycle][$city.coin]) * cycles[cycle].stx)
 										.toFixed(7)
 										.slice(0, -1)
 								)}
 							</p>
-							<p>{reward.toReturn.toLocaleString()}</p>
+							<p>{Math.floor(reward.toReturn / 1000000).toLocaleString()}</p>
 							<p>
 								{#if blockHeight >= parseInt($city.activationBlock) +
                   (parseInt(cycle) + 1) * 2100}
@@ -52,8 +52,8 @@
 										on:click={claimStackingReward(
 											cycle,
 											cycles[cycle],
-											reward.amountStacked,
-											reward.toReturn
+											reward.amountStacked / 1000000,
+											reward.toReturn / 1000000
 										)}>{$t.stack.claimNow}</button
 									>
 								{:else}
