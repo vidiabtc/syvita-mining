@@ -1,12 +1,10 @@
-
-
 <script>
-	import {onMount} from 'svelte'
+	import { onMount } from 'svelte';
 	import { user } from '$lib/stores';
 	import SelectCity from '$components/v2/selectCity.svelte';
 	import { getStxAddress } from '$lib/auth.js';
-	import { CYCLE_LENGTH, CITIES } from '$lib/constants.js'
-import { claimV1Tokens } from '$lib/contractCalls';
+	import { CYCLE_LENGTH, CITIES } from '$lib/constants.js';
+	import { claimV1Tokens } from '$lib/contractCalls';
 
 	let cycleNumber;
 
@@ -16,166 +14,153 @@ import { claimV1Tokens } from '$lib/contractCalls';
 	$: stackedTokens = stxAddress ? fetchUserTransactions(stxAddress) : []; // user id 918
 
 	const getCycleNumberFromBlock = (blockHeight, activationBlock) => {
-		console.log(blockHeight)
-		let cycle = Math.floor((parseInt(blockHeight) - parseInt(activationBlock)) / CYCLE_LENGTH) + 1
-		return parseInt(cycle)
-	}
-			
+		console.log(blockHeight);
+		let cycle = Math.floor((parseInt(blockHeight) - parseInt(activationBlock)) / CYCLE_LENGTH) + 1;
+		return parseInt(cycle);
+	};
 
-	const fetchUserTransactions = async stxAddress => {
+	const fetchUserTransactions = async (stxAddress) => {
+		let userTransactions = [];
 
-		let userTransactions = []
+		let url = `https://stacks-node-api.mainnet.stacks.co/extended/v1/address/${stxAddress}/transactions?limit=50&offset=0`;
 
-		let url = `https://stacks-node-api.mainnet.stacks.co/extended/v1/address/${stxAddress}/transactions?limit=50&offset=0`
+		let response = await fetch(url);
+		let transactions = await response.json();
+		userTransactions = userTransactions.concat(transactions.results);
 
-		let response = await fetch(url)
-		let transactions = await response.json()
-		userTransactions = userTransactions.concat(transactions.results)
+		console.log('array', userTransactions);
+		console.log(transactions.total);
 
-		console.log('array', userTransactions)
-		console.log(transactions.total)
-
-
-		let offset = 50
-
+		let offset = 50;
 
 		while (offset <= parseInt(transactions.total)) {
+			let url = `https://stacks-node-api.mainnet.stacks.co/extended/v1/address/${stxAddress}/transactions?limit=50&offset=${offset}`;
 
-			let url = `https://stacks-node-api.mainnet.stacks.co/extended/v1/address/${stxAddress}/transactions?limit=50&offset=${offset}`
+			let response = await fetch(url);
+			let transactions = await response.json();
+			userTransactions = userTransactions.concat(transactions.results);
 
-			let response = await fetch(url)
-			let transactions = await response.json()
-			userTransactions = userTransactions.concat(transactions.results)
-			
-
-			offset += 50
+			offset += 50;
 		}
 
-		 
 		const isStackTokens = (tx) => {
 			if (tx.tx_status === 'success') {
 				if (tx.tx_type === 'contract_call') {
-				if (tx.contract_call.function_name === 'stack-tokens') {
-					return true
+					if (tx.contract_call.function_name === 'stack-tokens') {
+						return true;
+					}
 				}
-				} 
-			}	
-			return false
-		}
+			}
+			return false;
+		};
 
+		userTransactions = userTransactions.filter((tx) => isStackTokens(tx));
 
-		userTransactions = userTransactions.filter(tx => isStackTokens(tx))
+		console.log('Final Array', userTransactions);
 
+		let stackedV1Tokens = [];
 
-		console.log('Final Array', userTransactions)
-
-		let stackedV1Tokens = []
-		
-
-		userTransactions.map(tx => {
-			let city = getCityFromTx(tx)
+		userTransactions.map((tx) => {
+			let city = getCityFromTx(tx);
 			// console.log('token ', city.coin)
 
-			let amountStacked = parseInt(tx.contract_call.function_args[0].repr.substring(1))
-			let cycle = getCycleNumberFromBlock(tx.block_height, city.activationBlock)
-			let cyclesStacked = parseInt(tx.contract_call.function_args[1].repr.substring(1))
+			let amountStacked = parseInt(tx.contract_call.function_args[0].repr.substring(1));
+			let cycle = getCycleNumberFromBlock(tx.block_height, city.activationBlock);
+			let cyclesStacked = parseInt(tx.contract_call.function_args[1].repr.substring(1));
 			// console.log('cycle stacked ', cycle)
 			// console.log('Cycles stacked for: ', cyclesStacked)
-			let lastCycleStacked = cycle + cyclesStacked - 1
+			let lastCycleStacked = cycle + cyclesStacked - 1;
 			// console.log('Last cycle stacked: ', lastCycleStacked)
-
-			
-
 
 			if (city.coin === 'mia') {
 				if (lastCycleStacked > 16) {
-
-				stackedV1Tokens = stackedV1Tokens.filter(tx => {
-					if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'mia') {
-						amountStacked += tx.amountStacked
-						return false
-					}
-					return true
-				})	
-				console.log('same cycle ', stackedV1Tokens)
-
-				stackedV1Tokens.push({
-					token: city.coin,
-					amountStacked,
-					lastCycleStacked,
-				})
-
-				}
-			} else {
-				if (lastCycleStacked > 10) {
-
-					stackedV1Tokens = stackedV1Tokens.filter(tx => {
-						if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'nyc') {
-							 amountStacked += tx.amountStacked
-							 return false
+					stackedV1Tokens = stackedV1Tokens.filter((tx) => {
+						if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'mia') {
+							amountStacked += tx.amountStacked;
+							return false;
 						}
-						return true
-					})	
-					console.log('same cycle ', stackedV1Tokens)
+						return true;
+					});
+					console.log('same cycle ', stackedV1Tokens);
 
 					stackedV1Tokens.push({
 						token: city.coin,
 						amountStacked,
-						lastCycleStacked,
-					})
+						lastCycleStacked
+					});
 				}
+			} else {
+				if (lastCycleStacked > 10) {
+					stackedV1Tokens = stackedV1Tokens.filter((tx) => {
+						if (tx.lastCycleStacked == lastCycleStacked && tx.token == 'nyc') {
+							amountStacked += tx.amountStacked;
+							return false;
+						}
+						return true;
+					});
+					console.log('same cycle ', stackedV1Tokens);
 
-
+					stackedV1Tokens.push({
+						token: city.coin,
+						amountStacked,
+						lastCycleStacked
+					});
+				}
 			}
-		})
+		});
 
-		console.log(stackedV1Tokens)
+		console.log(stackedV1Tokens);
 
-
-		return stackedV1Tokens
-
-	}
-
+		return stackedV1Tokens;
+	};
 
 	const getCityFromTx = (tx) => {
-		if (tx.contract_call.contract_id === 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1') {
-			return CITIES['nyc']
-		} else if (tx.contract_call.contract_id === 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1') {
-			return CITIES['mia']
+		if (
+			tx.contract_call.contract_id ===
+			'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1'
+		) {
+			return CITIES['nyc'];
+		} else if (
+			tx.contract_call.contract_id === 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1'
+		) {
+			return CITIES['mia'];
+		} else {
+			return 0;
 		}
-	}
-
-	
-
-
-
+	};
 </script>
 
 <div class="main-wrapper">
 	<h2>Claim your CityCoins V1 tokens</h2>
-	<p>Keep track of which cycles you are claiming for so you are not trying to claim already claimed cycles. We are only showing your claimable cycles after activation of v2 (NOT before then)</p>
+	<p>
+		Keep track of which cycles you are claiming for so you are not trying to claim already claimed
+		cycles. We are only showing your claimable cycles after activation of v2 (NOT before then)
+	</p>
 
 	{#await stackedTokens}
 		<h1>Loading...</h1>
 	{:then stackedTokens}
-	<table>
-		<tr>
-			<th>Token</th>
-			<th>Cycle</th>
-			<th>Amount to Claim</th>
-			<th>Claim</th>
-		</tr>
-	
-		{#each stackedTokens as claim}
-		<tr>
-			<td>{claim.token.toUpperCase()}</td>
-			<td>{claim.lastCycleStacked}</td>
-			<td>{claim.amountStacked}</td>
-			<button on:click={() => claimV1Tokens(CITIES[claim.token], claim.lastCycleStacked, claim.amountStacked)}>Claim</button>
-		</tr>
-		{/each}
-	</table>
-	
+		<table>
+			<tr>
+				<th>Token</th>
+				<th>Cycle</th>
+				<th>Amount to Claim</th>
+				<th>Claim</th>
+			</tr>
+
+			{#each stackedTokens as claim}
+				<tr>
+					<td>{claim.token.toUpperCase()}</td>
+					<td>{claim.lastCycleStacked}</td>
+					<td>{claim.amountStacked}</td>
+					<button
+						on:click={() =>
+							claimV1Tokens(CITIES[claim.token], claim.lastCycleStacked, claim.amountStacked)}
+						>Claim</button
+					>
+				</tr>
+			{/each}
+		</table>
 	{/await}
 </div>
 
@@ -287,14 +272,13 @@ import { claimV1Tokens } from '$lib/contractCalls';
 
 	table {
 		max-width: 1000px;
-    width: 100%;
-		padding-top:20px;
+		width: 100%;
+		padding-top: 20px;
 		text-align: center;
 	}
 
 	td {
 		padding: 5px;
-	
 	}
 
 	button {

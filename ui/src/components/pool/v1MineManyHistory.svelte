@@ -21,7 +21,6 @@
 </script>
 
 <div class="mine-many-history-wrapper">
-
 	<table>
 		<tr>
 			<th>MineMany</th>
@@ -32,31 +31,33 @@
 			<th>{city.coin.toUpperCase()} Won</th>
 			<th>{city.coin.toUpperCase()} to Claim</th>
 			{#if canClaim()}
-				<th><button on:click={() => claimAllRewardsForPool(city, poolId)}>Claim All</button></th>
+				<th><button on:click={() => claimAllRewardsForPoolV2(city, poolId)}>Claim All</button></th>
 			{:else}
 				<th>All Claimed</th>
 			{/if}
 		</tr>
 
 		{#each Object.keys(mineManys).reverse() as id}
-		<tr>
-			<td>{id}</td>
-			<td>{Math.round(pool.mineManys[id].ustxAmounts[0] / 1000000 * 100) / 100}</td>
-			<td>{pool.mineManys[id].blockMiningStarted}</td>
-			<td>{pool.mineManys[id].blockMiningStarted + pool.mineManys[id].ustxAmounts.length}</td>
-			<td>{Math.floor(pool.mineManys[id].ustxAmounts[0] / 1000000 * pool.mineManys[id].ustxAmounts.length)}</td>
-			<td>{pool.mineManys[id].coinsWon.toLocaleString()}</td>
-			<td>{mineManys[id].claimAmount.toLocaleString()}</td>
-			{#if mineManys[id].claimable}
-				<td>Can Claim</td>
-			{:else}
-				<td>Claimed</td>
-			{/if}
-		</tr>
-	{/each}
+			<tr>
+				<td>{id}</td>
+				<td>{Math.round((pool.mineManys[id].ustxAmounts[0] / 1000000) * 100) / 100}</td>
+				<td>{pool.mineManys[id].blockMiningStarted}</td>
+				<td>{pool.mineManys[id].blockMiningStarted + pool.mineManys[id].ustxAmounts.length}</td>
+				<td
+					>{Math.floor(
+						(pool.mineManys[id].ustxAmounts[0] / 1000000) * pool.mineManys[id].ustxAmounts.length
+					)}</td
+				>
+				<td>{pool.mineManys[id].coinsWon.toLocaleString()}</td>
+				<td>{mineManys[id].claimAmount.toLocaleString()}</td>
+				{#if mineManys[id].claimable}
+					<td>Can Claim</td>
+				{:else}
+					<td>Claimed</td>
+				{/if}
+			</tr>
+		{/each}
 	</table>
-
-	
 </div>
 
 <style>
@@ -113,7 +114,6 @@
 
 	td {
 		padding: 5px;
-	
 	}
 
 	button {
