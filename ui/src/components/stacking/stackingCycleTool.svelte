@@ -11,7 +11,7 @@
 
 	export let userId;
 	export let cycles;
-  export let blockHeight;
+	export let blockHeight;
 </script>
 
 <div class="claim-stacking-rewards">
@@ -31,23 +31,22 @@
 			<p>{$t.stack.claimRewards}</p>
 		</div>
 		{#each Object.keys(cycles).reverse() as cycle}
-			{#if  cycle > Object.keys(cycles)[Object.keys(cycles).length - 1] - 5}
+			{#if cycle > Object.keys(cycles)[Object.keys(cycles).length - 1] - 5}
 				{#await getStackingReward($city, userId, cycle) then reward}
 					{#if reward.amountStacked > 0}
 						<div class="table-data">
 							<p>{$t.stack.cycle} {cycle}</p>
-							<p>{reward.amountStacked.toLocaleString()}</p>
+							<p>{(reward.amountStacked / 1000000).toLocaleString()}</p>
 							<p>
 								{Math.floor(
-									(((reward.amountStacked / 1000000) / cycles[cycle][$city.coin]) * cycles[cycle].stx)
+									((reward.amountStacked / 1000000 / cycles[cycle][$city.coin]) * cycles[cycle].stx)
 										.toFixed(7)
 										.slice(0, -1)
 								)}
 							</p>
 							<p>{Math.floor(reward.toReturn / 1000000).toLocaleString()}</p>
 							<p>
-								{#if blockHeight >= parseInt($city.activationBlock) +
-                  (parseInt(cycle) + 1) * 2100}
+								{#if blockHeight >= parseInt($city.activationBlock) + (parseInt(cycle) + 1) * 2100}
 									<button
 										on:click={claimStackingReward(
 											cycle,

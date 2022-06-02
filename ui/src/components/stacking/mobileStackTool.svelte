@@ -1,4 +1,3 @@
-
 <script>
 	import {
 		getStackingCycleStats,
@@ -12,27 +11,29 @@
 
 	export let userId;
 	export let cycles;
-  export let blockHeight;
+	export let blockHeight;
 </script>
 
 <div class="stack-history-wrapper">
 	{#each Object.keys(cycles).reverse() as cycle}
-			{#if cycle > Object.keys(cycles)[Object.keys(cycles).length - 1] - 5}
-				{#await getStackingReward($city, userId, cycle) then reward}
-					{#if reward.amountStacked > 0}
+		{#if cycle > Object.keys(cycles)[Object.keys(cycles).length - 1] - 5}
+			{#await getStackingReward($city, userId, cycle) then reward}
+				{#if reward.amountStacked > 0}
 					<div class="cycle">
 						<div><p class="title">{$t.stack.cycle} {cycle}</p></div>
 						<div>
 							<p>{$t.stack[`${$city.coin}Stacked`]}</p>
-							<p>{reward.amountStacked.toLocaleString()}</p>
+							<p>{(reward.amountStacked / 1000000).toLocaleString()}</p>
 						</div>
 						<div>
 							<p>{$t.stack.stxToClaim}</p>
-							<p>	{Math.floor(
-								((reward.amountStacked / cycles[cycle][$city.coin]) * cycles[cycle].stx)
-									.toFixed(7)
-									.slice(0, -1)
-							)}</p>
+							<p>
+								{Math.floor(
+									((reward.amountStacked / 1000000 / cycles[cycle][$city.coin]) * cycles[cycle].stx)
+										.toFixed(7)
+										.slice(0, -1)
+								)}
+							</p>
 						</div>
 						<div>
 							<p>{$t.stack[`${$city.coin}ToReturn`]}</p>
@@ -40,28 +41,28 @@
 						</div>
 						<div>
 							<p>{$t.stack.claimRewards}</p>
-							<p class="claim">{#if blockHeight >= parseInt($city.activationBlock) +
-                (parseInt(cycle) + 1) * 2100}
-								<!-- content here -->
-								<button
-									on:click={claimStackingReward(
-										cycle,
-										cycles[cycle],
-										reward.amountStacked,
-										reward.toReturn
-									)}>{$t.stack.claimNow}</button
-								>
-							{:else}
-								{$t.stack.claimAtBlock} #{parseInt($city.activationBlock) +
-									(parseInt(cycle) + 1) * 2100}
-							{/if}</p>
+							<p class="claim">
+								{#if blockHeight >= parseInt($city.activationBlock) + (parseInt(cycle) + 1) * 2100}
+									<!-- content here -->
+									<button
+										on:click={claimStackingReward(
+											cycle,
+											cycles[cycle],
+											reward.amountStacked / 1000000,
+											reward.toReturn
+										)}>{$t.stack.claimNow}</button
+									>
+								{:else}
+									{$t.stack.claimAtBlock} #{parseInt($city.activationBlock) +
+										(parseInt(cycle) + 1) * 2100}
+								{/if}
+							</p>
 						</div>
 					</div>
-			
-					{/if}
-				{/await}
-			{/if}
-		{/each}
+				{/if}
+			{/await}
+		{/if}
+	{/each}
 </div>
 
 <style>
