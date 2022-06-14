@@ -17,11 +17,16 @@ const getReadOnlyTxOptions = (city, functionName, functionArgs) => {
 }
 
 export const getStackingStatsAtCycle = async (city, cycle) => {
+  console.log('cucle: ', cycle)
   const options = getReadOnlyTxOptions(city, 'get-stacking-stats-at-cycle', [
     uintCV(cycle),
   ])
+  console.log('options', options)
   let res = await callReadOnlyFunction(options)
+  console.log('res1', res)
+
   res = res.value.data
+  console.log('res')
 
   return res
 }

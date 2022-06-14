@@ -34,7 +34,8 @@ export const CITIES = {
 		activationBlock: '24497',
 		startingPoolId: '21',
 		v1StartingPoolId: '8',
-		v1LatestPoolId: '13'
+		v1LatestPoolId: '13',
+		v2Cycle: '18'
 	},
 	nyc: {
 		name: 'New York',
@@ -57,7 +58,8 @@ export const CITIES = {
 		activationBlock: '37449',
 		startingPoolId: '17',
 		v1StartingPoolId: '5',
-		v1LatestPoolId: '12'
+		v1LatestPoolId: '12',
+		v2Cycle: '12'
 	}
 };
 

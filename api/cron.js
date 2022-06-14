@@ -83,11 +83,12 @@ const updateSyvitaMiningData = async currentBlock => {
 // }
 
 const getStxPrice = async () => {
-  let url = 'https://api.coingecko.com/api/v3/simple/price?ids=blockstack&vs_currencies=USD'
-  let res = await fetch(url);
-  let data = await res.json();
-  let price = data.blockstack.usd;
-  return price;
+  let url =
+    'https://api.coingecko.com/api/v3/simple/price?ids=blockstack&vs_currencies=USD'
+  let res = await fetch(url)
+  let data = await res.json()
+  let price = data.blockstack.usd
+  return price
 }
 
 const updateStackingCycleData = async (city, currentBlock) => {
@@ -102,14 +103,21 @@ const updateStackingCycleData = async (city, currentBlock) => {
   console.log('all cycle data: ', allCycleData)
 
   if (allCycleData == null) {
-    let cycleStackingStats = await getStackingStatsAtCycle(city, 1)
+    console.log('is null ', city)
+
+    let cycleStackingStats = await getStackingStatsAtCycle(
+      city,
+      parseInt(city.v2Cycle),
+    )
     allCycleData = {
-      [1]: {
+      [parseInt(city.v2Cycle)]: {
         [city.coin]: parseInt(cycleStackingStats.amountToken.value) / 1000000,
         stx: parseInt(cycleStackingStats.amountUstx.value) / 1000000,
       },
     }
   } else {
+    console.log('is else ')
+
     allCycleData = JSON.parse(allCycleData)
     let previousCycles = Object.keys(allCycleData)
     let lastUpdatedCycle = parseInt(previousCycles[previousCycles.length - 1])
@@ -137,11 +145,10 @@ const updateStackingCycleData = async (city, currentBlock) => {
       }
     }
   }
+  console.log('data', allCycleData)
 
   await CITYCOINS.put(
     `cycle-stacking-stats-${city.coin}`,
     JSON.stringify(allCycleData),
   )
-
-  console.log('data', allCycleData)
 }

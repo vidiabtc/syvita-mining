@@ -16,6 +16,7 @@ export const CITIES = {
       'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token::miamicoin',
     miningHistoryUrl: 'miamining.com',
     activationBlock: '24497',
+    v2Cycle: '18',
   },
   nyc: {
     name: 'New York',
@@ -28,5 +29,6 @@ export const CITIES = {
       'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-token::newyorkcitycoin',
     miningHistoryUrl: 'mining.nyc',
     activationBlock: '37449',
+    v2Cycle: '12',
   },
 }
