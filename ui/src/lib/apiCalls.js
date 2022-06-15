@@ -28,9 +28,10 @@ export const getStxBalance = async (stxAddress) => {
 };
 
 export const getBlockHeight = async (city) => {
-	let url = `${API_URL}/blockheight`;
+	let url = `${BASE_URL}/block`;
 	let res = await fetch(url);
-	let block = await res.json();
+	let data = await res.json();
+	let block = data.total;
 	console.log('Block height: ', block);
 	return parseInt(block);
 };
